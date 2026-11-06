@@ -1588,3 +1588,59 @@ END P0012 | Awaiting review | HEAD (final amended task commit; concrete SHA in s
 2026-11-06T18:26:54Z | P0012 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 371 passed, 1 warning, 6 subtests passed in 43.31s
 2026-11-06T18:28:03Z | P0012 | REVIEW | automatic Codex review; source fa5125938dde418fdd24eddb92cbe0c2742acb40; attempt 2; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T18:28:03Z | P0012 | ORCH | ACCEPTED by automatic review at fa5125938dde418fdd24eddb92cbe0c2742acb40
+2026-11-06T18:28:03Z | P0016 | ORCH | starting from b92154cdd26d4cebc62e7af55abc0513fefa5a79
+
+START P0016 | 2026-11-06T18:28:17.684814+00:00 | main | b92154cdd26d4cebc62e7af55abc0513fefa5a79
+2026-11-06T18:28:17.684814+00:00 | P0016 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && sed -n '1,220p' AGENTS.md | exit 0 | main; existing orchestrator changes in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T18:28:17.684814+00:00 | P0016 | READ | AGENTS.md | repository instructions
+2026-11-06T18:28:17.684814+00:00 | P0016 | DECISION | Prerequisites already verified Accepted by orchestrator; do not edit log/STATUS.md; preserve existing changes; kit read-only
+2026-11-06T18:28:17.684814+00:00 | P0016 | EDIT | log/CODEX_LOG.md | append START and initial action records
+2026-11-06T18:28:25.904156+00:00 | P0016 | CMD | python append START/initial action records; rg -n '^\| P0016 \|' /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0016.md | exit 0 | task loaded
+2026-11-06T18:28:25.904210+00:00 | P0016 | READ | kit INDEX.md P0016 row; kit tasks/P0016.md
+2026-11-06T18:28:25.910988+00:00 | P0016 | CMD | rg --files -g '!uv.lock' -g '!log/**' -g '!tasks/**' -g '!INDEX.md' -g '!CONTEXT.md' -g '!docs/**' -g '!templates/**' -g '!README.md' -g '!AGENTS.md' -g '!requirements.lock' | head -100 | exit 0 | discovered project paths
+2026-11-06T18:28:32.078291+00:00 | P0016 | CMD | sed -n '1,240p' src/clavel/database/__init__.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.078291+00:00 | P0016 | READ | src/clavel/database/__init__.py
+2026-11-06T18:28:32.081876+00:00 | P0016 | CMD | sed -n '1,240p' src/clavel/database/catalog.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.081876+00:00 | P0016 | READ | src/clavel/database/catalog.py
+2026-11-06T18:28:32.085282+00:00 | P0016 | CMD | sed -n '1,240p' src/clavel/database/inventory.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.085282+00:00 | P0016 | READ | src/clavel/database/inventory.py
+2026-11-06T18:28:32.088822+00:00 | P0016 | CMD | sed -n '1,240p' tests/integration/conftest.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.088822+00:00 | P0016 | READ | tests/integration/conftest.py
+2026-11-06T18:28:32.092186+00:00 | P0016 | CMD | sed -n '1,240p' tests/integration/test_catalog_schema.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.092186+00:00 | P0016 | READ | tests/integration/test_catalog_schema.py
+2026-11-06T18:28:32.095373+00:00 | P0016 | CMD | sed -n '1,240p' tests/integration/test_inventory_schema.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.095373+00:00 | P0016 | READ | tests/integration/test_inventory_schema.py
+2026-11-06T18:28:32.098498+00:00 | P0016 | CMD | sed -n '1,240p' pyproject.toml | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.098498+00:00 | P0016 | READ | pyproject.toml
+2026-11-06T18:28:32.102077+00:00 | P0016 | CMD | sed -n '1,240p' tests/test_database.py | exit 0 | inspected implementation/test configuration
+2026-11-06T18:28:32.102077+00:00 | P0016 | READ | tests/test_database.py
+2026-11-06T18:28:51.330312+00:00 | P0016 | CMD | sed -n '1,180p' migrations/versions/0003_inventory_schema.py | exit 0 | targeted schema/test/environment discovery
+2026-11-06T18:28:51.330312+00:00 | P0016 | READ | migrations/versions/0003_inventory_schema.py
+2026-11-06T18:28:51.333841+00:00 | P0016 | CMD | sed -n '1,100p' tests/integration/test_migrations.py | exit 0 | targeted schema/test/environment discovery
+2026-11-06T18:28:51.333841+00:00 | P0016 | READ | tests/integration/test_migrations.py
+2026-11-06T18:28:51.339549+00:00 | P0016 | CMD | ls -ld .venv .venv/bin/python; command -v initdb; command -v pg_ctl; id -u | exit 0 | targeted schema/test/environment discovery
+2026-11-06T18:28:51.345034+00:00 | P0016 | CMD | rg --files -g AGENTS.md -g .gitignore | exit 0 | targeted schema/test/environment discovery
+2026-11-06T18:28:51.345116+00:00 | P0016 | DECISION | Add psycopg repositories bound to caller-managed transactions; immutable-ID keyset cursors, no implied freshness, reuse database stock-order trigger; integration evidence uses disposable PostgreSQL and synthetic records only
+2026-11-06T18:29:48.252454+00:00 | P0016 | EDIT | src/clavel/database/repositories.py | add typed catalog/stock reads and transactional upserts; bounded collection-scoped keyset pages; preserve unknowns; document concurrency and snapshot semantics
+2026-11-06T18:31:33.930595+00:00 | P0016 | EDIT | tests/integration/test_repositories.py | synthetic PostgreSQL evidence for duplicate/stale/concurrent upserts, rollback, unknown states, pagination mutation/replay/boundaries and repeatable-read snapshots
+2026-11-06T18:31:43.960764+00:00 | P0016 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_repositories.py -q --tb=short | started; capture output, print final 30 lines only
+2026-11-06T18:31:58.823015+00:00 | P0016 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_repositories.py -q --tb=short | exit 0 | ....................                                                     [100%]; 20 passed in 14.41s
+2026-11-06T18:31:58.823015+00:00 | P0016 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_repositories.py -q --tb=short | ....................                                                     [100%]; 20 passed in 14.41s | synthetic records on disposable PostgreSQL, not live provider evidence
+2026-11-06T18:32:34.849876+00:00 | P0016 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/test_database.py tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py -q --tb=short | started; verify compatibility with existing transaction and schema guards
+2026-11-06T18:33:11.799453+00:00 | P0016 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/test_database.py tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py -q --tb=short | exit 0 | -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html; 60 passed, 1 warning in 36.32s
+2026-11-06T18:33:11.799453+00:00 | P0016 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/test_database.py tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py -q --tb=short | -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html; 60 passed, 1 warning in 36.32s | synthetic/double-based and disposable PostgreSQL evidence only
+2026-11-06T18:33:47.866487+00:00 | P0016 | CMD | git diff --check | exit 0 | whitespace/status review; new files remain untracked until explicit staging
+2026-11-06T18:33:47.872067+00:00 | P0016 | CMD | git diff --stat | exit 0 | whitespace/status review; new files remain untracked until explicit staging
+2026-11-06T18:33:47.876731+00:00 | P0016 | CMD | git status --short | exit 0 | whitespace/status review; new files remain untracked until explicit staging
+2026-11-06T18:33:47.880622+00:00 | P0016 | CMD | git diff --numstat -- log/STATUS.md | exit 0 | whitespace/status review; new files remain untracked until explicit staging
+2026-11-06T18:33:47.880707+00:00 | P0016 | DECISION | log/STATUS.md retains pre-existing orchestrator modifications and will be excluded from staging; no API/schema/provider changes; implementation ready for independent review after compatibility checks
+2026-11-06T18:33:47.880856+00:00 | P0016 | READ | log/STATUS.md | fingerprint only to confirm task does not alter orchestrator file: 8ebe316e63fe1eef29cc35a9fc22b173162fb19dfdd772411323c7853cfd6bd8
+2026-11-06T18:36:23.190331+00:00 | P0016 | EDIT | log/P0016_EVIDENCE.md | prepare independent review evidence, 80 passing checks, synthetic provenance, transaction/pagination limitations and Awaiting review status
+2026-11-06T18:36:23.190331+00:00 | P0016 | DECISION | Done-when mechanics validated: 20 repository tests plus 60 existing schema/transaction tests passed, no skips; existing Starlette/httpx dependency warning is non-blocking; no live gate required; independent reviewer determines acceptance
+2026-11-06T18:36:52.784537+00:00 | P0016 | CMD | python SHA256 comparison for log/STATUS.md | exit 0 | unchanged from recorded orchestrator fingerprint
+2026-11-06T18:36:52.791573+00:00 | P0016 | CMD | git add src/clavel/database/repositories.py tests/integration/test_repositories.py log/P0016_EVIDENCE.md log/CODEX_LOG.md | exit 0 | staged task files and checked patch
+2026-11-06T18:36:52.796792+00:00 | P0016 | CMD | git diff --cached --check | exit 0 | staged task files and checked patch
+2026-11-06T18:36:52.802023+00:00 | P0016 | CMD | git diff --cached --stat | exit 0 | staged task files and checked patch
+2026-11-06T18:36:52.806310+00:00 | P0016 | CMD | git diff --cached --name-only | exit 0 | staged task files and checked patch
+2026-11-06T18:36:52.806376+00:00 | P0016 | DECISION | Audit complete: initial inspection, all kit/repo reads, implementation/test/evidence edits, both test runs and staging checks recorded; preserve pre-existing log history and exclude orchestrator status changes
+2026-11-06T18:36:52.806423+00:00 | P0016 | CMD | git add log/CODEX_LOG.md; git commit -m "P0016 catalog and stock repositories" | starting validated task commit; completion and final SHA recorded immediately after
