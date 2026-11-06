@@ -18,7 +18,7 @@ Stack: Python, FastAPI, PostgreSQL, pytest, REST, modular monolith. BIRCH cluste
 - Contract (OpenAPI) changes: propose diff + examples + migration impact; do not edit silently.
 - Never put secrets or raw personal data in code, logs, commits or prompts. Only `.env.example` with fake values.
 - Unknown/stale stock or unknown compatibility is never treated as verified/eligible. Preserve unknown states.
-- Status vocabulary: Pending, In progress, Blocked, Awaiting review, Changes requested, Accepted. You may set at most Awaiting review; only the reviewer sets Accepted (record reviewer, SHA, date).
+- Status vocabulary: Pending, In progress, Blocked, Awaiting review, Changes requested, Accepted. You may set at most Awaiting review; only the reviewer sets Accepted (record reviewer, SHA, date). In Alonso automated runs, the independent Codex reviewer and orchestrator resolve review without a separate human approval step; failed checks, missing inputs and required live provider decisions still block acceptance.
 
 ## MANDATORY LOGGING (every action, no exceptions)
 Maintain append-only `log/CODEX_LOG.md` (never rewrite or delete past lines; commit it with the task).

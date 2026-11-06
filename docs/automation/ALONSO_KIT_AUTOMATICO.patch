@@ -1,0 +1,513 @@
+diff --git a/orchestrator.py b/orchestrator.py
+--- a/orchestrator.py
++++ b/orchestrator.py
+@@ -4,7 +4,7 @@
+ Usage: python3 orchestrator.py --repo REPO --kit KIT [--only P0002] [--max-tasks N] [--dry-run] [--accept ID]"""
+ import argparse, re, subprocess, sys, datetime, pathlib
+ 
+-HUMAN_GATES = {"P0007", "P0022", "P0044", "P0046"}   # need Emi/Manu/sponsor signatures: Codex prepares, a human accepts
++DEFAULT_GATES = {"P0007", "P0022", "P0044", "P0046"}
+ EXCL = "':!log/runs' ':!log/CODEX_LOG.md' ':!log/STATUS.md'"   # files managed by the orchestrator
+ 
+ def now(): return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+@@ -17,6 +17,8 @@
+         s.log = s.repo / "log" / "CODEX_LOG.md"; s.status = s.repo / "log" / "STATUS.md"
+         s.runs = s.repo / "log" / "runs"; s.runs.mkdir(parents=True, exist_ok=True)
+         s.ext = s.repo / "log" / "EXTERNAL_ACCEPTED.txt"
++        gate_file = s.kit / "gates.txt"
++        s.gates = set(gate_file.read_text().split()) if gate_file.exists() else DEFAULT_GATES.copy()
+     def L(s, tid, typ, detail):
+         with open(s.log, "a") as f: f.write(f"{now()} | {tid} | {typ} | {detail}\n")
+     def index(s):
+@@ -25,13 +27,14 @@
+             rows[m[1]] = [] if m[4].strip() in ("—", "None") else [d.strip() for d in m[4].split(",")]
+         return rows
+     def statuses(s):
+-        return {m[1]: m[2] for m in re.finditer(r"^\| (P\d{4}) \| (.*?) \|", s.status.read_text(), re.M)}
+-    def set_status(s, tid, st, sha="—", note="—"):
++        return {m[1]: m[2] for m in re.finditer(r"^\| ([PEM]\d{4}) \| (.*?) \|", s.status.read_text(), re.M)}
++    def set_status(s, tid, st, sha="—", note="—", reviewer="—"):
+         def rep(m):
+             c = [x.strip() for x in m[0].strip().strip("|").split("|")]
+             c[1] = st
+             if sha != "—": c[2] = sha
+             if note != "—": c[4] = note
++            if reviewer != "—": c[5] = reviewer
+             return "| " + " | ".join(c) + " |"
+         s.status.write_text(re.sub(rf"^\| {tid} \|.*$", rep, s.status.read_text(), flags=re.M))
+     def external_ok(s):
+@@ -39,8 +42,9 @@
+     def ready(s):
+         idx, st, ext = s.index(), s.statuses(), s.external_ok()
+         return [t for t, deps in idx.items() if st.get(t) == "Pending"
+-                and all((st.get(d) == "Accepted") if d.startswith("P") else (d in ext) for d in deps)]
+-    def head(s): return sh("git rev-parse --short HEAD", s.repo).stdout.strip()
++                and all(st.get(d) == "Accepted" or
++                        (not d.startswith("P") and d not in st and d in ext) for d in deps)]
++    def head(s): return sh("git rev-parse HEAD", s.repo).stdout.strip()
+     def dirty(s): return sh(f"git status --porcelain -- . {EXCL}", s.repo).stdout.strip()
+     def commit_state(s, msg):
+         sh("git add log/STATUS.md log/CODEX_LOG.md", s.repo); sh(["git", "commit", "-qm", msg, "--allow-empty"], s.repo)
+@@ -49,11 +53,13 @@
+     cmd = ["codex", "exec"] + c.a.codex_args.split() + ["-C", str(c.repo), prompt]
+     try:
+         r = subprocess.run(cmd, capture_output=True, text=True, timeout=c.a.timeout)
+-        out, rc = r.stdout + "\n--STDERR--\n" + r.stderr, r.returncode
++        stdout, stderr, rc = r.stdout, r.stderr, r.returncode
+     except subprocess.TimeoutExpired as e:
+-        out, rc = f"TIMEOUT after {c.a.timeout}s\n{e.stdout or ''}", 124
+-    outfile.write_text(out)
+-    return rc, out
++        stdout = e.stdout.decode(errors="replace") if isinstance(e.stdout, bytes) else (e.stdout or "")
++        stderr = f"TIMEOUT after {c.a.timeout}s"
++        rc = 124
++    outfile.write_text(stdout + "\n--STDERR--\n" + stderr)
++    return rc, stdout
+ 
+ def impl_prompt(c, tid, feedback):
+     p = (f"Read AGENTS.md. The kit is at {c.kit} (read-only). Your task is {tid}: read only the kit's INDEX.md (its row), "
+@@ -61,6 +67,9 @@
+          f"Prerequisites are already verified Accepted. Execute the task following AGENTS.md, logging every action in "
+          f"log/CODEX_LOG.md (START and END lines included). Work on the current branch and commit after validating, with the commit "
+          f"message from the task file. Do NOT edit log/STATUS.md (the orchestrator manages it). "
++         f"Project checkpoint review is automatic: prepare evidence for the independent Codex reviewer, "
++         f"without requesting human signatures or setting Accepted yourself. Missing inputs, failed checks "
++         f"and required live provider decisions remain blockers; never fabricate acceptance or live evidence. "
+          f"Final reply: changed paths, commands/results, SHA, next step (max 10 lines).")
+     if feedback: p += f"\n\nPREVIOUS ATTEMPT REJECTED. Fix exactly this and log it:\n{feedback}"
+     return p
+@@ -68,7 +77,10 @@
+ def review_prompt(c, tid, base):
+     return (f"Read AGENTS.md. The kit is at {c.kit} (read-only). You are the independent REVIEWER of {tid}. Read the kit's "
+             f"templates/REVIEW.md and tasks/{tid}.md, then inspect `git diff {base}..HEAD`. Do NOT modify, create, or commit any file. "
+-            f"Reproduce the riskiest 'Done when' check yourself. Last line of your reply must be exactly "
++            f"Reproduce the riskiest 'Done when' check yourself. Record the exact reviewed source SHA. "
++            f"This is automatic independent review; project checkpoint signatures are not required. "
++            f"Missing inputs, failed checks and required live provider decisions remain blockers. "
++            f"Exit successfully and make the last line of stdout exactly "
+             f"'VERDICT: ACCEPTED' or 'VERDICT: CHANGES: <concrete unmet criteria>'.")
+ 
+ def mechanical_checks(c, tid, base):
+@@ -77,8 +89,10 @@
+     if not re.search(rf"END {tid}", log): errs.append("log lacks END line for the task")
+     if int(sh(f"git rev-list --count {base}..HEAD", c.repo).stdout.strip() or 0) < 1: errs.append("no commit was created for the task")
+     if c.dirty(): errs.append("uncommitted changes remain")
+-    py = ".venv/bin/python" if (c.repo / ".venv/bin/python").exists() else "python3"
+-    vc = c.a.verify_cmd or (f"{py} -m pytest -q -x" if (c.repo / "pyproject.toml").exists() else "")
++    if not c.a.verify_cmd and (c.repo / "pyproject.toml").exists() and not (c.repo / ".venv/bin/python").exists():
++        errs.append("project-local .venv/bin/python is missing; install dependencies before retrying")
++        return errs
++    vc = c.a.verify_cmd or (".venv/bin/python -m pytest -q -x" if (c.repo / "pyproject.toml").exists() else "")
+     if vc:
+         r = sh(vc, c.repo)
+         c.L(tid, "TEST", f"orchestrator `{vc}` exit {r.returncode}: {(r.stdout.strip().splitlines() or [''])[-1][:200]}")
+@@ -98,21 +112,24 @@
+         rc, out = codex(c, impl_prompt(c, tid, feedback), c.runs / f"{tid}-impl{n}.txt")
+         c.L(tid, "ORCH", f"attempt {n}: codex exit {rc}; full output log/runs/{tid}-impl{n}.txt")
+         errs = ([f"codex exit code {rc}"] if rc else []) + mechanical_checks(c, tid, base)
+-        if not errs and tid not in HUMAN_GATES and not c.a.no_review:
++        if not errs:
+             head_before = c.head()
+-            _, rout = codex(c, review_prompt(c, tid, base), c.runs / f"{tid}-review{n}.txt")
++            review_rc, rout = codex(c, review_prompt(c, tid, base), c.runs / f"{tid}-review{n}.txt")
+             if c.head() != head_before or c.dirty():
+                 errs.append("reviewer modified the repo; reverted"); reset(c, head_before)
+-            v = re.findall(r"VERDICT: (ACCEPTED|CHANGES.*)", rout)
+-            c.L(tid, "REVIEW", f"attempt {n}: {v[-1][:300] if v else 'no verdict'}")
+-            if not v or not v[-1].startswith("ACCEPTED"): errs.append(v[-1] if v else "reviewer gave no verdict")
++            lines = rout.splitlines()
++            verdict = lines[-1] if lines else ""
++            c.L(tid, "REVIEW", f"automatic Codex review; source {head_before}; attempt {n}; exit {review_rc}; last stdout line {verdict[:300]!r}")
++            if review_rc != 0: errs.append(f"reviewer exited with code {review_rc}")
++            if verdict != "VERDICT: ACCEPTED": errs.append("reviewer stdout did not end with exact VERDICT: ACCEPTED")
+         if not errs:
+             sha = c.head()
+-            if tid in HUMAN_GATES:
++            if tid in c.gates:
+                 c.set_status(tid, "Awaiting review", sha, "needs human acceptance")
+                 c.L(tid, "ORCH", f"prepared at {sha}; HUMAN GATE, run --accept {tid} after signatures")
+                 c.commit_state(f"status: {tid} awaiting human review"); return "gate"
+-            c.set_status(tid, "Accepted", sha, "auto: orchestrator+AI reviewer"); c.L(tid, "ORCH", f"ACCEPTED at {sha}")
++            c.set_status(tid, "Accepted", sha, "automatic: checks + independent Codex review", f"Codex (automatic) / {now()}")
++            c.L(tid, "ORCH", f"ACCEPTED by automatic review at {sha}")
+             c.commit_state(f"status: {tid} Accepted"); sh(f"git tag -f accepted/{tid}", c.repo); return "ok"
+         feedback = "\n".join(errs); c.L(tid, "ORCH", f"attempt {n} rejected: {feedback[:300]}")
+         reset(c, base); c.L(tid, "ORCH", f"reverted to {base} after rejected attempt {n}")
+@@ -123,11 +140,13 @@
+     """One row per INDEX task, keeping the most advanced existing row (fixes duplicate rows)."""
+     rows = {}
+     for line in c.status.read_text().splitlines():
+-        m = re.match(r"^\| (P\d{4}) \| (.*?) \|", line)
++        m = re.match(r"^\| ([PEM]\d{4}) \| (.*?) \|", line)
+         if m and (m[1] not in rows or (rows[m[1]][1] == "Pending" and m[2] != "Pending")): rows[m[1]] = (line, m[2])
+     head = ["# STATUS (one row per task; managed by orchestrator in automated mode)", "",
+             "| Task | Status | Branch/SHA | Tests | Blocker | Reviewer/date | Next |", "|---|---|---|---|---|---|---|"]
+-    new = "\n".join(head + [rows[t][0] if t in rows else f"| {t} | Pending | — | — | — | — | — |" for t in c.index()]) + "\n"
++    owned = list(c.index())
++    task_ids = owned + [t for t in rows if t not in owned]
++    new = "\n".join(head + [rows[t][0] if t in rows else f"| {t} | Pending | — | — | — | — | — |" for t in task_ids]) + "\n"
+     if new != c.status.read_text(): c.status.write_text(new); print("STATUS.md repaired")
+ 
+ def main():
+@@ -139,6 +158,8 @@
+     ap.add_argument("--codex-args", default="--full-auto"); ap.add_argument("--no-review", action="store_true")
+     ap.add_argument("--dry-run", action="store_true")
+     a = ap.parse_args(); c = Ctx(a)
++    if a.no_review: ap.error("--no-review is disabled: automatic acceptance requires independent Codex review")
++    if a.accept and a.accept not in c.gates: ap.error("manual acceptance is disabled for tasks absent from gates.txt")
+     repair_status(c)
+     if a.accept:
+         c.set_status(a.accept, "Accepted", c.head(), f"human accepted {now()}"); c.L(a.accept, "ORCH", "accepted by human")
+diff --git a/gates.txt b/gates.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/INDEX.md b/INDEX.md
+--- a/INDEX.md
++++ b/INDEX.md
+@@ -8,7 +8,7 @@
+ | P0004 | FastAPI shell | P1 | P0002, P0003 | CP0 | — |
+ | P0005 | Architecture and decision records | P1 | P0001 | CP0 | — |
+ | P0006 | Initial OpenAPI and fixture contract | P0 | P0004, P0005 | CP0 | — |
+-| P0007 | Contract review and foundation gate | P0 | P0006, E0001, M0002 | CP0 | — |
++| P0007 | Contract review and foundation gate | P0 | P0006, E0001 | CP0 | — |
+ | P0008 | PostgreSQL access | P1 | P0007 | CP1 | — |
+ | P0009 | Migration workflow | P1 | P0008 | CP1 | — |
+ | P0010 | Customer and session schema | P1 | P0009 | CP1 | — |
+diff --git a/tasks/P0007.md b/tasks/P0007.md
+--- a/tasks/P0007.md
++++ b/tasks/P0007.md
+@@ -1,15 +1,15 @@
+ # P0007 · Contract review and foundation gate
+-Phase Foundation | CP0 | P0 | Deps: P0006, E0001, M0002 | Gate: None specific
++Phase Foundation | CP0 | P0 | Deps: P0006, E0001 | Gate: Automatic independent Codex review
+ 
+ **Goal:** contract review and foundation gate.
+ 
+-**Scope:** Record Alonso and Emi architecture acceptance and Manu contract acceptance against commit SHA.
++**Scope:** Verify the accepted P0006 contract and E0001 architecture review against an exact source commit SHA. Independently check OpenAPI and synthetic frontend fixtures for success, empty and error states, including 401 and 403. Credentials and runtime authorization remain backend responsibilities; mocks do not prove live access control. No Manu signature or M0002 acceptance is required for this checkpoint.
+ 
+-- Paths: `docs/ESTADO_ACTUAL.md`+tests.
++- Paths: discover the existing contract, OpenAPI, fixtures, tests and review records. Write the CP0 evidence in `docs/REVISION_P0007.md`; the orchestrator manages `log/STATUS.md`.
+ - Out of scope: Business feature implementation and production deployment.
+ 
+-**Deliverable:** A reviewable record in the applicable documentation, linked to the evidence and source revision.
++**Deliverable:** A reviewable CP0 record with the full reviewed SHA, accepted prerequisites, exact commands/results, fixture provenance, known limitations and independent automatic review evidence. Do not claim human signatures or live authorization checks.
+ 
+-**Done when:** Verify signatures and decision closure for CP0; reject unresolved contract defects.
++**Done when:** Verify bootstrap, architecture, working instructions, OpenAPI validity and fixture conformance. Run the smallest relevant contract/API suite with `.venv/bin/python -m pytest`, including success, empty, error, 401 and 403 fixture coverage. Record the exact reviewed SHA and distinguish synthetic mechanics from live behavior. Reject unresolved contract defects, failed checks and missing required inputs. The orchestrator may mark Accepted only after checks pass and the independent Codex reviewer exits 0 with final stdout line exactly `VERDICT: ACCEPTED`; it may then continue to P0008 without human confirmation.
+ 
+ **Commit:** `P0007 contract review and foundation gate`
+diff --git a/AGENTS.md b/AGENTS.md
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -18,7 +18,7 @@
+ - Contract (OpenAPI) changes: propose diff + examples + migration impact; do not edit silently.
+ - Never put secrets or raw personal data in code, logs, commits or prompts. Only `.env.example` with fake values.
+ - Unknown/stale stock or unknown compatibility is never treated as verified/eligible. Preserve unknown states.
+-- Status vocabulary: Pending, In progress, Blocked, Awaiting review, Changes requested, Accepted. You may set at most Awaiting review; only the reviewer sets Accepted (record reviewer, SHA, date).
++- Status vocabulary: Pending, In progress, Blocked, Awaiting review, Changes requested, Accepted. You may set at most Awaiting review; only the reviewer sets Accepted (record reviewer, SHA, date). In Alonso automated runs, the independent Codex reviewer and orchestrator resolve review without a separate human approval step; failed checks, missing inputs and required live provider decisions still block acceptance.
+ 
+ ## MANDATORY LOGGING (every action, no exceptions)
+ Maintain append-only `log/CODEX_LOG.md` (never rewrite or delete past lines; commit it with the task).
+diff --git a/AUTOMATION.md b/AUTOMATION.md
+--- a/AUTOMATION.md
++++ b/AUTOMATION.md
+@@ -1,35 +1,60 @@
+ # Modo automático (orchestrator.py)
+ 
+-Corre desde el KIT (fuera del repo) y apunta al repo oficial. Todo se commitea directamente en `main`, tarea por tarea y en secuencia. Requiere `codex` CLI con sesión iniciada, git y python3.
++Ejecutar desde el kit apuntando al repo oficial. Trabaja en main, tarea por tarea.
++Requiere Codex CLI autenticado, git y Python. Alonso y Emi coordinan el turno:
++un solo orquestador a la vez sobre main, cada uno en su clon local. Al cambiar
++de turno, publicar commits y actualizar el otro clon. No hay bloqueo distribuido.
+ 
+-## Preparación (una vez)
+-1. En el repo: `AGENTS.md` y `log/` copiados, `.gitignore` con la línea `log/runs/`, árbol limpio y commit hecho.
+-2. Verifica los flags de tu Codex: `codex exec --help` (el script usa `codex exec --full-auto -C <repo> "<prompt>"`; cámbialos con `--codex-args`).
+-3. Marca lo que ya hiciste a mano en `log/STATUS.md` (P0001 -> Accepted). El script repara filas duplicadas.
+-4. Cuando Emi/Manu acepten sus dependencias, añade sus IDs a `log/EXTERNAL_ACCEPTED.txt` (ej. `E0001 M0002`).
++## Preparación
+ 
+-## Ejecutar
++1. Actualizar main y dejar el árbol limpio. Instalar dependencias en la .venv
++   del repo; no se usa un pytest global.
++2. Conservar gates.txt presente y vacío: desactiva todas las pausas manuales.
++   Si falta el archivo, se recuperan las compuertas antiguas por compatibilidad.
++3. Las dependencias se comprueban en log/STATUS.md, preservando filas P/E/M.
++   log/EXTERNAL_ACCEPTED.txt sirve para dependencias externas sin fila de estado;
++   no sobreescribe un estado explícito no aceptado.
++4. P0007 depende de P0006 y E0001. Incluye OpenAPI y fixtures sintéticos de éxito,
++   vacío y error, incluidos 401/403, y el SHA exacto revisado. No requiere M0002
++   ni firma de Manu.
++
++## Ejecución
++
+ ```bash
+-KIT=/home/alonso/Documents/clavel-codex-kit; REPO=/ruta/repo
+-python3 $KIT/orchestrator.py --repo $REPO --kit $KIT --dry-run         # qué tareas están listas
+-python3 $KIT/orchestrator.py --repo $REPO --kit $KIT --max-tasks 1     # prueba con UNA tarea
+-python3 $KIT/orchestrator.py --repo $REPO --kit $KIT                   # todo lo posible
+-# opciones: --only P0008 | --retries 2 | --timeout 3600 | --verify-cmd "pytest -q" | --no-review | --branch main (default)
++python3 /ruta/kit/orchestrator.py --repo /ruta/Clavel --kit /ruta/kit --dry-run
++python3 /ruta/kit/orchestrator.py --repo /ruta/Clavel --kit /ruta/kit --max-tasks 1
++python3 /ruta/kit/orchestrator.py --repo /ruta/Clavel --kit /ruta/kit
+ ```
+ 
+-## Qué hace por tarea
+-implementa (Codex) -> checks mecánicos (START/END en log, commit hecho, árbol limpio, pytest si hay pyproject) -> revisión independiente (otra sesión Codex, sin editar) -> Accepted + tag `accepted/<ID>`. Si falla: revierte, reintenta con el motivo; tras N intentos queda Blocked y sigue con otras tareas listas.
+-Todo va a `log/CODEX_LOG.md` (líneas ORCH/REVIEW/TEST) y la salida completa de cada sesión a `log/runs/<ID>-*.txt` (no versionado).
++--dry-run muestra tareas listas y puede normalizar STATUS.md; no ejecuta Codex.
++--only P0007 limita la ejecución a esa tarea. Sin esa opción, P0007 aceptada
++permite continuar a P0008 y otras tareas listas sin confirmación.
++--no-review está deshabilitado. Con gates.txt vacío, --accept está deshabilitado.
+ 
+-## Trabajo directo en main
+-Un commit por tarea más uno de estado. Antes de empezar se crea el tag `auto-start-<fecha>` como punto de restauración (`git reset --hard <tag>`). Un intento rechazado se revierte con `reset --hard` al commit previo de esa tarea: no tengas cambios manuales sin commit ni hagas push durante la ejecución; haz push al terminar.
++## Aceptación y fallos
+ 
+-## Se detiene solo
+-- P0007, P0022, P0044, P0046: Codex prepara la evidencia, queda "Awaiting review". Tras firmas reales: `--accept P0007`.
+-- Sin tareas listas (dependencias de Emi/Manu pendientes o decisiones bloqueadas).
++Cada tarea pasa por implementación, checks mecánicos y revisión independiente.
++Accepted exige pruebas correctas, un revisor con código 0 y una última línea de
++stdout exactamente VERDICT: ACCEPTED. Un veredicto en stderr, texto posterior o
++espacios adicionales no es aceptación. Se registra revisión automática con SHA
++completo, revisor y fecha, sin inventar firmas humanas.
+ 
+-## Límites
+-- La aceptación automática es de un revisor IA: no sustituye firmas de Emi/Manu/sponsor.
+-- Si el sandbox de Codex no tiene red, `pip install` falla (verás Blocked con el motivo); instala dependencias antes o ajusta `--codex-args`.
+-- Cuesta tokens por tarea x (implementación + revisión x reintentos). `--no-review` ahorra a costa de verificación.
+-- Corre en `tmux`/`screen` para que no se corte.
++Fallos, insumos faltantes y decisiones live obligatorias siguen bloqueando.
++La revisión automática del proyecto no sustituye la decisión live de Jeff ni
++convierte mocks en evidencia de credenciales o permisos reales. Los detalles
++van en log/CODEX_LOG.md y las salidas en log/runs/, sin secretos ni datos personales.
++
++Un intento rechazado se revierte al commit anterior con git reset --hard y git
++clean. No mantener trabajo manual sin commit ni ejecutar otro orquestador durante
++ese turno. Publicar los cambios al terminar.
++
++## Pruebas del kit
++
++Desde el repo, usando su entorno local:
++
++```bash
++.venv/bin/python -m pytest /ruta/kit/tests/test_orchestrator.py -q
++```
++
++Son fixtures y dobles sintéticos: validan aceptación, rechazo, dependencias y
++continuidad P0007 a P0008; no ejecutan tareas ni firman CP0.
+diff --git a/templates/CHECKPOINT.md b/templates/CHECKPOINT.md
+--- a/templates/CHECKPOINT.md
++++ b/templates/CHECKPOINT.md
+@@ -1,14 +1,14 @@
+ # Verify a checkpoint
+ 
+-Read the checkpoint in the execution handbook and list every required criterion. For each criterion record its task IDs, reviewed SHA, reproduction steps, observed results and reviewer. Identify fixture versus live environments. Ask each designated acceptor to sign their scope. Record Accepted only when every mandatory criterion and signature is present. Otherwise keep the checkpoint pending and record its next unblock action.
++List the assigned checkpoint's required criteria using its task file. For each criterion record task IDs, full reviewed SHA, reproduction steps, observed results and reviewer. Identify fixture versus live environments. In automated runs, the independent Codex review replaces project checkpoint signatures: do not request manual confirmation or fabricate human approval. The orchestrator alone records Accepted after checks pass and the reviewer exits 0 with final stdout line exactly `VERDICT: ACCEPTED`. Failed checks, missing inputs and required live provider decisions still block acceptance.
+ 
+ Checkpoints and required evidence (acceptors in parentheses):
+-- CP0 / P0007: bootstrap, architecture, verified OpenAPI/examples, working instructions (Alonso + Emi foundation; Manu frontend contract).
++- CP0 / P0007: bootstrap, architecture, verified OpenAPI and synthetic success/empty/error examples including 401/403, working instructions; prerequisites P0006 and E0001; exact reviewed SHA; automatic independent Codex review, without M0002 or Manu signature.
+ - CP1 / P0022: clean PostgreSQL migration, constraints, replay/rollback tests, canonical import, synthetic fixtures (Emi reviews).
+ - CP2 / P0044: reproducible BIRCH + metrics, popularity baseline, deterministic eligibility, cold-start, API conformance (Emi reviews; separate E0004 grants backend start).
+ - CP3 / E0019: target Qwen, bounded validation, fair comparison, live Jeff decision, promotion/rejection (Alonso reviews).
+ - CP4 / E0036: metrics, diagnosis, pause continuity, budgets/cooldowns, audit, rollback races, API conformance (Alonso backend; Manu frontend contract).
+ - CP5 / E0043: browser+backend E2E, security, target ops, authorized pilot, recovery, release candidate (Alonso, Manu, Emi, store sponsor).
+-A checkpoint stays open until all evidence exists and is signed.
++A checkpoint stays open until its required evidence exists and independent review passes. Named people above retain their domain responsibilities; automatic review does not fabricate their signatures or substitute for required live provider evidence.
+ 
+ Log: record START/END and each READ/CMD/TEST/DECISION in log/CODEX_LOG.md as defined in AGENTS.md.
+diff --git a/tests/test_orchestrator.py b/tests/test_orchestrator.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_orchestrator.py
+@@ -0,0 +1,187 @@
++"""Synthetic fixtures/test doubles: orchestration mechanics, never live acceptance."""
++import importlib.util
++import subprocess
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++
++KIT = Path(__file__).resolve().parents[1]
++spec = importlib.util.spec_from_file_location("alonso_orchestrator", KIT / "orchestrator.py")
++orch = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(orch)
++SOURCE_SHA = "a" * 40  # Synthetic source, not a project commit.
++
++
++@pytest.fixture
++def ctx(tmp_path):
++    repo, kit = tmp_path / "repo", tmp_path / "kit"
++    (repo / "log").mkdir(parents=True)
++    kit.mkdir()
++    (kit / "gates.txt").write_text("")
++    (kit / "INDEX.md").write_text(
++        "| P0007 | CP0 | P0 | P0006, E0001 | CP0 | — |\n"
++        "| P0008 | Next task | P1 | P0007 | CP0 | — |\n")
++    (repo / "log/CODEX_LOG.md").write_text("")
++    (repo / "log/STATUS.md").write_text(
++        "| Task | Status | Branch/SHA | Tests | Blocker | Reviewer/date | Next |\n"
++        "|---|---|---|---|---|---|---|\n"
++        "| P0006 | Accepted | synthetic-p6 | — | — | synthetic reviewer | — |\n"
++        "| P0007 | Pending | — | — | — | — | — |\n"
++        "| P0008 | Pending | — | — | — | — | — |\n"
++        "| E0001 | Accepted | synthetic-e1 | — | — | synthetic reviewer | — |\n"
++        "| M0001 | Pending | — | — | — | — | — |\n")
++    args = SimpleNamespace(repo=repo, kit=kit, retries=1, timeout=1,
++                           codex_args="--full-auto", verify_cmd="", no_review=False)
++    return orch.Ctx(args)
++
++
++def fake_execution(monkeypatch, ctx, reviewer_rc=0, reviewer_stdout="VERDICT: ACCEPTED\n",
++                   implementation_rc=0, errors=None):
++    calls, resets = [], []
++    monkeypatch.setattr(ctx, "head", lambda: SOURCE_SHA)
++    monkeypatch.setattr(ctx, "dirty", lambda: "")
++    monkeypatch.setattr(ctx, "commit_state", lambda message: calls.append(("commit", message)))
++    monkeypatch.setattr(orch, "sh", lambda *args: SimpleNamespace(returncode=0, stdout="", stderr=""))
++    monkeypatch.setattr(orch, "mechanical_checks", lambda *args: errors or [])
++    monkeypatch.setattr(orch, "reset", lambda *args: resets.append(args[1]))
++    def codex(c, prompt, outfile):
++        if "-impl" in outfile.name:
++            calls.append(("implementation", outfile.name))
++            return implementation_rc, "synthetic implementation"
++        calls.append(("review", outfile.name))
++        return reviewer_rc, reviewer_stdout
++    monkeypatch.setattr(orch, "codex", codex)
++    return calls, resets
++
++
++def test_empty_gates_does_not_fall_back_to_defaults(ctx):
++    assert ctx.gates == set()
++
++
++def test_missing_gates_keeps_defaults(ctx):
++    (ctx.kit / "gates.txt").unlink()
++    assert orch.Ctx(ctx.a).gates == orch.DEFAULT_GATES
++
++
++def test_repair_preserves_other_owners_and_prerequisites(ctx):
++    orch.repair_status(ctx)
++    assert ctx.statuses()["E0001"] == "Accepted"
++    assert ctx.statuses()["M0001"] == "Pending"
++    assert ctx.statuses()["P0006"] == "Accepted"
++    assert ctx.ready() == ["P0007"]
++    before = ctx.status.read_text()
++    orch.repair_status(ctx)
++    assert ctx.status.read_text() == before
++
++
++@pytest.mark.parametrize("missing", ["P0006", "E0001"])
++def test_unaccepted_prerequisite_still_blocks(ctx, missing):
++    ctx.set_status(missing, "Pending")
++    assert "P0007" not in ctx.ready()
++
++
++def test_stale_external_id_cannot_override_unaccepted_status(ctx):
++    ctx.set_status("E0001", "Blocked")
++    ctx.ext.write_text("E0001\n")
++    assert "P0007" not in ctx.ready()
++
++
++def test_external_fallback_only_when_status_is_absent(ctx):
++    ctx.status.write_text("\n".join(line for line in ctx.status.read_text().splitlines()
++                                   if not line.startswith("| E0001 |")) + "\n")
++    assert "P0007" not in ctx.ready()
++    ctx.ext.write_text("E0001\n")
++    assert ctx.ready() == ["P0007"]
++
++
++@pytest.mark.parametrize("stdout", ["VERDICT: ACCEPTED", "evidence\nVERDICT: ACCEPTED\n"])
++def test_exact_successful_review_advances_to_p0008(monkeypatch, ctx, stdout):
++    calls, resets = fake_execution(monkeypatch, ctx, reviewer_stdout=stdout)
++    assert orch.run_task(ctx, "P0007") == "ok"
++    assert ctx.statuses()["P0007"] == "Accepted"
++    assert "P0008" in ctx.ready()
++    row = next(line for line in ctx.status.read_text().splitlines() if line.startswith("| P0007 |"))
++    assert SOURCE_SHA in row and "Codex (automatic)" in row
++    assert "automatic Codex review" in ctx.log.read_text() and SOURCE_SHA in ctx.log.read_text()
++    assert not resets and [name for name, _ in calls].count("review") == 1
++
++
++@pytest.mark.parametrize("rc,stdout", [
++    (1, "VERDICT: ACCEPTED\n"), (124, "VERDICT: ACCEPTED\n"), (0, ""),
++    (0, "VERDICT: ACCEPTED\nextra text\n"), (0, "VERDICT: ACCEPTED\n\n"),
++    (0, " VERDICT: ACCEPTED\n"), (0, "VERDICT: ACCEPTED \n"),
++    (0, "VERDICT: ACCEPTED-but-incomplete\n"),
++    (0, "VERDICT: CHANGES: broken fixture\n"),
++])
++def test_invalid_review_blocks_acceptance_and_successor(monkeypatch, ctx, rc, stdout):
++    _, resets = fake_execution(monkeypatch, ctx, reviewer_rc=rc, reviewer_stdout=stdout)
++    assert orch.run_task(ctx, "P0007") == "blocked"
++    assert ctx.statuses()["P0007"] == "Blocked" and "P0008" not in ctx.ready()
++    assert resets == [SOURCE_SHA]
++
++
++@pytest.mark.parametrize("rc,errors", [(1, []), (0, ["synthetic failing contract test"]),
++                                      (0, ["required input missing"])])
++def test_failed_implementation_or_checks_never_reaches_reviewer(monkeypatch, ctx, rc, errors):
++    calls, _ = fake_execution(monkeypatch, ctx, implementation_rc=rc, errors=errors)
++    assert orch.run_task(ctx, "P0007") == "blocked"
++    assert not any(name == "review" for name, _ in calls)
++
++
++def test_reviewer_modifications_are_rejected(monkeypatch, ctx):
++    fake_execution(monkeypatch, ctx)
++    monkeypatch.setattr(ctx, "dirty", lambda: " M synthetic-file")
++    assert orch.run_task(ctx, "P0007") == "blocked"
++
++
++def test_stderr_verdict_cannot_be_accepted(monkeypatch, ctx):
++    monkeypatch.setattr(orch.subprocess, "run", lambda *args, **kwargs:
++                        SimpleNamespace(returncode=0, stdout="", stderr="VERDICT: ACCEPTED\n"))
++    rc, stdout = orch.codex(ctx, "synthetic review", ctx.runs / "review.txt")
++    assert rc == 0 and stdout == ""
++    assert "VERDICT: ACCEPTED" in (ctx.runs / "review.txt").read_text()
++
++
++def test_timeout_is_nonzero_even_with_accepted_output(monkeypatch, ctx):
++    def timeout(*args, **kwargs):
++        raise subprocess.TimeoutExpired("synthetic-codex", 1, output=b"VERDICT: ACCEPTED\n")
++    monkeypatch.setattr(orch.subprocess, "run", timeout)
++    rc, stdout = orch.codex(ctx, "synthetic review", ctx.runs / "timeout.txt")
++    assert rc == 124 and stdout == "VERDICT: ACCEPTED\n"
++
++
++def test_missing_local_python_is_a_mechanical_blocker(monkeypatch, ctx):
++    monkeypatch.setattr(ctx, "dirty", lambda: "")
++    monkeypatch.setattr(orch, "sh", lambda *args: SimpleNamespace(stdout="1", returncode=0))
++    ctx.log.write_text("START P0007\nEND P0007\n")
++    (ctx.repo / "pyproject.toml").write_text("# Synthetic Python project\n")
++    assert any(".venv/bin/python is missing" in error
++               for error in orch.mechanical_checks(ctx, "P0007", SOURCE_SHA))
++
++
++@pytest.mark.parametrize("option", ["--no-review", "--accept"])
++def test_cli_cannot_bypass_review_with_empty_gates(monkeypatch, ctx, option):
++    args = ["orchestrator.py", "--repo", str(ctx.repo), "--kit", str(ctx.kit), option]
++    if option == "--accept": args.append("P0007")
++    monkeypatch.setattr(orch.sys, "argv", args)
++    before = ctx.status.read_text()
++    with pytest.raises(SystemExit) as error: orch.main()
++    assert error.value.code == 2 and ctx.status.read_text() == before
++
++
++def test_shipped_configuration_is_automatic(ctx):
++    ctx.a.kit = KIT
++    shipped = orch.Ctx(ctx.a)
++    assert (KIT / "gates.txt").read_bytes() == b"" and shipped.gates == set()
++    assert shipped.index()["P0007"] == ["P0006", "E0001"]
++
++
++def test_main_runs_p0007_then_p0008_without_confirmation(monkeypatch, ctx):
++    calls, _ = fake_execution(monkeypatch, ctx)
++    monkeypatch.setattr(orch, "Ctx", lambda args: ctx)
++    monkeypatch.setattr(orch.sys, "argv", ["orchestrator.py", "--repo", str(ctx.repo),
++                        "--kit", str(ctx.kit), "--max-tasks", "2"])
++    orch.main()
++    assert ctx.statuses()["P0007"] == ctx.statuses()["P0008"] == "Accepted"
++    assert [name for name, _ in calls].count("review") == 2
