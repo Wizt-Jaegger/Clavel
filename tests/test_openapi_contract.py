@@ -168,7 +168,7 @@ def test_draft_adds_no_runtime_routes_or_business_schema():
         database_url="postgresql://synthetic:fake@localhost/synthetic"))
     with TestClient(app) as client:
         runtime = client.get("/openapi.json").json()
-        assert set(runtime["paths"]) == {"/health"}
+        assert set(runtime["paths"]) == {"/health", "/ready"}
         for path, method, _ in OPERATIONS:
             response = client.request(method, path)
             assert response.status_code == 404

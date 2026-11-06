@@ -12,6 +12,7 @@ from starlette.exceptions import HTTPException
 from clavel.core.correlation import RequestCorrelationMiddleware
 from clavel.core.errors import ApplicationError, ErrorCode, ErrorResponse, error_response
 from clavel.core.settings import Settings, load_settings
+from clavel.database import Database
 
 
 class HealthResponse(BaseModel):
@@ -22,6 +23,7 @@ def create_app(*, settings: Settings | None = None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         app.state.settings = settings if settings is not None else load_settings()
+        app.state.database = Database(app.state.settings)
         yield
 
     app = FastAPI(title="Clavel", lifespan=lifespan, debug=False)
@@ -59,6 +61,17 @@ def create_app(*, settings: Settings | None = None) -> FastAPI:
     )
     async def health() -> HealthResponse:
         """Process liveness only; does not access PostgreSQL or external services."""
+        return HealthResponse()
+
+    @app.get(
+        "/ready",
+        response_model=HealthResponse,
+        responses={503: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
+    )
+    def ready(request: Request) -> HealthResponse:
+        """Readiness requires PostgreSQL; blocking I/O runs in the thread pool."""
+        if not request.app.state.database.is_ready():
+            raise ApplicationError(ErrorCode.DATABASE_UNAVAILABLE)
         return HealthResponse()
 
     return app

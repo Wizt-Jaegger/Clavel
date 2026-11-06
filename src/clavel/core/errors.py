@@ -16,6 +16,7 @@ class ErrorCode(StrEnum):
     VALIDATION_ERROR = "validation_error"
     HTTP_ERROR = "http_error"
     INTERNAL_ERROR = "internal_error"
+    DATABASE_UNAVAILABLE = "database_unavailable"
 
 
 _PUBLIC_ERRORS = {
@@ -25,6 +26,7 @@ _PUBLIC_ERRORS = {
     ErrorCode.VALIDATION_ERROR: (422, "Request validation failed"),
     ErrorCode.HTTP_ERROR: (400, "Request failed"),
     ErrorCode.INTERNAL_ERROR: (500, "Internal server error"),
+    ErrorCode.DATABASE_UNAVAILABLE: (503, "Database unavailable"),
 }
 
 

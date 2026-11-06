@@ -1069,3 +1069,71 @@ END P0007 | Awaiting review | 99f0c35ad23a5ce9748ee8a52bc1ae1161ecd9d5 | indepen
 2026-11-06T17:20:22Z | P0007 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 309 passed, 1 warning, 6 subtests passed in 0.97s
 2026-11-06T17:22:20Z | P0007 | REVIEW | automatic Codex review; source 9bcc5217943eb68b6b51fc16fc8d7b7a6d115fd1; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T17:22:20Z | P0007 | ORCH | ACCEPTED by automatic review at 9bcc5217943eb68b6b51fc16fc8d7b7a6d115fd1
+2026-11-06T17:24:59Z | P0008 | ORCH | starting from b29721027e3dd3f810c35be2980bfa7d65082010
+START P0008 | 2026-11-06T17:25:18.414581+00:00 | main | b29721027e3dd3f810c35be2980bfa7d65082010
+2026-11-06T17:25:18.414581+00:00 | P0008 | CMD | pwd; git branch --show-current; git rev-parse HEAD; git status --short; sed -n '1,220p' AGENTS.md; rg -n '^\|? *P0008\b|P0008' /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0008.md | exit 0 | main; pre-existing changes in CODEX_LOG.md and STATUS.md; task loaded
+2026-11-06T17:25:18.414581+00:00 | P0008 | READ | AGENTS.md; kit INDEX.md matching P0008 row (rg also returned adjacent P0009 reference); kit tasks/P0008.md
+2026-11-06T17:25:18.414581+00:00 | P0008 | DECISION | Prerequisites already verified Accepted by orchestrator; preserve existing edits, work on current main; never edit STATUS.md; P0008 is implementation so no template applies
+2026-11-06T17:25:32.551006+00:00 | P0008 | CMD | python logging bootstrap | exit 0 | START and initial discovery recorded
+2026-11-06T17:25:32.557357+00:00 | P0008 | CMD | rg --files -g '!*lock*' -g '!log/**' -g '!tasks/**' -g '!docs/**' -g '!INDEX.md' -g '!CONTEXT.md' -g '!AGENTS.md' -g '!templates/**' -g '!*.egg-info/**' -g '!uv.lock' | exit 0 | repository/environment discovery
+2026-11-06T17:25:32.561022+00:00 | P0008 | CMD | sed -n '1,120p' log/log.sh | exit 0 | repository/environment discovery
+2026-11-06T17:25:32.561071+00:00 | P0008 | READ | log/log.sh
+2026-11-06T17:25:32.564599+00:00 | P0008 | CMD | ls -d .venv /usr/lib/postgresql /usr/bin/psql 2>/dev/null | exit 2 | repository/environment discovery
+2026-11-06T17:25:39.312715+00:00 | P0008 | CMD | sed -n '1,230p' pyproject.toml | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.312715+00:00 | P0008 | READ | pyproject.toml
+2026-11-06T17:25:39.316325+00:00 | P0008 | CMD | sed -n '1,230p' src/clavel/core/settings.py | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.316325+00:00 | P0008 | READ | src/clavel/core/settings.py
+2026-11-06T17:25:39.319537+00:00 | P0008 | CMD | sed -n '1,230p' src/clavel/api/app.py | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.319537+00:00 | P0008 | READ | src/clavel/api/app.py
+2026-11-06T17:25:39.325227+00:00 | P0008 | CMD | sed -n '1,230p' src/clavel/core/errors.py | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.325227+00:00 | P0008 | READ | src/clavel/core/errors.py
+2026-11-06T17:25:39.328837+00:00 | P0008 | CMD | sed -n '1,230p' tests/test_settings.py | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.328837+00:00 | P0008 | READ | tests/test_settings.py
+2026-11-06T17:25:39.332528+00:00 | P0008 | CMD | sed -n '1,230p' tests/test_api_shell.py | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.332528+00:00 | P0008 | READ | tests/test_api_shell.py
+2026-11-06T17:25:39.335903+00:00 | P0008 | CMD | sed -n '1,230p' tests/test_openapi_contract.py | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.335903+00:00 | P0008 | READ | tests/test_openapi_contract.py
+2026-11-06T17:25:39.339281+00:00 | P0008 | CMD | sed -n '1,230p' .env.example | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.339281+00:00 | P0008 | READ | .env.example
+2026-11-06T17:25:39.342448+00:00 | P0008 | CMD | sed -n '1,230p' .env.shared.example | exit 0 | targeted implementation inspection
+2026-11-06T17:25:39.342448+00:00 | P0008 | READ | .env.shared.example
+2026-11-06T17:25:56.638055+00:00 | P0008 | CMD | command -v docker podman postgres initdb pg_config uv apt-get | exit 0 | targeted tests and PostgreSQL tooling discovery
+2026-11-06T17:25:56.802545+00:00 | P0008 | CMD | .venv/bin/python -c 'import sys, psycopg; print(sys.version); print("psycopg", psycopg.__version__)' | exit 0 | targeted tests and PostgreSQL tooling discovery
+2026-11-06T17:25:56.806147+00:00 | P0008 | CMD | sed -n '1,180p' tests/test_project_smoke.py | exit 0 | targeted tests and PostgreSQL tooling discovery
+2026-11-06T17:25:56.806147+00:00 | P0008 | READ | tests/test_project_smoke.py
+2026-11-06T17:25:56.809730+00:00 | P0008 | CMD | sed -n '1,160p' tests/test_repository_rules.py | exit 0 | targeted tests and PostgreSQL tooling discovery
+2026-11-06T17:25:56.809730+00:00 | P0008 | READ | tests/test_repository_rules.py
+2026-11-06T17:25:56.814221+00:00 | P0008 | CMD | ls docs; ls /usr/lib/x86_64-linux-gnu/libldap* /usr/lib/x86_64-linux-gnu/libicu* 2>/dev/null | exit 2 | targeted tests and PostgreSQL tooling discovery
+2026-11-06T17:26:27.235991+00:00 | P0008 | EDIT | docs/P0008_POSTGRESQL_ACCESS.md: publish additive runtime contract proposal, synthetic examples and migration impact before implementation
+2026-11-06T17:26:27.235991+00:00 | P0008 | DECISION | Use existing psycopg dependency, lazy per-session connections with commit/rollback/close, sync readiness in FastAPI thread pool; native postgres/initdb available for actual local synthetic integration checks
+2026-11-06T17:26:47Z | P0008 | EDIT | src/clavel/database/__init__.py: lazy psycopg sessions, transaction lifecycle, bounded readiness probe
+2026-11-06T17:26:47Z | P0008 | EDIT | src/clavel/api/app.py: initialize database handle without connecting; add sync /ready
+2026-11-06T17:26:47Z | P0008 | EDIT | src/clavel/core/errors.py: redacted 503 database_unavailable error
+2026-11-06T17:26:47Z | P0008 | EDIT | tests/test_openapi_contract.py: allow additive readiness runtime route, keep design-time routes unimplemented
+2026-11-06T17:27:52Z | P0008 | EDIT | tests/test_database.py: synthetic redaction/liveness/schema/thread checks; disposable local PostgreSQL connectivity, commit, application/SQL/commit-failure rollback, close, isolation and unavailable-server integration tests
+2026-11-06T17:28:03.367300+00:00 | P0008 | CMD | .venv/bin/python -m pytest -q tests/test_database.py tests/test_api_shell.py tests/test_openapi_contract.py | exit 1 | output retained /tmp/clavel-p0008-validation.txt
+2026-11-06T17:28:03.367300+00:00 | P0008 | TEST | .venv/bin/python -m pytest -q tests/test_database.py tests/test_api_shell.py tests/test_openapi_contract.py | 1 failed, 301 passed, 1 warning in 1.87s
+2026-11-06T17:28:03.367300+00:00 | P0008 | ERROR | targeted validation failed; inspect retained failure output and fix before commit
+2026-11-06T17:28:19Z | P0008 | EDIT | src/clavel/database/__init__.py: guarantee close in finally after real PostgreSQL deferred-constraint test revealed connection leak on commit failure
+2026-11-06T17:28:19Z | P0008 | EDIT | tests/test_database.py: remove unused import
+2026-11-06T17:28:19Z | P0008 | DECISION | Retain deferred-constraint regression; actual database evidence demonstrated driver context alone does not guarantee close on failed commit
+2026-11-06T17:28:33.652775+00:00 | P0008 | CMD | .venv/bin/python -m pytest -q tests/test_database.py tests/test_api_shell.py tests/test_openapi_contract.py tests/test_settings.py tests/test_project_smoke.py | exit 0 | 315 passed, 1 warning in 1.98s
+2026-11-06T17:28:33.652775+00:00 | P0008 | TEST | .venv/bin/python -m pytest -q tests/test_database.py tests/test_api_shell.py tests/test_openapi_contract.py tests/test_settings.py tests/test_project_smoke.py | 315 passed, 1 warning in 1.98s | disposable local PostgreSQL integration executed, not provider acceptance
+2026-11-06T17:28:33.660627+00:00 | P0008 | CMD | git diff --check | exit 0 | passed
+2026-11-06T17:28:33.664490+00:00 | P0008 | CMD | git diff --stat -- src/clavel tests docs/P0008_POSTGRESQL_ACCESS.md | exit 0 |  3 files changed, 16 insertions(+), 1 deletion(-)
+2026-11-06T17:28:33.668756+00:00 | P0008 | CMD | git status --short | exit 0 | ?? tests/test_database.py
+2026-11-06T17:29:19.896165+00:00 | P0008 | CMD | postgres --version | exit 0 | postgres (PostgreSQL) 17.11
+2026-11-06T17:29:19.896326+00:00 | P0008 | READ | docs/P0008_POSTGRESQL_ACCESS.md: finalize own evidence document
+2026-11-06T17:29:19.896552+00:00 | P0008 | EDIT | docs/P0008_POSTGRESQL_ACCESS.md: record session boundaries, contract migration impact, 315-pass synthetic/local PostgreSQL evidence, initial failure/fix, independent review next step
+2026-11-06T17:29:19.896552+00:00 | P0008 | DECISION | Awaiting review only; zero skipped checks; no live provider gate; STATUS.md untouched; independent reviewer/orchestrator owns acceptance
+2026-11-06T17:30:07.402073+00:00 | P0008 | CMD | git diff -- src/clavel/api/app.py src/clavel/core/errors.py tests/test_openapi_contract.py | exit 0 | final scoped review
+2026-11-06T17:30:07.402073+00:00 | P0008 | READ | final diff for app.py, errors.py and test_openapi_contract.py
+2026-11-06T17:30:07.407767+00:00 | P0008 | CMD | git diff --check | exit 0 | final scoped review
+2026-11-06T17:30:07.411672+00:00 | P0008 | CMD | rg -n 'Pending|Status:|Result:|PostgreSQL|Migration impact|COMMIT failure' docs/P0008_POSTGRESQL_ACCESS.md | exit 0 | final scoped review
+2026-11-06T17:30:07.411672+00:00 | P0008 | READ | own P0008 evidence document matching status/validation lines
+2026-11-06T17:30:07.412914+00:00 | P0008 | READ | audit current-task CODEX_LOG entries for START, each edited path, initial failed run/retry, final passing tests and commands
+2026-11-06T17:30:07.412914+00:00 | P0008 | CMD | python current-task log coverage audit | exit 0 | all six implementation/test/evidence paths and failed/successful validation events logged
+2026-11-06T17:30:33.218686+00:00 | P0008 | CMD | git add -- src/clavel/database/__init__.py src/clavel/api/app.py src/clavel/core/errors.py tests/test_database.py tests/test_openapi_contract.py docs/P0008_POSTGRESQL_ACCESS.md log/CODEX_LOG.md | exit 0 | stage only P0008 changes and append-only audit log
+2026-11-06T17:30:33.222347+00:00 | P0008 | CMD | git diff --cached --check | exit 0 | whitespace check passed
+2026-11-06T17:30:33.224497+00:00 | P0008 | CMD | git diff --cached --name-only | exit 0 | staged paths checked; STATUS.md excluded
+2026-11-06T17:30:33.224540+00:00 | P0008 | DECISION | Implementation validation complete; commit on main with task message. COMMIT/END records follow commit because its SHA is only then available; preserve orchestrator-owned STATUS.md changes.
