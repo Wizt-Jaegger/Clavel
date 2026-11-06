@@ -10,6 +10,7 @@ import sqlalchemy as sa
 from sqlalchemy.engine import make_url
 
 from clavel.database.catalog import categories, hardware_attributes, metadata, skus
+from clavel.database.inventory import inventory
 from tests.integration.test_migrations import BASELINE, HEAD, revisions, run_alembic, tables
 
 
@@ -162,7 +163,8 @@ def test_empty_or_padded_sku_rejected(catalog, sku):
 
 def test_catalog_upgrade_downgrade_upgrade(catalog):
     url, _ = catalog
-    expected = [("alembic_version",), ("categories",), ("hardware_attributes",), ("skus",)]
+    expected = [("alembic_version",), ("categories",), ("hardware_attributes",),
+                (inventory.name,), ("skus",)]
     assert tables(url) == expected
     run_alembic(url, "upgrade", "head")  # Idempotent with an existing synthetic SKU.
     with psycopg.connect(url) as connection:

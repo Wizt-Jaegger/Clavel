@@ -1436,3 +1436,151 @@ END P0011 | Awaiting review | 6d76aa2782b6e2a903ea71b8d190e6dbd5eb73e9 (implemen
 2026-11-06T18:11:01Z | P0011 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 351 passed, 1 warning, 6 subtests passed in 28.80s
 2026-11-06T18:12:44Z | P0011 | REVIEW | automatic Codex review; source 69431f8c4cc1dceff528ddde0b728b25c4082d45; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T18:12:44Z | P0011 | ORCH | ACCEPTED by automatic review at 69431f8c4cc1dceff528ddde0b728b25c4082d45
+2026-11-06T18:12:44Z | P0012 | ORCH | starting from 33bcdb2a3b1d358cbc78c403cc4a0b3cb6e6e0d4
+
+START P0012 | 2026-11-06T18:13:24.335582+00:00 | main | 33bcdb2a3b1d358cbc78c403cc4a0b3cb6e6e0d4
+2026-11-06T18:13:24.335582+00:00 | P0012 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && sed -n '1,240p' AGENTS.md | exit 0 | main; baseline has pre-existing CODEX_LOG.md and STATUS.md edits
+2026-11-06T18:13:24.335582+00:00 | P0012 | READ | AGENTS.md
+2026-11-06T18:13:24.335582+00:00 | P0012 | CMD | rg -n '^\|? *P0012\b|P0012' /home/alonso/Documents/clavel-codex-kit/INDEX.md && sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0012.md | exit 0 | P0012 inventory schema, dependency P0011, no gate
+2026-11-06T18:13:24.335582+00:00 | P0012 | READ | kit INDEX.md matching rows and tasks/P0012.md; no other task opened
+2026-11-06T18:13:24.335582+00:00 | P0012 | ERROR | Initial python logging setup failed before mutation: exit 1 IndentationError unexpected indent; removed stray indentation and retried
+2026-11-06T18:13:24.335582+00:00 | P0012 | DECISION | Prerequisites already verified Accepted by user; preserve orchestrator STATUS.md edits; work on current main; no template applies
+2026-11-06T18:13:24.335582+00:00 | P0012 | EDIT | log/CODEX_LOG.md: append task START and initial inspection events
+2026-11-06T18:13:24.335582+00:00 | P0012 | CMD | python heredoc bootstrap append-only logger and /tmp/clavel_p0012_run.py | exit 0 | logging ready after retry
+2026-11-06T18:13:24.410618+00:00 | P0012 | CMD | "rg --files -g '!log/**' -g '!tasks/**' -g '!docs/**' -g '!*.lock' -g '!INDEX.md' -g '!CONTEXT.md' -g '!AGENTS.md' -g '!*.egg-info/**' -g '!templates/**' -g '!README*' -g '!*.csv' -g '!*.json' -g '!*.md' | head -100; ls -d .venv migrations app/database tests 2>/dev/null" | exit 2 | output inspected
+START P0010-DIAG | 2026-11-06T18:15:44.035620+00:00 | main | read-only diagnosis during user-owned orchestration; no git mutation
+2026-11-06T18:15:44.035629+00:00 | P0010-DIAG | DECISION | User asks whether to stop a running orchestrator after P0010 Blocked. Inspect only P0010 state and relevant failure records; do not start/stop automation or commit while it is running.
+2026-11-06T18:15:44.035736+00:00 | P0010-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md | P0010 row only
+2026-11-06T18:15:44.036216+00:00 | P0010-DIAG | READ | log/STATUS.md | P0010 row only
+2026-11-06T18:15:44.036380+00:00 | P0010-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0010.md | assigned failed task criteria
+2026-11-06T18:15:44.037338+00:00 | P0010-DIAG | READ | log/CODEX_LOG.md | last 12 P0010 event records only; no full task output or other tasks read
+2026-11-06T18:16:18.135576+00:00 | P0010-DIAG | CMD | python3 scoped P0010 diagnostic | exit 0 | status/task/recent log inspected; reviewer exited 0 with CHANGES requesting disposable PostgreSQL and independent persistence checks
+2026-11-06T18:16:18.135586+00:00 | P0010-DIAG | READ | log/STATUS.md | prerequisite P0009 row only; verify Accepted
+2026-11-06T18:16:18.135590+00:00 | P0010-DIAG | BLOCKER | P0010 reviewer requested an existing disposable PostgreSQL service and independently passing uniqueness, invalid-link and anonymous-persistence checks. Attempt 2 local suite passed 337 tests, 1 warning, 6 subtests; reviewer requested changes, task reverted and Blocked.
+2026-11-06T18:16:18.135592+00:00 | P0010-DIAG | DECISION | Do not mutate source, task state, git HEAD or create untracked report files while user orchestrator runs. Independent ready tasks may continue; P0010 requires missing test input before reset to Pending and retry.
+2026-11-06T18:16:18.135594+00:00 | P0010-DIAG | SKIP | commit and standalone blocker document | live orchestration is mutating main; append diagnosis only to orchestrator-excluded audit log to avoid interfering with task mechanical/review checks
+2026-11-06T18:16:18.135596+00:00 | P0010-DIAG | EDIT | log/CODEX_LOG.md | recorded read-only diagnosis and closure; leave audit for orchestrator-managed logging commit
+END P0010-DIAG | Blocked | e443f9e3563e4555662503af3206f03f63d82c94 | disposable PostgreSQL and independent schema checks requested by reviewer | let independent work continue; fix missing input before retrying P0010
+2026-11-06T18:16:34.092134+00:00 | P0012 | CMD | "sed -n '1,220p' src/clavel/database/catalog.py; sed -n '1,220p' migrations/versions/0002_catalog_schema.py; sed -n '1,180p' pyproject.toml; sed -n '1,220p' tests/integration/conftest.py" | exit 0 | output inspected
+2026-11-06T18:16:34.092222+00:00 | P0012 | READ | src/clavel/database/catalog.py
+2026-11-06T18:16:34.092283+00:00 | P0012 | READ | migrations/versions/0002_catalog_schema.py
+2026-11-06T18:16:34.092331+00:00 | P0012 | READ | pyproject.toml
+2026-11-06T18:16:34.092375+00:00 | P0012 | READ | tests/integration/conftest.py
+2026-11-06T18:16:34.171825+00:00 | P0012 | CMD | "sed -n '1,240p' tests/integration/test_catalog_schema.py; sed -n '1,220p' tests/integration/test_migrations.py; sed -n '1,180p' src/clavel/database/__init__.py; sed -n '1,180p' tests/test_database.py; sed -n '1,160p' migrations/env.py" | exit 0 | output inspected
+2026-11-06T18:16:34.171943+00:00 | P0012 | READ | tests/integration/test_catalog_schema.py
+2026-11-06T18:16:34.172019+00:00 | P0012 | READ | tests/integration/test_migrations.py
+2026-11-06T18:16:34.172086+00:00 | P0012 | READ | src/clavel/database/__init__.py
+2026-11-06T18:16:34.172155+00:00 | P0012 | READ | tests/test_database.py
+2026-11-06T18:16:34.172223+00:00 | P0012 | READ | migrations/env.py
+2026-11-06T18:17:03.584348+00:00 | P0012 | CMD | "command -v initdb; command -v pg_ctl; .venv/bin/python --version; git diff --numstat -- log/CODEX_LOG.md log/STATUS.md; rg -n 'inventory|sellable|source_version|observed_at|0002_catalog_schema|target_metadata' src migrations tests --glob '*.py'" | exit 0 | output inspected
+2026-11-06T18:17:03.661008+00:00 | P0012 | CMD | "ls /usr/lib/postgresql; ls log; sed -n '1,140p' tests/test_repository_rules.py; sed -n '1,120p' tests/test_project_smoke.py" | exit 0 | output inspected
+2026-11-06T18:17:03.661081+00:00 | P0012 | READ | tests/test_repository_rules.py
+2026-11-06T18:17:03.661122+00:00 | P0012 | READ | tests/test_project_smoke.py
+2026-11-06T18:17:34.915007+00:00 | P0012 | EDIT | src/clavel/database/inventory.py and migrations/versions/0003_inventory_schema.py: nullable nonnegative stock, required ordered version/time, stale-update and immutable-SKU triggers; migrations/env.py registers inventory metadata; migration/catalog integration expectations advance head
+2026-11-06T18:17:34.915075+00:00 | P0012 | ASSUMPTION | One authoritative observation stream per SKU; nonnegative integer stock units and source versions are local storage rules only; no vendor protocol or live freshness inferred
+2026-11-06T18:17:34.915120+00:00 | P0012 | CMD | apply_patch inventory schema, migration, metadata registration, existing integration expectations | exit 0 | five paths updated
+2026-11-06T18:17:34.915166+00:00 | P0012 | ERROR | Discovery commands: ls -d app/database returned exit 2 because actual path is src/clavel/database; ls /usr/lib/postgresql failed because native binaries are already on PATH; no installation needed
+2026-11-06T18:18:38.092662+00:00 | P0012 | EDIT | tests/integration/test_inventory_schema.py: synthetic PostgreSQL tests for nullable/zero/positive stock, metadata parity, invalid stock/version/time, stale SQL/upserts, identity, concurrent writers and migration reversal
+2026-11-06T18:18:38.092742+00:00 | P0012 | CMD | apply_patch tests/integration/test_inventory_schema.py | exit 0 | task Done when checks and regression evidence added
+2026-11-06T18:18:49.455282+00:00 | P0012 | CMD | 'git diff --check; git diff --stat -- src/clavel/database migrations tests/integration; git status --short' | exit 0 | output inspected
+2026-11-06T18:19:00.914118+00:00 | P0012 | CMD | 'git diff -- migrations/env.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py; tail -n 5 /tmp/clavel_p0012_tests.txt' | exit 0 | output inspected
+2026-11-06T18:19:00.914217+00:00 | P0012 | READ | migrations/env.py
+2026-11-06T18:19:00.914279+00:00 | P0012 | READ | tests/integration/test_catalog_schema.py
+2026-11-06T18:19:00.914342+00:00 | P0012 | READ | tests/integration/test_migrations.py
+2026-11-06T18:19:00.914410+00:00 | P0012 | READ | /tmp/clavel_p0012_tests.txt
+2026-11-06T18:19:20.361482+00:00 | P0012 | CMD | 'CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py > /tmp/clavel_p0012_tests.txt 2>&1; result=$?; tail -n 30 /tmp/clavel_p0012_tests.txt; exit "$result"' | exit 0 | output inspected
+2026-11-06T18:19:59.934101+00:00 | P0012 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py | 53 passed in 41.69s; 0 failed, 0 skipped; native disposable PostgreSQL, synthetic records only
+2026-11-06T18:19:59.934302+00:00 | P0012 | EDIT | log/P0012_EVIDENCE.md: Awaiting review evidence, exact validation, local version assumptions, unknown stock behavior, downgrade impact, no live claims
+2026-11-06T18:19:59.934364+00:00 | P0012 | CMD | apply_patch log/P0012_EVIDENCE.md | exit 0 | independent reviewer evidence prepared
+2026-11-06T18:19:59.934425+00:00 | P0012 | DECISION | Task Done when and relevant migration/catalog regressions passed; no wider suite needed because API and unrelated modules unchanged; no human signatures; no Accepted status set; STATUS.md left to orchestrator
+2026-11-06T18:20:00.003809+00:00 | P0012 | CMD | 'git diff --check && git diff --numstat -- log/CODEX_LOG.md log/STATUS.md && git status --short' | exit 0 | output inspected
+2026-11-06T18:20:23.471971+00:00 | P0012 | CMD | 'git add src/clavel/database/inventory.py migrations/versions/0003_inventory_schema.py migrations/env.py tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py log/P0012_EVIDENCE.md && git diff --cached --check && git diff --cached --stat' | exit 0 | output inspected
+2026-11-06T18:20:23.540004+00:00 | P0012 | CMD | python action-log audit: verify each changed task path and READ/ERROR/TEST/EDIT/DECISION events in P0012 section | exit 0 | all required path/event coverage present
+2026-11-06T18:20:23.540073+00:00 | P0012 | READ | log/CODEX_LOG.md P0012 section for action coverage audit
+2026-11-06T18:20:23.540120+00:00 | P0012 | DECISION | Commit validated task using prescribed message; append actual commit SHA and END then amend to include closure. Final END uses symbolic HEAD to avoid a self-referential commit hash; final concrete SHA is reported to orchestrator.
+2026-11-06T18:20:23.588088+00:00 | P0012 | CMD | 'git add log/CODEX_LOG.md && git diff --cached --check && git commit -m "P0012 inventory schema"' | exit 0 | output inspected
+2026-11-06T18:20:32.468969+00:00 | P0012 | CMD | git rev-parse HEAD | exit 0 | 175250e884409e1d5effb694f60f9b7499b06a33
+2026-11-06T18:20:32.469058+00:00 | P0012 | COMMIT | 175250e884409e1d5effb694f60f9b7499b06a33 | P0012 inventory schema | validated implementation; closure included through final amendment
+END P0012 | Awaiting review | HEAD (final closure amendment; concrete SHA in session result) | no P0012 blockers; synthetic evidence only | independent Codex reviewer; orchestrator manages STATUS.md
+2026-11-06T18:20:44Z | P0012 | ORCH | attempt 1: codex exit 0; full output log/runs/P0012-impl1.txt
+2026-11-06T18:21:28Z | P0012 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 371 passed, 1 warning, 6 subtests passed in 43.21s
+2026-11-06T18:22:32Z | P0012 | REVIEW | automatic Codex review; source 794e7e62c8a23fb9c373e926b5147a95ee793413; attempt 1; exit 0; last stdout line 'VERDICT: CHANGES: Provide an existing disposable PostgreSQL service and independently pass nonnegative-stock and stale-update rejection checks.'
+2026-11-06T18:22:32Z | P0012 | ORCH | attempt 1 rejected: reviewer stdout did not end with exact VERDICT: ACCEPTED
+2026-11-06T18:22:32Z | P0012 | ORCH | reverted to 33bcdb2a3b1d358cbc78c403cc4a0b3cb6e6e0d4 after rejected attempt 1
+START P0012 | 2026-11-06T18:22:49.472245+00:00 | main | 33bcdb2a3b1d358cbc78c403cc4a0b3cb6e6e0d4
+2026-11-06T18:22:49.472245+00:00 | P0012 | CMD | pwd && git status --short && git branch --show-current && git rev-parse HEAD && sed -n '1,220p' AGENTS.md | exit 0; main at base SHA; preexisting changes in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T18:22:49.472245+00:00 | P0012 | READ | AGENTS.md; session instructions read
+2026-11-06T18:22:49.472245+00:00 | P0012 | DECISION | User verified prerequisites Accepted; preserve orchestrator-owned log/STATUS.md; current branch main; fix prior reviewer stdout rejection without fabricating acceptance
+2026-11-06T18:22:49.472245+00:00 | P0012 | CMD | Initial logging command appends START and records initial inspection; exit 0
+2026-11-06T18:22:59.099616+00:00 | P0012 | CMD | rg -n '^\| P0012\b|P0012' /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0012.md | exit 0; inventory schema; commit message P0012 inventory schema
+2026-11-06T18:22:59.099616+00:00 | P0012 | READ | Kit INDEX.md matching rows (search also returned P0016 prerequisite reference); tasks/P0012.md
+2026-11-06T18:23:15.860347+00:00 | P0012 | CMD | rg --files targeted inventory/stock/migration/Python paths in migrations app tests log | exit 2; app missing, real path to discover; git diff --stat; git log -4 --oneline; tail -n 55 log/CODEX_LOG.md | exit 0; previous implementation reverted after reviewer requested existing disposable PostgreSQL service
+2026-11-06T18:23:15.860347+00:00 | P0012 | READ | log/CODEX_LOG.md recent P0012 attempt and rejection
+2026-11-06T18:23:15.860347+00:00 | P0012 | EDIT | /tmp/clavel_p0012_runner.py: temporary command runner to log exact commands, outcomes and reads immediately
+2026-11-06T18:23:15.899844+00:00 | P0012 | CMD | "sed -n '1,230p' tests/integration/conftest.py; sed -n '1,210p' src/clavel/database/catalog.py; sed -n '1,180p' migrations/versions/0002_catalog_schema.py; sed -n '1,160p' pyproject.toml" | exit 0 | addopts = "--import-mode=importlib -ra"
+2026-11-06T18:23:15.899938+00:00 | P0012 | READ | tests/integration/conftest.py
+2026-11-06T18:23:15.899993+00:00 | P0012 | READ | src/clavel/database/catalog.py
+2026-11-06T18:23:15.900043+00:00 | P0012 | READ | migrations/versions/0002_catalog_schema.py
+2026-11-06T18:23:15.900091+00:00 | P0012 | READ | pyproject.toml
+2026-11-06T18:23:15.909347+00:00 | P0012 | CMD | 'git show 794e7e6:log/P0012_EVIDENCE.md; command -v initdb; command -v pg_ctl; command -v psql; rg --files src/clavel/database migrations tests/integration; ls -d .venv' | exit 0 | .venv
+2026-11-06T18:23:15.909420+00:00 | P0012 | READ | 794e7e6:log/P0012_EVIDENCE.md
+2026-11-06T18:23:27.005171+00:00 | P0012 | CMD | 'git restore --source=794e7e62c8a23fb9c373e926b5147a95ee793413 -- src/clavel/database/inventory.py migrations/versions/0003_inventory_schema.py migrations/env.py tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py log/P0012_EVIDENCE.md' | exit 0 | no output
+2026-11-06T18:23:27.005264+00:00 | P0012 | EDIT | Restored only seven P0012 implementation/test/evidence paths from reverted attempt; log/STATUS.md preserved
+2026-11-06T18:23:27.012804+00:00 | P0012 | CMD | "sed -n '1,220p' src/clavel/database/inventory.py; sed -n '1,230p' migrations/versions/0003_inventory_schema.py; sed -n '1,250p' tests/integration/test_inventory_schema.py" | exit 0 |             write_observation(connection, sku_id, version=9, upsert=True)
+2026-11-06T18:23:27.012888+00:00 | P0012 | READ | src/clavel/database/inventory.py
+2026-11-06T18:23:27.012968+00:00 | P0012 | READ | migrations/versions/0003_inventory_schema.py
+2026-11-06T18:23:27.013018+00:00 | P0012 | READ | tests/integration/test_inventory_schema.py
+2026-11-06T18:23:27.023956+00:00 | P0012 | CMD | "sed -n '251,510p' tests/integration/test_inventory_schema.py; git diff -- migrations/env.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py; id -u; pg_ctl --version; ls -d /tmp/clavel-p0012-review* 2>/dev/null" | exit 2 | pg_ctl (PostgreSQL) 17.11
+2026-11-06T18:23:27.024014+00:00 | P0012 | READ | tests/integration/test_inventory_schema.py
+2026-11-06T18:23:27.024049+00:00 | P0012 | READ | migrations/env.py
+2026-11-06T18:23:27.024081+00:00 | P0012 | READ | tests/integration/test_catalog_schema.py
+2026-11-06T18:23:27.024112+00:00 | P0012 | READ | tests/integration/test_migrations.py
+2026-11-06T18:23:42.113606+00:00 | P0012 | CMD | "rg -n 'PostgreSQL|disposable|denied|permission|sandbox|VERDICT' log/runs/P0012-review1.txt | tail -n 20" | exit 0 | 1104:VERDICT: CHANGES: Provide an existing disposable PostgreSQL service and independently pass nonnegative-stock and stale-update rejection checks.
+2026-11-06T18:23:42.113674+00:00 | P0012 | READ | log/runs/P0012-review1.txt targeted rejection reasons
+2026-11-06T18:23:42.114017+00:00 | P0012 | EDIT | /tmp/clavel-p0012-review-yu3u2ss7: disposable synthetic PostgreSQL data/socket directories created for independent review
+2026-11-06T18:23:42.581872+00:00 | P0012 | CMD | 'initdb -D /tmp/clavel-p0012-review-yu3u2ss7/data -U synthetic_p0012 --auth=trust --no-locale --encoding=UTF8' | exit 0 |     pg_ctl -D /tmp/clavel-p0012-review-yu3u2ss7/data -l logfile start
+2026-11-06T18:23:42.694910+00:00 | P0012 | CMD | 'pg_ctl -D /tmp/clavel-p0012-review-yu3u2ss7/data -l /tmp/clavel-p0012-review-yu3u2ss7/postgres.log -o \'-h \'"\'"\'\'"\'"\' -k /tmp/clavel-p0012-review-yu3u2ss7/socket -p 55412\' -w start' | exit 0 | server started
+2026-11-06T18:23:42.695149+00:00 | P0012 | EDIT | /tmp/clavel_p0012_review_service.json: synthetic local service coordinates; no production credentials
+2026-11-06T18:23:42.695201+00:00 | P0012 | DECISION | Keep disposable Unix-socket PostgreSQL service running through independent review; tests create/drop unique synthetic databases; no live provider evidence or acceptance claimed
+2026-11-06T18:23:42.698583+00:00 | P0012 | CMD | 'pg_ctl -D /tmp/clavel-p0012-review-yu3u2ss7/data status' | exit 0 | /run/current-system/sw/bin/postgres "-D" "/tmp/clavel-p0012-review-yu3u2ss7/data" "-h" "" "-k" "/tmp/clavel-p0012-review-yu3u2ss7/socket" "-p" "55412"
+2026-11-06T18:23:53.674841+00:00 | P0012 | READ | /tmp/clavel_p0012_review_service.json: synthetic local service coordinates
+2026-11-06T18:24:03.918402+00:00 | P0012 | CMD | "sed -n '1,115p' tests/integration/test_migrations.py; sed -n '1,115p' migrations/env.py; sed -n '1,100p' src/clavel/core/settings.py" | exit 0 |         raise ConfigurationError("Unable to read settings sources") from None
+2026-11-06T18:24:03.918477+00:00 | P0012 | READ | tests/integration/test_migrations.py
+2026-11-06T18:24:03.918515+00:00 | P0012 | READ | migrations/env.py
+2026-11-06T18:24:03.918550+00:00 | P0012 | READ | src/clavel/core/settings.py
+2026-11-06T18:24:17.531895+00:00 | P0012 | READ | /tmp/clavel_p0012_review_service.json for review-database provisioning
+2026-11-06T18:24:17.746868+00:00 | P0012 | CMD | '.venv/bin/python -B -c \'import psycopg\nwith psycopg.connect(\'"\'"\'postgresql://synthetic_p0012@localhost:55412/postgres?host=/tmp/clavel-p0012-review-yu3u2ss7/socket\'"\'"\', autocommit=True) as c:\n c.execute("CREATE DATABASE synthetic_p0012_review")\nprint("Created dedicated synthetic review database")\n\'' | exit 0 | Created dedicated synthetic review database
+2026-11-06T18:24:17.746943+00:00 | P0012 | EDIT | Disposable PostgreSQL synthetic_p0012_review database created; reserved for reviewer SQL checks
+2026-11-06T18:24:18.355149+00:00 | P0012 | CMD | "APP_ENV=test DATABASE_URL='postgresql://synthetic_p0012@localhost:55412/synthetic_p0012_review?host=/tmp/clavel-p0012-review-yu3u2ss7/socket' .venv/bin/python -B -m alembic upgrade head" | exit 0 | no output
+2026-11-06T18:24:18.355233+00:00 | P0012 | EDIT | synthetic_p0012_review: migrated to 0003_inventory_schema
+2026-11-06T18:24:18.539916+00:00 | P0012 | CMD | '.venv/bin/python -B -c \'import psycopg\nwith psycopg.connect(\'"\'"\'postgresql://synthetic_p0012@localhost:55412/synthetic_p0012_review?host=/tmp/clavel-p0012-review-yu3u2ss7/socket\'"\'"\') as c:\n sku_id = c.execute("INSERT INTO skus (sku, name) VALUES (\'"\'"\'SYNTHETIC-P0012-REVIEW\'"\'"\', \'"\'"\'Synthetic reviewer fixture\'"\'"\') RETURNING id").fetchone()[0]\n c.execute("INSERT INTO inventory (sku_id, sellable_stock, source_version, observed_at) VALUES (%s, 5, 10, \'"\'"\'2026-01-01T00:00:00Z\'"\'"\')", (sku_id,))\nprint("Seeded synthetic review SKU and observation: stock=5, version=10")\n\'' | exit 0 | Seeded synthetic review SKU and observation: stock=5, version=10
+2026-11-06T18:24:18.539986+00:00 | P0012 | EDIT | synthetic_p0012_review: committed synthetic review fixture; no provider or personal data
+2026-11-06T18:24:18.540184+00:00 | P0012 | EDIT | /tmp/clavel_p0012_review_service.json: added dedicated migrated review database URL
+2026-11-06T18:24:35.829911+00:00 | P0012 | CMD | "CLAVEL_REQUIRE_POSTGRES=1 CLAVEL_MIGRATION_TEST_URL='postgresql://synthetic_p0012@localhost:55412/postgres?host=/tmp/clavel-p0012-review-yu3u2ss7/socket' .venv/bin/python -m pytest -q tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py" | exit 0 | 53 passed in 41.63s
+2026-11-06T18:24:35.830010+00:00 | P0012 | TEST | CLAVEL_REQUIRE_POSTGRES=1 CLAVEL_MIGRATION_TEST_URL='postgresql://synthetic_p0012@localhost:55412/postgres?host=/tmp/clavel-p0012-review-yu3u2ss7/socket' .venv/bin/python -m pytest -q tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py | 53 passed in 41.63s; existing disposable PostgreSQL 17.11; synthetic records only
+2026-11-06T18:25:05.060067+00:00 | P0012 | READ | /tmp/clavel_p0012_review_service.json: review connection and cleanup coordinates
+2026-11-06T18:25:05.226812+00:00 | P0012 | CMD | '.venv/bin/python -B -c \'import psycopg\nurl = \'"\'"\'postgresql://synthetic_p0012@localhost:55412/synthetic_p0012_review?host=/tmp/clavel-p0012-review-yu3u2ss7/socket\'"\'"\'\nwith psycopg.connect(url, connect_timeout=3) as c:\n    assert c.execute("SELECT version_num FROM alembic_version").fetchone() == ("0003_inventory_schema",)\n    sku_id = c.execute("SELECT id FROM skus WHERE sku = \'"\'"\'SYNTHETIC-P0012-REVIEW\'"\'"\'").fetchone()[0]\n    def current():\n        return c.execute("SELECT sellable_stock, source_version, observed_at FROM inventory WHERE sku_id = %s", (sku_id,)).fetchone()\n    original = current()\n    assert original[:2] == (5, 10)\n    c.rollback()\n    cases = [\n        (-1, 11, "2026-01-01T00:00:01Z", "inventory_stock_nonnegative"),\n        (99, 9, "2026-01-01T00:00:01Z", "inventory_update_fresh"),\n        (99, 10, "2026-01-01T00:00:00Z", "inventory_update_fresh"),\n        (99, 11, "2025-12-31T23:59:59Z", "inventory_update_fresh"),\n    ]\n    for stock, version, observed, constraint in cases:\n        try:\n            c.execute("UPDATE inventory SET sellable_stock=%s, source_version=%s, observed_at=%s WHERE sku_id=%s", (stock, version, observed, sku_id))\n        except psycopg.errors.CheckViolation as error:\n            assert error.diag.constraint_name == constraint\n        else:\n            c.rollback()\n            raise AssertionError("Invalid observation was accepted")\n        c.rollback()\n        assert current() == original\n        c.rollback()\n    for stock in (0, 7, None):\n        c.execute("UPDATE inventory SET sellable_stock=%s, source_version=11 WHERE sku_id=%s", (stock, sku_id))\n        assert current()[:2] == (stock, 11)\n        c.rollback()\n    assert current() == original\n    c.rollback()\nprint("PASS: negative stock, stale/replayed versions and regressing time rejected; zero/positive/unknown preserved; all probe changes rolled back")\n\'' | exit 0 | PASS: negative stock, stale/replayed versions and regressing time rejected; zero/positive/unknown preserved; all probe changes rolled back
+2026-11-06T18:25:05.226924+00:00 | P0012 | TEST | Direct rollback-only SQL probe against existing synthetic review database | 1 passed; 0 failed; fixture unchanged
+2026-11-06T18:25:05.227040+00:00 | P0012 | READ | log/P0012_EVIDENCE.md: restored prior evidence; replace historical validation with current attempt evidence
+2026-11-06T18:25:05.227292+00:00 | P0012 | EDIT | log/P0012_EVIDENCE.md: rejection root cause, existing synthetic service URL, pre-migrated reviewer fixture, rollback-only reproduction and deferred cleanup; no acceptance claim
+2026-11-06T18:25:31.359019+00:00 | P0012 | READ | log/P0012_EVIDENCE.md for validation-result update
+2026-11-06T18:25:31.359069+00:00 | P0012 | EDIT | log/P0012_EVIDENCE.md: recorded current attempt 53 passed in 41.63s, zero skips/failures
+2026-11-06T18:25:31.359106+00:00 | P0012 | CMD | write_stdin session 7736 polled twice | completed exit 0; captured relevant integration suite result; exact shell command and TEST entry logged by runner
+2026-11-06T18:25:31.359153+00:00 | P0012 | DECISION | Existing independent-review service and rollback-only probe address concrete prior rejection; keep Awaiting review; only reviewer/orchestrator can accept; log/STATUS.md untouched
+2026-11-06T18:25:31.371943+00:00 | P0012 | CMD | 'git diff --check && git diff --stat && git status --short' | exit 0 | ?? tests/integration/test_inventory_schema.py
+2026-11-06T18:25:31.375957+00:00 | P0012 | CMD | "sed -n '25,155p' log/P0012_EVIDENCE.md" | exit 0 | ```
+2026-11-06T18:25:31.376042+00:00 | P0012 | READ | log/P0012_EVIDENCE.md updated evidence
+2026-11-06T18:25:31.376197+00:00 | P0012 | READ | /tmp/clavel_p0012_review_service.json for final service availability check
+2026-11-06T18:25:31.378736+00:00 | P0012 | CMD | 'pg_ctl -D /tmp/clavel-p0012-review-yu3u2ss7/data status' | exit 0 | /run/current-system/sw/bin/postgres "-D" "/tmp/clavel-p0012-review-yu3u2ss7/data" "-h" "" "-k" "/tmp/clavel-p0012-review-yu3u2ss7/socket" "-p" "55412"
+2026-11-06T18:26:00.432327+00:00 | P0012 | DECISION | Relevant 53-test PostgreSQL integration suite and direct SQL probe passed; no API/code changes beyond restored P0012 schema; do not broaden tests without new failures or concerns
+2026-11-06T18:26:00.432972+00:00 | P0012 | READ | log/CODEX_LOG.md: current-attempt action coverage audit
+2026-11-06T18:26:00.433095+00:00 | P0012 | CMD | python3 current-attempt log audit | exit 0; all changed task paths, failed discovery, restored implementation, service provisioning, 53-test result, rollback probe and rationale recorded
+2026-11-06T18:26:00.447902+00:00 | P0012 | CMD | 'git add src/clavel/database/inventory.py migrations/versions/0003_inventory_schema.py migrations/env.py tests/integration/test_inventory_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py log/P0012_EVIDENCE.md log/CODEX_LOG.md && git diff --cached --check && git diff --cached --stat' | exit 0 |  8 files changed, 561 insertions(+), 3 deletions(-)
+2026-11-06T18:26:00.451878+00:00 | P0012 | CMD | 'git diff --cached --name-only' | exit 0 | tests/integration/test_migrations.py
+2026-11-06T18:26:00.451961+00:00 | P0012 | CMD | python3 staged-path assertion | exit 0; orchestrator-owned log/STATUS.md excluded from commit
+2026-11-06T18:26:00.465919+00:00 | P0012 | CMD | 'git add log/CODEX_LOG.md && git commit -m "P0012 inventory schema"' | exit 0 |  create mode 100644 tests/integration/test_inventory_schema.py
+2026-11-06T18:26:00.469860+00:00 | P0012 | CMD | 'git rev-parse HEAD' | exit 0 | fc940bfbcaaeb4a10b4b94002225b31582e99afb
+2026-11-06T18:26:00.469918+00:00 | P0012 | COMMIT | fc940bfbcaaeb4a10b4b94002225b31582e99afb | P0012 inventory schema | validated inventory implementation and rejection fix; closure included through amendment
+2026-11-06T18:26:00.469956+00:00 | P0012 | DECISION | Append audit closure then amend the same task commit. END uses symbolic HEAD because embedding its own final commit hash is self-referential; concrete final SHA and amendment result reported to orchestrator in session result.
+2026-11-06T18:26:00.470004+00:00 | P0012 | CMD | git add log/CODEX_LOG.md && git commit --amend --no-edit && git status --short && git rev-parse HEAD | final closure operation; outcome reported by command stdout and final session result
+END P0012 | Awaiting review | HEAD (final amended task commit; concrete SHA in session result) | independent reviewer verdict pending; existing synthetic PostgreSQL service running | automated reviewer reproduces Done when using log/P0012_EVIDENCE.md; orchestrator manages STATUS.md and later service cleanup

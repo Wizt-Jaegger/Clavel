@@ -11,7 +11,7 @@ import psycopg
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = "0001_migration_baseline"
-HEAD = "0002_catalog_schema"
+HEAD = "0003_inventory_schema"
 
 
 def run_alembic(url, *args, config=None, succeeds=True, expected_error=None):
