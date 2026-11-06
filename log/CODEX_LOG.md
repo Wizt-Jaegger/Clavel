@@ -2173,3 +2173,8 @@ START P0010 | 2026-11-06T19:36:06.727231+00:00 | main | 288a3cead827eb905abb4dd2
 2026-11-06T19:41:24.981710+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-impl1.txt | preserve rejected-run diagnostics before retry
 2026-11-06T19:41:24.981905+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-review1.txt | preserve rejected-run diagnostics before retry
 2026-11-06T19:41:24.982091+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-review2.txt | preserve rejected-run diagnostics before retry
+2026-11-06T19:41:24.988677+00:00 | P0010 | CMD | git add -- docs/automation/P0010_REVIEW_TEMP_RESOURCES.md docs/automation/P0010_REVIEW_TEMP_RESOURCES.patch log/CODEX_LOG.md | exit 0 | no stdout
+2026-11-06T19:41:24.998032+00:00 | P0010 | CMD | git commit -m 'P0010 customer and session schema' | exit 0 |  create mode 100644 docs/automation/P0010_REVIEW_TEMP_RESOURCES.patch
+2026-11-06T19:41:25.000436+00:00 | P0010 | CMD | git rev-parse HEAD | exit 0 | f5b2aeaeb655cf9b9875d2d0eddea203940c2cca
+2026-11-06T19:41:25.000489+00:00 | P0010 | COMMIT | f5b2aeaeb655cf9b9875d2d0eddea203940c2cca | P0010 customer and session schema | review infrastructure fix; not task acceptance
+2026-11-06T19:41:25Z | P0010 | DECISION | Requeue Blocked to Pending after verified native PostgreSQL and review-instruction fix; acceptance remains independent
