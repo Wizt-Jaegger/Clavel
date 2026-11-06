@@ -34,7 +34,7 @@
 | P0030 | Pending | — | — | — | — | — |
 | P0031 | Pending | — | — | — | — | — |
 | P0032 | Pending | — | — | — | — | — |
-| P0033 | Pending | — | — | — | — | — |
+| P0033 | Accepted | 3fbe272a6be6ba36603b08cc440cb093be0227f0 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:52:38Z | — |
 | P0034 | Pending | — | — | — | — | — |
 | P0035 | Pending | — | — | — | — | — |
 | P0036 | Pending | — | — | — | — | — |
