@@ -2720,3 +2720,52 @@ END P0020 | Awaiting review | 94ab34cbac95c1199ab53fe3aa209689f6ddabb8 | Q01/Q02
 2026-11-06T23:47:44Z | P0020 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 910 passed, 1 warning, 7 subtests passed in 220.18s (0:03:40)
 2026-11-06T23:49:28Z | P0020 | REVIEW | automatic Codex review; source 31941fdb27e60f3cdfa26b960ecc3d184b59aeb6; attempt 2; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T23:49:28Z | P0020 | ORCH | ACCEPTED by automatic review at 31941fdb27e60f3cdfa26b960ecc3d184b59aeb6
+2026-11-06T23:49:28Z | P0021 | ORCH | starting from 4f86d3ce1c307b276a64e208b0d0d6f8b55455f9
+START P0021 | 2026-11-06T23:49:37Z | main | 4f86d3ce1c307b276a64e208b0d0d6f8b55455f9
+2026-11-06T23:49:50Z | P0021 | CMD | pwd | exit 0 | repository cwd confirmed
+2026-11-06T23:49:50Z | P0021 | CMD | git branch --show-current | exit 0 | main
+2026-11-06T23:49:50Z | P0021 | CMD | git rev-parse HEAD | exit 0 | 4f86d3ce1c307b276a64e208b0d0d6f8b55455f9
+2026-11-06T23:49:50Z | P0021 | CMD | date -u +%Y-%m-%dT%H:%M:%SZ | exit 0 | 2026-11-06T23:49:37Z
+2026-11-06T23:49:50Z | P0021 | CMD | git status --short | exit 0 | existing modifications in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T23:49:50Z | P0021 | CMD | ls -l AGENTS.md log/log.sh log/CODEX_LOG.md | exit 0 | rule and log files found
+2026-11-06T23:49:50Z | P0021 | READ | AGENTS.md repository rules read; sed -n 1,220p AGENTS.md exit 0
+2026-11-06T23:49:50Z | P0021 | READ | rg -n P0021 /home/alonso/Documents/clavel-codex-kit/INDEX.md exit 0; only task row read
+2026-11-06T23:49:50Z | P0021 | READ | sed -n 1,240p /home/alonso/Documents/clavel-codex-kit/tasks/P0021.md exit 0
+2026-11-06T23:49:50Z | P0021 | DECISION | User verified prerequisites Accepted; work current main; preserve pre-existing log changes; do not edit orchestrator-managed log/STATUS.md
+2026-11-06T23:49:58Z | P0021 | CMD | rg --files targeted fixture/schema/catalog/inventory/subject/sales/return/ingest/config paths | exit 0 | discovered scoped source and tests
+2026-11-06T23:49:58Z | P0021 | CMD | ls -d fixtures scripts tests src .venv 2>/dev/null | exit 2 | discovered project directories
+2026-11-06T23:49:58Z | P0021 | DECISION | P0021 is implementation; no review/handoff/checkpoint template applies. INDEX rg incidentally matched P0022 dependency row; no other task file opened.
+2026-11-06T23:50:05Z | P0021 | READ | sed -n '1,220p' src/clavel/data/import_validation.py | exit 0 | import validation model
+2026-11-06T23:50:05Z | P0021 | READ | sed -n '1,220p' src/clavel/database/catalog.py | exit 0 | catalog model
+2026-11-06T23:50:05Z | P0021 | CMD | rg --files src/clavel/data src/clavel/database scripts tests | rg '(data/|database/|scripts/|import|quality|feature)' | exit 0 | scoped implementation paths
+2026-11-06T23:50:05Z | P0021 | READ | sed -n '1,200p' src/clavel/database/customers.py | exit 0 | subject model discovery
+2026-11-06T23:50:05Z | P0021 | READ | sed -n '1,220p' src/clavel/database/sales.py | exit 0 | sales and returns model
+2026-11-06T23:50:05Z | P0021 | READ | sed -n '1,180p' pyproject.toml | exit 0 | project configuration
+2026-11-06T23:50:05Z | P0021 | CMD | ls -la scripts src/clavel/data tests | exit 0 | scoped directory contents
+2026-11-06T23:50:17Z | P0021 | READ | sed -n '1,160p' src/clavel/data/README.md | exit 0 | existing import workflow
+2026-11-06T23:50:17Z | P0021 | READ | sed -n '1,210p' src/clavel/database/inventory.py | exit 0 | inventory schema
+2026-11-06T23:50:17Z | P0021 | READ | sed -n '1,170p' src/clavel/data/offline_import.py | exit 0 | import file format
+2026-11-06T23:50:17Z | P0021 | READ | sed -n '1,110p' tests/test_import_validation.py | exit 0 | test conventions
+2026-11-06T23:50:17Z | P0021 | READ | sed -n '1,100p' .gitignore | exit 0 | ignore rules
+2026-11-06T23:50:17Z | P0021 | READ | sed -n '1,70p' scripts/import_canonical.py | exit 0 | script conventions
+2026-11-06T23:51:27Z | P0021 | EDIT | src/clavel/data/synthetic_fixtures.py added seeded generator, provenance, canonical sales/returns, cold starts and safe JSON CLI
+2026-11-06T23:51:27Z | P0021 | EDIT | scripts/generate_fixtures.py added project-local CLI entry point
+2026-11-06T23:51:27Z | P0021 | EDIT | fixtures/README.md added bundle/link documentation, reproducibility usage and reviewer/live gate evidence boundaries
+2026-11-06T23:51:27Z | P0021 | DECISION | Bundle-wide provenance preserves strict canonical rows; no HTTP contract or database writes. Q03/Q04/Q08 block live representativeness only.
+2026-11-06T23:52:22Z | P0021 | EDIT | tests/test_synthetic_fixtures.py added seeded cross-process reproducibility, reference/return integrity, provenance, cold-start and unknown-state checks plus CLI failures
+2026-11-06T23:52:23Z | P0021 | TEST | .venv/bin/python -m pytest -q tests/test_synthetic_fixtures.py tests/test_import_validation.py > /tmp/clavel-p0021-pytest.log 2>&1 | exit 0 | 221 passed in 0.43s
+2026-11-06T23:52:47Z | P0021 | EDIT | fixtures/README.md recorded actual 221-passed validation and synthetic-only reviewer evidence
+2026-11-06T23:52:48Z | P0021 | BLOCKER | Live representativeness only: Q03/Q04/Q08 and real source inputs unresolved; synthetic generator slice validated, no live acceptance claimed
+2026-11-06T23:52:48Z | P0021 | CMD | git diff --stat | exit 0 | tracked modifications are append-only log and pre-existing orchestrator status
+2026-11-06T23:52:48Z | P0021 | CMD | git status --short | exit 0 | P0021 new files and existing logs; log/STATUS.md remains untouched by task
+2026-11-06T23:52:48Z | P0021 | CMD | .venv/bin/python -c AST parse of three added Python files | exit 0 | 3 Python files parse successfully
+2026-11-06T23:52:48Z | P0021 | CMD | git add -- src/clavel/data/synthetic_fixtures.py scripts/generate_fixtures.py fixtures/README.md tests/test_synthetic_fixtures.py log/CODEX_LOG.md | exit 0 | only task paths staged; status excluded
+2026-11-06T23:52:48Z | P0021 | CMD | git diff --cached --check | exit 0 | staged whitespace validation
+2026-11-06T23:53:03Z | P0021 | READ | tail -n 35 log/CODEX_LOG.md | exit 0 | audit current session action coverage
+2026-11-06T23:53:03Z | P0021 | CMD | git diff --cached --numstat | exit 0 | five task paths staged; no status edits staged
+2026-11-06T23:53:03Z | P0021 | CMD | .venv/bin/python -c 'import ast; from pathlib import Path; paths = [Path("src/clavel/data/synthetic_fixtures.py"), Path("scripts/generate_fixtures.py"), Path("tests/test_synthetic_fixtures.py")]; [ast.parse(p.read_text()) for p in paths]; print("3 Python files parse successfully")' | exit 0 | exact command expansion for preceding AST verification
+2026-11-06T23:53:03Z | P0021 | DECISION | Action audit complete: every source/document edit and command recorded; preserve existing log content and status changes. Task prepared for automatic independent review; no human signature or Accepted status.
+2026-11-06T23:53:36Z | P0021 | CMD | rg --files -g 'AGENTS.md' -g '*fixture*' -g '*synthetic*' -g 'pyproject.toml' -g 'pytest.ini' -g 'conftest.py' -g '*schema*' -g '*catalog*' -g '*inventory*' -g '*subject*' -g '*sales*' -g '*return*' -g '*ingest*' -g '*validation*' -g '*requirements*' | exit 0 | exact expansion of initial scoped discovery command
+2026-11-06T23:53:36Z | P0021 | CMD | tail -n 30 /tmp/clavel-p0021-pytest.log | exit 0 | displayed bounded test summary, 221 passed
+2026-11-06T23:53:36Z | P0021 | DECISION | Validated fixture implementation ready for Awaiting review; append actual commit SHA and END after successful commit. Status remains orchestrator-owned.
+2026-11-06T23:53:36Z | P0021 | CMD | git add -- log/CODEX_LOG.md | exit 0 | refresh staged append-only audit log
