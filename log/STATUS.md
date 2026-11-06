@@ -16,7 +16,7 @@
 | P0012 | Accepted | fa5125938dde418fdd24eddb92cbe0c2742acb40 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:28:03Z | — |
 | P0013 | Accepted | 9b4f9bf38f3bb52bd2ef359e02bc539b6663c8e8 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T22:29:11Z | — |
 | P0014 | Accepted | 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T22:45:10Z | — |
-| P0015 | Pending | — | — | — | — | — |
+| P0015 | Accepted | d6762f41fbd1a98ade06db33e41da7c5fba9dfbb | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T22:55:25Z | — |
 | P0016 | Accepted | c319bf2beee3a8fdeee44f4eafbe42b776592e6f | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:39:15Z | — |
 | P0017 | Pending | — | — | — | — | — |
 | P0018 | Pending | — | — | — | — | — |

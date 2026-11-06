@@ -2450,3 +2450,13 @@ START P0015 | 2026-11-06T22:45:34.583206Z | main | fc9058c24a7d3b7d55f981083b025
 2026-11-06T22:49:39.418653Z | P0015 | READ | log/CODEX_LOG.md (P0015 audit tail)
 2026-11-06T22:49:49.278399Z | P0015 | CMD | git add -- src/clavel/database/customer_sessions.py tests/integration/test_customer_session_repositories.py docs/P0015_CUSTOMER_SESSION_REPOSITORIES.md log/CODEX_LOG.md && git diff --cached --check && git diff --cached --stat && git diff --cached --name-only | exit 0 | completed
 2026-11-06T22:49:58.891441Z | P0015 | DECISION | Audited command/read/edit coverage and failed discovery attempts; staged exactly four P0015 paths; staged whitespace check passed; orchestrator STATUS excluded. Refresh audit log before commit; actual commit SHA and END necessarily append after commit, following existing repository log practice
+2026-11-06T22:49:58.994398Z | P0015 | CMD | git add -- log/CODEX_LOG.md && git diff --cached --check && git commit -m 'P0015 customer and session repository' | exit 0 | completed
+2026-11-06T22:50:06.570791Z | P0015 | CMD | git rev-parse HEAD && git status --short | exit 0 | completed
+2026-11-06T22:50:06.636448Z | P0015 | CMD | git rev-parse HEAD | exit 0 | d6762f41fbd1a98ade06db33e41da7c5fba9dfbb
+2026-11-06T22:50:06.636448Z | P0015 | COMMIT | d6762f41fbd1a98ade06db33e41da7c5fba9dfbb | P0015 customer and session repository
+2026-11-06T22:50:06.636448Z | P0015 | DECISION | Final audit complete: 87 synthetic PostgreSQL/transaction checks passed; no implementation blockers; only post-commit audit tail and pre-existing orchestrator STATUS change remain
+END P0015 | Awaiting review | d6762f41fbd1a98ade06db33e41da7c5fba9dfbb | post-commit audit tail appended; no implementation blockers | independent Codex review; orchestrator manages STATUS
+2026-11-06T22:50:16Z | P0015 | ORCH | attempt 1: codex exit 0; full output log/runs/P0015-impl1.txt
+2026-11-06T22:53:38Z | P0015 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 637 passed, 1 warning, 6 subtests passed in 201.92s (0:03:21)
+2026-11-06T22:55:25Z | P0015 | REVIEW | automatic Codex review; source d6762f41fbd1a98ade06db33e41da7c5fba9dfbb; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T22:55:25Z | P0015 | ORCH | ACCEPTED by automatic review at d6762f41fbd1a98ade06db33e41da7c5fba9dfbb
