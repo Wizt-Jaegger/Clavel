@@ -6,7 +6,7 @@
 | P0002 | Accepted | a19dc40 | — | auto: orchestrator+AI reviewer | — | — |
 | P0003 | Accepted | f7eefa4 | — | auto: orchestrator+AI reviewer | — | — |
 | P0004 | Accepted | 788b37b | — | auto: orchestrator+AI reviewer | — | — |
-| P0005 | Pending | — | — | — | — | — |
+| P0005 | Accepted | 0441954 | — | auto: orchestrator+AI reviewer | — | — |
 | P0006 | Pending | — | — | — | — | — |
 | P0007 | Pending | — | — | — | — | — |
 | P0008 | Pending | — | — | — | — | — |
