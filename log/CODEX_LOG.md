@@ -1781,3 +1781,157 @@ END P0033 | Awaiting review | 3fbe272a6be6ba36603b08cc440cb093be0227f0 | Q07 liv
 2026-11-06T18:51:36Z | P0033 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 424 passed, 1 warning, 6 subtests passed in 55.94s
 2026-11-06T18:52:38Z | P0033 | REVIEW | automatic Codex review; source 3fbe272a6be6ba36603b08cc440cb093be0227f0; attempt 2; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T18:52:38Z | P0033 | ORCH | ACCEPTED by automatic review at 3fbe272a6be6ba36603b08cc440cb093be0227f0
+2026-11-06T18:52:38Z | P0035 | ORCH | starting from efa02423871bf7065a5234ada53eb1d445277ac7
+START P0035 | 2026-11-06T18:52:54.605079Z | main | efa02423871bf7065a5234ada53eb1d445277ac7
+2026-11-06T18:52:54.605092Z | P0035 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && ls AGENTS.md log/CODEX_LOG.md && sed -n '1,240p' AGENTS.md; exit 0; main; pre-existing changes in CODEX_LOG.md and STATUS.md
+2026-11-06T18:52:54.605095Z | P0035 | READ | AGENTS.md
+2026-11-06T18:52:54.605097Z | P0035 | DECISION | Prerequisites verified Accepted by user; preserve existing changes; do not edit STATUS.md; work on current main branch
+2026-11-06T18:52:54.609715Z | P0035 | CMD | rg -n 'P0035' /home/alonso/Documents/clavel-codex-kit/INDEX.md; exit 0; task instructions retrieved
+2026-11-06T18:52:54.609734Z | P0035 | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md (P0035 scope only)
+2026-11-06T18:52:54.616045Z | P0035 | CMD | sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0035.md; exit 0; task instructions retrieved
+2026-11-06T18:52:54.616057Z | P0035 | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0035.md (P0035 scope only)
+2026-11-06T18:53:05.241138+00:00 | P0035 | EDIT | /tmp/clavel_p0035_runner.py; external command logging helper created; prior Python logging bootstrap and task reads completed exit 0
+2026-11-06T18:53:05.278524Z | P0035 | CMD | rg --files -g "!uv.lock" -g "!log/**" -g "!tasks/**" -g "!INDEX.md" -g "!.venv/**" -g "!AGENTS.md" | head -100; exit 0; output inspected
+2026-11-06T18:53:13.960261Z | P0035 | CMD | sed -n '1,260p' src/clavel/database/repositories.py && sed -n '1,200p' src/clavel/database/catalog.py && sed -n '1,180p' pyproject.toml; exit 0; output inspected
+2026-11-06T18:53:13.960361Z | P0035 | READ | src/clavel/database/repositories.py; src/clavel/database/catalog.py; pyproject.toml
+2026-11-06T18:53:13.960670Z | P0035 | CMD | sed -n '1,240p' src/clavel/api/app.py && sed -n '1,200p' src/clavel/core/errors.py && sed -n '1,200p' tests/test_api_shell.py; exit 0; output inspected
+2026-11-06T18:53:13.960759Z | P0035 | READ | src/clavel/api/app.py; src/clavel/core/errors.py; tests/test_api_shell.py
+2026-11-06T18:53:13.965912Z | P0035 | CMD | sed -n '1,240p' tests/test_openapi_contract.py && sed -n '1,160p' src/clavel/database/__init__.py && rg -n 'catalog|Catalog|sku|pagination|page_size|limit|offset' docs/openapi/clavel-v1.draft.json docs/CONTRATO_FRONTEND_API.md && ls -d .venv; exit 0; output inspected
+2026-11-06T18:53:13.966011Z | P0035 | READ | tests/test_openapi_contract.py; src/clavel/database/__init__.py; catalog contract matches; .venv existence
+2026-11-06T18:53:20.520941Z | P0035 | CMD | sed -n '1,135p' docs/openapi/clavel-v1.draft.json && sed -n '1995,2085p' docs/openapi/clavel-v1.draft.json && sed -n '2140,2215p' docs/openapi/clavel-v1.draft.json && sed -n '3030,3070p' docs/openapi/clavel-v1.draft.json && sed -n '1,100p' docs/CONTRATO_FRONTEND_API.md && sed -n '145,185p' docs/CONTRATO_FRONTEND_API.md && sed -n '1,180p' tests/integration/conftest.py && sed -n '1,150p' tests/test_repository_rules.py; exit 0; output inspected
+2026-11-06T18:53:20.521040Z | P0035 | READ | catalog list operation, CatalogItem, Page and pagination schemas; repository frontend contract auth/change policy; integration fixtures; repository checks
+2026-11-06T18:53:36.509571Z | P0035 | CMD | sed -n '1,200p' /home/alonso/Documents/clavel-codex-kit/templates/BLOCKER.md && sed -n '3180,3340p' docs/openapi/clavel-v1.draft.json && sed -n '2080,2155p' docs/openapi/clavel-v1.draft.json && ls docs/openapi; exit 0; output inspected
+2026-11-06T18:53:36.509682Z | P0035 | READ | kit templates/BLOCKER.md; shared error/unavailable schemas and responses; OpenAPI artifact names
+2026-11-06T18:54:25.320767+00:00 | P0035 | DECISION | Runtime catalog implementation Blocked: current contract has no detail route, A03 bearer verification/claims unresolved, and repository keyset cursors do not satisfy snapshot-bound API semantics. Prepare isolated proposal and synthetic validation; no acceptance or live evidence claimed.
+2026-11-06T18:54:25.321996+00:00 | P0035 | EDIT | docs/openapi/P0035-catalog-detail.proposed.patch.json; isolated RFC 6902 detail-operation proposal with synthetic happy and shared error/unavailable examples; published contract unchanged
+2026-11-06T18:54:25.322129+00:00 | P0035 | EDIT | docs/P0035_CATALOG_REST.md; blocker template fields, exact missing inputs, proposed diff/examples, migration impact, evidence limits, unblocking owners and next checks
+2026-11-06T18:54:25.322170+00:00 | P0035 | BLOCKER | P0035 runtime Done when cannot be met without reviewed detail/identity policy, auth verifier/role mapping and snapshot cursor semantics; P0040 verification affected. Fixture/doc proposal can be validated now.
+2026-11-06T18:54:25.322204+00:00 | P0035 | CMD | python heredoc generating isolated P0035 detail patch and blocker report; exit 0; two scoped review artifacts prepared
+2026-11-06T18:54:49.482029+00:00 | P0035 | EDIT | /tmp/clavel_p0035_validate.py; isolated proposal lint/example checks and explicit current-runtime blocker evidence
+2026-11-06T18:54:49.482037+00:00 | P0035 | CMD | python heredoc creating external validation script; exit 0
+2026-11-06T18:54:56.099385Z | P0035 | CMD | .venv/bin/python /tmp/clavel_p0035_validate.py; exit 0; output inspected
+2026-11-06T18:54:56.099563Z | P0035 | TEST | Proposal validation: candidate OpenAPI lint and all catalog examples; see CMD result for outcome; runtime Done when remains Blocked
+2026-11-06T18:54:56.773073Z | P0035 | CMD | .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q > /tmp/clavel_p0035_pytest.txt 2>&1; test_result=$?; tail -30 /tmp/clavel_p0035_pytest.txt; exit "$test_result"; exit 0; output inspected
+2026-11-06T18:58:22.876512+00:00 | P0035 | TEST | .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q; exit 0; 293 passed, 0 failed, 1 existing deprecation warning
+2026-11-06T18:58:22.876524+00:00 | P0035 | TEST | .venv/bin/python /tmp/clavel_p0035_validate.py; exit 0; candidate OpenAPI valid, 28 synthetic examples valid, unchanged runtime confirmed; no live acceptance
+2026-11-06T18:58:22.876527+00:00 | P0035 | EDIT | docs/P0035_CATALOG_REST.md; exact validation results, limits and independent reproduction procedure appended
+2026-11-06T18:58:22.876531+00:00 | P0035 | SKIP | Runtime empty/populated/missing-SKU lookup checks Blocked by missing reviewed detail/identity, auth and snapshot inputs; router 404 does not prove missing-SKU lookup
+2026-11-06T18:58:22.876534+00:00 | P0035 | CMD | python heredoc appending validation evidence and TEST records; exit 0
+2026-11-06T18:58:22.922520Z | P0035 | CMD | git diff --check && git diff --stat && git status --short && tail -32 log/CODEX_LOG.md; exit 0; output inspected
+2026-11-06T18:58:22.922622Z | P0035 | READ | P0035 log tail and diff/status audit; log/STATUS.md pre-existing change remains untouched
+2026-11-06T18:58:53.717346Z | P0035 | CMD | git add -- docs/P0035_CATALOG_REST.md docs/openapi/P0035-catalog-detail.proposed.patch.json log/CODEX_LOG.md && git diff --cached --check && git diff --cached --stat; exit 0; output inspected
+2026-11-06T18:58:53.717476Z | P0035 | DECISION | Staged only P0035 review artifacts and append-only log; STATUS.md excluded; log audit covers discovery, reads, edits, synthetic checks and blocker rationale
+2026-11-06T18:59:11.833272+00:00 | P0035 | CMD | git add -- log/CODEX_LOG.md; exit 0; final precommit log audit staged
+2026-11-06T18:59:11.863765+00:00 | P0035 | CMD | git commit -m "P0035 catalog rest operations"; exit 0; validated review artifacts committed
+2026-11-06T18:59:11.866000+00:00 | P0035 | CMD | git rev-parse HEAD; exit 0; 9d7b58fd131aa088f0e717e399e41521dd87f226
+2026-11-06T18:59:11.866053+00:00 | P0035 | COMMIT | 9d7b58fd131aa088f0e717e399e41521dd87f226 | P0035 catalog rest operations
+2026-11-06T18:59:11.866090+00:00 | P0035 | DECISION | P0035 Blocked; automatic independent review receives proposal and synthetic evidence; no Accepted state or human signature requested; STATUS.md untouched. Post-commit COMMIT/END audit entries are left append-only for orchestrator collection.
+END P0035 | Blocked | 9d7b58fd131aa088f0e717e399e41521dd87f226 | missing reviewed detail/identity/length policy, auth verifier/claims, snapshot cursors | independent reviewer/orchestrator resolves contract inputs, then implement runtime handlers and HTTP checks
+2026-11-06T18:59:24Z | P0035 | ORCH | attempt 1: codex exit 0; full output log/runs/P0035-impl1.txt
+2026-11-06T19:00:21Z | P0035 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 424 passed, 1 warning, 6 subtests passed in 55.88s
+2026-11-06T19:03:33Z | P0035 | REVIEW | automatic Codex review; source 9d7b58fd131aa088f0e717e399e41521dd87f226; attempt 1; exit 0; last stdout line 'VERDICT: CHANGES: Catalog list/detail operations are absent; empty, populated, and missing-SKU responses have not passed published OpenAPI validation.'
+2026-11-06T19:03:33Z | P0035 | ORCH | attempt 1 rejected: reviewer stdout did not end with exact VERDICT: ACCEPTED
+2026-11-06T19:03:33Z | P0035 | ORCH | reverted to efa02423871bf7065a5234ada53eb1d445277ac7 after rejected attempt 1
+START P0035 | 2026-11-06T19:05:54.245942+00:00 | main | efa02423871bf7065a5234ada53eb1d445277ac7
+2026-11-06T19:05:54.245954+00:00 | P0035 | CMD | pwd && git status --short && git branch --show-current && git rev-parse HEAD && ls AGENTS.md log/log.sh | exit 0 | main; pre-existing modifications in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T19:05:54.245957+00:00 | P0035 | DECISION | Preserve existing log and orchestrator STATUS changes; user says prerequisites verified Accepted and forbids editing STATUS. Investigate prior rejection: reviewer stdout lacked exact final VERDICT: ACCEPTED.
+2026-11-06T19:05:54.250053+00:00 | P0035 | READ | sed -n '1,240p' AGENTS.md
+2026-11-06T19:05:54.250062+00:00 | P0035 | CMD | sed -n '1,240p' AGENTS.md | exit 0 | targeted instructions read
+2026-11-06T19:05:54.254329+00:00 | P0035 | READ | rg -n '^\|? *P0035|P0035' /home/alonso/Documents/clavel-codex-kit/INDEX.md
+2026-11-06T19:05:54.254341+00:00 | P0035 | CMD | rg -n '^\|? *P0035|P0035' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0 | targeted instructions read
+2026-11-06T19:05:54.257899+00:00 | P0035 | READ | sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0035.md
+2026-11-06T19:05:54.257906+00:00 | P0035 | CMD | sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0035.md | exit 0 | targeted instructions read
+2026-11-06T19:05:54.261408+00:00 | P0035 | READ | sed -n '1,120p' log/log.sh
+2026-11-06T19:05:54.261419+00:00 | P0035 | CMD | sed -n '1,120p' log/log.sh | exit 0 | targeted instructions read
+2026-11-06T19:06:04.288929+00:00 | P0035 | CMD | git show --stat --oneline HEAD | exit 0 |  2 files changed, 12 insertions(+), 1 deletion(-)
+2026-11-06T19:06:04.288950+00:00 | P0035 | READ | Targeted prior P0035 evidence and commit metadata
+2026-11-06T19:06:04.295554+00:00 | P0035 | CMD | rg --files -g '*catalog*' -g '*openapi*' -g '*P0035*' -g '*review*' -g 'pyproject.toml' -g 'requirements*' -g 'AGENTS.md' -g '!log/**' -g '!.venv/**' | exit 0 | src/clavel/database/catalog.py
+2026-11-06T19:06:04.300928+00:00 | P0035 | CMD | rg -n 'P0035|VERDICT|reviewer stdout' log/CODEX_LOG.md | tail -n 45 | exit 0 | 1848:2026-11-06T19:06:04.295554+00:00 | P0035 | CMD | rg --files -g '*catalog*' -g '*openapi*' -g '*P0035*' -g '*review*' -g 'pyproject.toml' -g 'requirements*' -g 'AGENTS.md' -g '!log/**' -g '!.venv/**' | exit 0 | src/clavel/database/catalog.py
+2026-11-06T19:06:04.300976+00:00 | P0035 | READ | Targeted prior P0035 evidence and commit metadata
+2026-11-06T19:06:04.304221+00:00 | P0035 | CMD | ls app/api tests .venv/bin/python | exit 2 | test_settings.py
+2026-11-06T19:06:12.175630+00:00 | P0035 | CMD | rg --files src/clavel docs tests/integration | exit 0 | targeted implementation discovery
+2026-11-06T19:06:12.175648+00:00 | P0035 | READ | rg --files src/clavel docs tests/integration
+2026-11-06T19:06:12.179443+00:00 | P0035 | CMD | sed -n '1,230p' src/clavel/database/catalog.py | exit 0 | targeted implementation discovery
+2026-11-06T19:06:12.179457+00:00 | P0035 | READ | sed -n '1,230p' src/clavel/database/catalog.py
+2026-11-06T19:06:12.183255+00:00 | P0035 | CMD | sed -n '1,190p' tests/test_api_shell.py | exit 0 | targeted implementation discovery
+2026-11-06T19:06:12.183267+00:00 | P0035 | READ | sed -n '1,190p' tests/test_api_shell.py
+2026-11-06T19:06:12.186994+00:00 | P0035 | CMD | sed -n '1,170p' pyproject.toml | exit 0 | targeted implementation discovery
+2026-11-06T19:06:12.187004+00:00 | P0035 | READ | sed -n '1,170p' pyproject.toml
+2026-11-06T19:06:12.194212+00:00 | P0035 | CMD | rg -n 'catalog|Catalog|snapshot|auth|bearer' docs/openapi* src/clavel/api* tests/test_openapi_contract.py | head -n 100 | exit 0 | targeted implementation discovery
+2026-11-06T19:06:12.194232+00:00 | P0035 | READ | rg -n 'catalog|Catalog|snapshot|auth|bearer' docs/openapi* src/clavel/api* tests/test_openapi_contract.py | head -n 100
+2026-11-06T19:06:24.559855+00:00 | P0035 | READ | sed -n '1,240p' src/clavel/api/app.py
+2026-11-06T19:06:24.559868+00:00 | P0035 | CMD | sed -n '1,240p' src/clavel/api/app.py | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.563822+00:00 | P0035 | READ | sed -n '1,300p' src/clavel/database/repositories.py
+2026-11-06T19:06:24.563833+00:00 | P0035 | CMD | sed -n '1,300p' src/clavel/database/repositories.py | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.567634+00:00 | P0035 | READ | sed -n '1,180p' src/clavel/database/__init__.py
+2026-11-06T19:06:24.567644+00:00 | P0035 | CMD | sed -n '1,180p' src/clavel/database/__init__.py | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.571040+00:00 | P0035 | READ | sed -n '1,210p' src/clavel/core/errors.py
+2026-11-06T19:06:24.571050+00:00 | P0035 | CMD | sed -n '1,210p' src/clavel/core/errors.py | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.574864+00:00 | P0035 | READ | sed -n '1,210p' tests/test_openapi_contract.py
+2026-11-06T19:06:24.574874+00:00 | P0035 | CMD | sed -n '1,210p' tests/test_openapi_contract.py | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.578635+00:00 | P0035 | READ | sed -n '1,140p' docs/openapi/clavel-v1.draft.json
+2026-11-06T19:06:24.578644+00:00 | P0035 | CMD | sed -n '1,140p' docs/openapi/clavel-v1.draft.json | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.582277+00:00 | P0035 | READ | sed -n '2140,2225p' docs/openapi/clavel-v1.draft.json
+2026-11-06T19:06:24.582286+00:00 | P0035 | CMD | sed -n '2140,2225p' docs/openapi/clavel-v1.draft.json | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.585937+00:00 | P0035 | READ | sed -n '3025,3085p' docs/openapi/clavel-v1.draft.json
+2026-11-06T19:06:24.585946+00:00 | P0035 | CMD | sed -n '3025,3085p' docs/openapi/clavel-v1.draft.json | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:24.589442+00:00 | P0035 | READ | sed -n '1,120p' /home/alonso/Documents/clavel-codex-kit/templates/BLOCKER.md
+2026-11-06T19:06:24.589452+00:00 | P0035 | CMD | sed -n '1,120p' /home/alonso/Documents/clavel-codex-kit/templates/BLOCKER.md | exit 0 | targeted contract and runtime inspection
+2026-11-06T19:06:48.214972+00:00 | P0035 | READ | sed -n '1985,2055p' docs/openapi/clavel-v1.draft.json
+2026-11-06T19:06:48.214987+00:00 | P0035 | CMD | sed -n '1985,2055p' docs/openapi/clavel-v1.draft.json | exit 0 | targeted approval and validation evidence
+2026-11-06T19:06:48.218905+00:00 | P0035 | READ | sed -n '1,180p' docs/REVISION_P0007.md
+2026-11-06T19:06:48.218915+00:00 | P0035 | CMD | sed -n '1,180p' docs/REVISION_P0007.md | exit 0 | targeted approval and validation evidence
+2026-11-06T19:06:48.226208+00:00 | P0035 | READ | rg -n 'A03|catalog|catálogo|cursor|item_id|SKU|auth' docs/REGISTRO_DECISIONES.md docs/DECISIONES_PENDIENTES.md docs/CONTRATO_FRONTEND_API.md | head -n 65
+2026-11-06T19:06:48.226224+00:00 | P0035 | CMD | rg -n 'A03|catalog|catálogo|cursor|item_id|SKU|auth' docs/REGISTRO_DECISIONES.md docs/DECISIONES_PENDIENTES.md docs/CONTRATO_FRONTEND_API.md | head -n 65 | exit 0 | targeted approval and validation evidence
+2026-11-06T19:06:48.234444+00:00 | P0035 | READ | rg -n 'def test_|def .*fixture|synthetic|SKIP|skip|psql|postgres' tests/integration/test_repositories.py tests/integration/conftest.py tests/test_database.py | head -n 85
+2026-11-06T19:06:48.234462+00:00 | P0035 | CMD | rg -n 'def test_|def .*fixture|synthetic|SKIP|skip|psql|postgres' tests/integration/test_repositories.py tests/integration/conftest.py tests/test_database.py | head -n 85 | exit 0 | targeted approval and validation evidence
+2026-11-06T19:06:48.238051+00:00 | P0035 | READ | sed -n '1,110p' tests/integration/conftest.py
+2026-11-06T19:06:48.238062+00:00 | P0035 | CMD | sed -n '1,110p' tests/integration/conftest.py | exit 0 | targeted approval and validation evidence
+2026-11-06T19:06:48.242366+00:00 | P0035 | READ | git status --porcelain=v1
+2026-11-06T19:06:48.242376+00:00 | P0035 | CMD | git status --porcelain=v1 | exit 0 | targeted approval and validation evidence
+2026-11-06T19:07:12.679848+00:00 | P0035 | READ | Published Unavailable, Page and auth/not-found response schemas/examples; JSON extraction
+2026-11-06T19:07:12.679859+00:00 | P0035 | CMD | python3 heredoc extracting named catalog response components from docs/openapi/clavel-v1.draft.json | exit 0 | typed 503 and shared error contracts inspected
+2026-11-06T19:07:50.481932+00:00 | P0035 | DECISION | Recorded reviewer rejection is substantive: absent list/detail runtime and missing HTTP Done when evidence. Do not force or fabricate exact VERDICT: ACCEPTED. Accepted P0007 is design-time only; A03 and missing detail contract still gate runtime. Limit work to reproducible fixture/proposal evidence per AGENTS.md.
+2026-11-06T19:07:50.486410+00:00 | P0035 | READ | git show 9d7b58fd131aa088f0e717e399e41521dd87f226:docs/P0035_CATALOG_REST.md
+2026-11-06T19:07:50.486430+00:00 | P0035 | CMD | git show 9d7b58fd131aa088f0e717e399e41521dd87f226:docs/P0035_CATALOG_REST.md | exit 0 | prior rejected P0035 proposal read for scoped correction
+2026-11-06T19:07:50.491191+00:00 | P0035 | READ | git show 9d7b58fd131aa088f0e717e399e41521dd87f226:docs/openapi/P0035-catalog-detail.proposed.patch.json
+2026-11-06T19:07:50.491210+00:00 | P0035 | CMD | git show 9d7b58fd131aa088f0e717e399e41521dd87f226:docs/openapi/P0035-catalog-detail.proposed.patch.json | exit 0 | prior rejected P0035 proposal read for scoped correction
+2026-11-06T19:08:54.388939+00:00 | P0035 | CMD | git show 9d7b58fd131aa088f0e717e399e41521dd87f226:docs/openapi/P0035-catalog-detail.proposed.patch.json | exit 0 | retrieve unapplied synthetic detail proposal
+2026-11-06T19:08:54.389146+00:00 | P0035 | EDIT | docs/openapi/P0035-catalog-detail.proposed.patch.json | restore isolated, unapplied detail proposal; published OpenAPI unchanged
+2026-11-06T19:08:54.389342+00:00 | P0035 | EDIT | tests/test_catalog_proposal.py | durable in-memory candidate OpenAPI validation and 28 synthetic list/detail response examples; distinguish missing-SKU example from runtime lookup
+2026-11-06T19:08:54.389607+00:00 | P0035 | EDIT | docs/P0035_CATALOG_REST.md | blocker report ties exact reviewer rejection to missing runtime inputs; concrete contract diff/examples/migration and automatic-review handoff; no acceptance claim
+2026-11-06T19:08:54.389706+00:00 | P0035 | BLOCKER | P0035 Done when cannot pass: published detail operation, runtime auth/identity policy and cross-request snapshot input absent. Independent reviewer rejection cannot be fixed by changing its stdout. Durable fixture validation continues; runtime and P0040 remain blocked.
+2026-11-06T19:08:54.389750+00:00 | P0035 | CMD | python3 heredoc restoring isolated patch and writing scoped report/tests | exit 0 | three review artifacts written; runtime and published contract unchanged
+2026-11-06T19:09:03.674615+00:00 | P0035 | CMD | .venv/bin/python -m pytest tests/test_catalog_proposal.py tests/test_openapi_contract.py tests/test_api_shell.py -q | exit 0 | 323 passed, 1 warning in 1.29s
+2026-11-06T19:09:03.674640+00:00 | P0035 | TEST | .venv/bin/python -m pytest tests/test_catalog_proposal.py tests/test_openapi_contract.py tests/test_api_shell.py -q | 323 passed, 1 warning in 1.29s | synthetic proposal/API-shell evidence only; runtime Done when remains Blocked
+2026-11-06T19:09:16.752814+00:00 | P0035 | CMD | synthetic TestClient GET /openapi.json | HTTP 200 | paths: /health, /ready
+2026-11-06T19:09:16.754726+00:00 | P0035 | CMD | synthetic TestClient GET /v1/catalog | HTTP 404 | router not_found; no database lookup
+2026-11-06T19:09:16.756349+00:00 | P0035 | CMD | synthetic TestClient GET /v1/catalog/synthetic-missing-sku | HTTP 404 | router not_found; no database lookup
+2026-11-06T19:09:16.757054+00:00 | P0035 | CMD | .venv/bin/python heredoc probing current API using synthetic local settings | exit 0 | absence of catalog runtime confirmed, not task completion
+2026-11-06T19:09:16.757087+00:00 | P0035 | BLOCKER | Runtime Done when observed unmet: catalog list and missing-SKU URLs are unregistered; HTTP empty/populated catalog and database missing-SKU tests cannot run until contract/auth/snapshot inputs are resolved.
+2026-11-06T19:09:44.331147+00:00 | P0035 | EDIT | docs/P0035_CATALOG_REST.md | append exact validation outcome: 323 passed, 30 new synthetic proposal checks; runtime probe confirms blocker, previous rejection remains unresolved
+2026-11-06T19:09:44.337762+00:00 | P0035 | CMD | git diff --check | exit 0 | scoped precommit audit
+2026-11-06T19:09:44.344128+00:00 | P0035 | CMD | git diff --stat | exit 0 | scoped precommit audit
+2026-11-06T19:09:44.349020+00:00 | P0035 | CMD | git status --short | exit 0 | scoped precommit audit
+2026-11-06T19:09:44.354796+00:00 | P0035 | CMD | git diff --numstat -- log/CODEX_LOG.md | exit 0 | scoped precommit audit
+2026-11-06T19:09:44.358314+00:00 | P0035 | CMD | git diff --exit-code -- src/clavel/api/app.py docs/openapi/clavel-v1.draft.json tests/test_openapi_contract.py | exit 0 | scoped precommit audit
+2026-11-06T19:09:44.361689+00:00 | P0035 | CMD | sed -n '1,145p' tests/test_catalog_proposal.py | exit 0 | scoped precommit audit
+2026-11-06T19:09:44.361744+00:00 | P0035 | READ | tests/test_catalog_proposal.py | final inspection; candidate schema validation only
+2026-11-06T19:09:44.361779+00:00 | P0035 | DECISION | Audit covers initial command, reads, failed app/api discovery, prior rejection, edits, tests and runtime blocker. Log diff has additions only. Stage only P0035 artifacts and log; retain pre-existing STATUS changes without editing/staging them. Commit documents blocker, not completed runtime operations.
+2026-11-06T19:10:02.975021+00:00 | P0035 | CMD | git add -- docs/P0035_CATALOG_REST.md docs/openapi/P0035-catalog-detail.proposed.patch.json tests/test_catalog_proposal.py log/CODEX_LOG.md | exit 0 | completed
+2026-11-06T19:10:02.981093+00:00 | P0035 | CMD | git diff --cached --check | exit 0 | completed
+2026-11-06T19:10:02.985843+00:00 | P0035 | CMD | git diff --cached --name-only | exit 0 | tests/test_catalog_proposal.py
+2026-11-06T19:10:02.985935+00:00 | P0035 | DECISION | Staged artifact validation passed; exactly four P0035 paths staged, STATUS excluded. Final COMMIT/END audit entries necessarily follow creation of the commit and remain append-only for orchestrator collection. Runtime task remains Blocked; no accepted verdict fabricated.
+2026-11-06T19:10:02.993315+00:00 | P0035 | CMD | git add -- log/CODEX_LOG.md | exit 0 | completed
+2026-11-06T19:10:03.004026+00:00 | P0035 | CMD | git commit -m "P0035 catalog rest operations" | exit 0 |  create mode 100644 tests/test_catalog_proposal.py
+2026-11-06T19:10:03.008085+00:00 | P0035 | CMD | git rev-parse HEAD | exit 0 | 214ff9ea77151cc0a090d69b70e20438e707ad60
+2026-11-06T19:10:03.008143+00:00 | P0035 | COMMIT | 214ff9ea77151cc0a090d69b70e20438e707ad60 | P0035 catalog rest operations
+2026-11-06T19:10:03.013077+00:00 | P0035 | CMD | git status --short | exit 0 |  M log/STATUS.md
+2026-11-06T19:10:03.013122+00:00 | P0035 | DECISION | Final audit: every command/read/edit and synthetic test result logged; log remains append-only; pre-existing STATUS change preserved and unstaged; published contract and runtime unchanged. Missing runtime inputs and substantive rejection remain open.
+END P0035 | Blocked | 214ff9ea77151cc0a090d69b70e20438e707ad60 | missing reviewed detail/identity/representation policy, auth verifier/role mapping and HTTP snapshot policy; runtime Done when unmet | independent reviewer/orchestrator reviews blocker evidence; obtain missing inputs then implement and validate runtime
+2026-11-06T19:10:15Z | P0035 | ORCH | attempt 2: codex exit 0; full output log/runs/P0035-impl2.txt
+2026-11-06T19:11:11Z | P0035 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 454 passed, 1 warning, 6 subtests passed in 55.61s
+2026-11-06T19:12:05Z | P0035 | REVIEW | automatic Codex review; source 214ff9ea77151cc0a090d69b70e20438e707ad60; attempt 2; exit 0; last stdout line 'VERDICT: CHANGES: Implement approved catalog list/detail operations and validate empty, populated, and actual missing-SKU HTTP responses against published OpenAPI.'
+2026-11-06T19:12:05Z | P0035 | ORCH | attempt 2 rejected: reviewer stdout did not end with exact VERDICT: ACCEPTED
+2026-11-06T19:12:05Z | P0035 | ORCH | reverted to efa02423871bf7065a5234ada53eb1d445277ac7 after rejected attempt 2
+2026-11-06T19:12:05Z | P0035 | BLOCKER | reviewer stdout did not end with exact VERDICT: ACCEPTED
