@@ -506,3 +506,14 @@ START P0005 | 2026-11-06T09:21:04Z | main | f39db8418aa2bc902354c59970498eece336
 2026-11-06T09:27:21Z | P0005 | CMD | git diff --cached --name-only | exit 0 | verify staged scope
 2026-11-06T09:27:21Z | P0005 | CMD | git hash-object log/STATUS.md | exit 0 | check orchestrator STATUS remains unchanged
 2026-11-06T09:27:21Z | P0005 | DECISION | Validation complete; commit with required message. A subsequent log-only closeout persists the implementation COMMIT/END entries; END identifies the validated implementation SHA.
+2026-11-06T09:27:21Z | P0005 | CMD | git add -- log/CODEX_LOG.md | exit 0 | include final validation and decision audit
+2026-11-06T09:27:21Z | P0005 | CMD | git commit -m "P0005 architecture and decision records" | exit 0 | [main 447a590] P0005 architecture and decision records;  3 files changed, 234 insertions(+);  create mode 100644 docs/ARQUITECTURA.md;  create mode 100644 docs/REGISTRO_DECISIONES.md
+2026-11-06T09:27:21Z | P0005 | CMD | git rev-parse HEAD | exit 0 | 447a5907f09cc3c7fc35474bc71a72978a867bde
+2026-11-06T09:27:21Z | P0005 | COMMIT | 447a5907f09cc3c7fc35474bc71a72978a867bde | P0005 architecture and decision records
+2026-11-06T09:28:03Z | P0005 | CMD | git status --short | exit 0 | post-implementation scope: only append-only log closeout and pre-existing STATUS changes; M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-06T09:28:03Z | P0005 | CMD | git diff --exit-code HEAD -- docs/ARQUITECTURA.md docs/REGISTRO_DECISIONES.md | exit 0 | validated documentation is committed and unchanged;
+2026-11-06T09:28:03Z | P0005 | CMD | git diff --numstat -- log/CODEX_LOG.md | exit 0 | post-commit audit changes are append-only; 6	0	log/CODEX_LOG.md
+2026-11-06T09:28:03Z | P0005 | CMD | git hash-object log/STATUS.md | exit 0 | STATUS fingerprint unchanged from pre-validation baseline; 2ef3e926496187c27cb26ed2410220d563977f0e
+2026-11-06T09:28:03Z | P0005 | READ | log/CODEX_LOG.md P0005 session | final audit: reads, edits, validations, failed attempts/retries and implementation commit recorded; no prior log lines changed
+2026-11-06T09:28:03Z | P0005 | DECISION | Persist post-implementation audit as a log-only closeout using the required task commit message; END final SHA denotes validated documentation commit, while closeout changes only this audit log.
+END P0005 | Awaiting review | 447a5907f09cc3c7fc35474bc71a72978a867bde | A01-A10 have accountable roles; named-owner confirmation and live evidence remain open | Reviewer examines docs; orchestrator updates STATUS
