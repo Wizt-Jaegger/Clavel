@@ -61,7 +61,7 @@ Stack: Python, FastAPI, PostgreSQL, pytest, REST, modular monolith. Emi's scope:
 - Contract (OpenAPI) changes: propose diff + examples + migration impact for Manu's review; do not edit silently.
 - Never put secrets, credentials, endpoints with tokens or raw personal data in code, logs, commits, prompts or evidence. Redact outputs.
 - Preserve unknown/unavailable states in APIs; unavailable ratios differ from zero counts.
-- Status vocabulary: Pending, In progress, Blocked, Awaiting review, Changes requested, Accepted. Codex may set at most Awaiting review; only the reviewer sets Accepted. Tasks marked human gate end in Awaiting review for the person to sign.
+- Status vocabulary: Pending, In progress, Blocked, Awaiting review, Changes requested, Accepted. Codex may set at most Awaiting review; only the reviewer sets Accepted. In Emi automated runs the independent Codex reviewer and orchestrator resolve the review without a separate human approval step.
 - In automated mode `log/STATUS.md` is managed by the orchestrator: do not edit it.
 
 ## MANDATORY LOGGING (every action, no exceptions)
