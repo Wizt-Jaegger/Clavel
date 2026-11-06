@@ -742,3 +742,4 @@ END E0001 | Awaiting review | HEAD of this record | master-prompt traceability a
 2026-11-06T15:38:00Z | E0001 | ORCH | attempt 1: codex exit 0; full output log/runs/E0001-impl1.txt
 2026-11-06T15:38:04Z | E0001 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 309 passed, 1 warning, 6 subtests passed in 2.82s
 2026-11-06T15:38:04Z | E0001 | ORCH | prepared at 1a8cb5f; HUMAN GATE, run --accept E0001 after signatures
+2026-11-06T15:52:21Z | E0001 | ORCH | accepted by human

@@ -48,7 +48,7 @@
 | P0044 | Pending | — | — | — | — | — |
 | P0045 | Pending | — | — | — | — | — |
 | P0046 | Pending | — | — | — | — | — |
-| E0001 | Awaiting review | 1a8cb5f | — | needs human acceptance | — | — |
+| E0001 | Accepted | 8c24f5c | — | human accepted 2026-11-06T15:52:21Z | — | — |
 | E0002 | Pending | — | — | — | — | — |
 | E0003 | Pending | — | — | — | — | — |
 | E0004 | Pending | — | — | — | — | — |

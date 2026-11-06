@@ -1,6 +1,6 @@
 # E0001 · Independent architecture and contract review
 
-**Awaiting review.** Human reviewer, decision and date are pending.
+**Accepted by Emi on 2026-11-06 (UTC).** Emi approved the E0001 review of the source revision below. The findings and their closure criteria remain documented for CP0.
 
 Reviewed source `8a031e9da7dabe3369349b62bd277089c85f1f4d` (P0006 Accepted row
 prefix `8a031e9`, supplied by the task). The local and origin
