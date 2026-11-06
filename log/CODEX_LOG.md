@@ -798,3 +798,47 @@ START CONTEXT-20261106 | 2026-11-06T16:12:48.803161+00:00 | main | 20f596df2ef20
 2026-11-06T16:14:06.626354+00:00 | CONTEXT-20261106 | READ | log/CODEX_LOG.md | audited this session entries for inspection commands, file reads, syntax warning, validation, and sole edited path
 2026-11-06T16:14:06.626404+00:00 | CONTEXT-20261106 | EDIT | log/CODEX_LOG.md | appended review evidence and session close; only repository modification, left uncommitted because no implementation task was assigned
 END CONTEXT-20261106 | Awaiting review | 20f596df2ef200484656cad7782b010061239bf5 | organizational/acceptance findings require discussion; context audit uncommitted | discuss concrete assignment and permission problems with user
+START M0002 | 2026-11-06T16:18:47.346906+00:00 | main | 6272e867183b1d07b66a500c8f0055586e1471d2
+2026-11-06T16:18:47.346989+00:00 | M0002 | CMD | git status --short --branch | exit 0 | ## main...origin/main
+2026-11-06T16:18:47.347037+00:00 | M0002 | CMD | git rev-parse HEAD | exit 0 | 6272e867183b1d07b66a500c8f0055586e1471d2
+2026-11-06T16:18:47.347080+00:00 | M0002 | CMD | git branch --show-current | exit 0 | main
+2026-11-06T16:18:47.347116+00:00 | M0002 | DECISION | Investigate requested M0002 reassignment to Emi and prepare reviewable evidence; never impersonate Emi or record an acceptance without attributable evidence. Prior context audit remains uncommitted.
+2026-11-06T16:18:47.351640+00:00 | M0002 | CMD | rg --files -g AGENTS.md -g INDEX.md -g '*M0002*' -g '*orchestrator*' -g '*REVIEW*' -g '*BLOCKER*' -g '*openapi*' -g '*contract*' -g '*fixture*' -g '*EXTERNAL_ACCEPTED*' -g '!log/runs/**' -g '!.venv/**' | exit 0 | targeted task/source discovery
+2026-11-06T16:18:47.369467+00:00 | M0002 | CMD | rg -n '^\| M0002 \|' INDEX.md log/STATUS.md | exit 1 | targeted task/source discovery
+2026-11-06T16:18:47.369599+00:00 | M0002 | READ | INDEX.md M0002 row; log/STATUS.md M0002 row
+2026-11-06T16:18:47.371855+00:00 | M0002 | CMD | ls -ld tasks templates docs .venv | exit 2 | targeted task/source discovery
+2026-11-06T16:19:05.993026+00:00 | M0002 | ERROR | Initial discovery: rg for M0002 row exited 1 (no match); ls exited 2 because repo templates/ is absent; no implementation started.
+2026-11-06T16:19:05.993093+00:00 | M0002 | DECISION | Initial git status was clean at new HEAD 6272e867183b1d07b66a500c8f0055586e1471d2; supersedes assumption that the previous context audit remained uncommitted.
+2026-11-06T16:19:05.995600+00:00 | M0002 | CMD | sed -n 1,14p INDEX.md | exit 0 | targeted M0002 readiness/source inspection
+2026-11-06T16:19:05.995671+00:00 | M0002 | READ | INDEX.md 1,14p
+2026-11-06T16:19:06.000378+00:00 | M0002 | CMD | rg -n 'M0002|P0006|E0001|P0007|M0001' INDEX.md log/STATUS.md | exit 0 | targeted M0002 readiness/source inspection
+2026-11-06T16:19:06.000484+00:00 | M0002 | READ | INDEX.md; log/STATUS.md
+2026-11-06T16:19:06.004966+00:00 | M0002 | CMD | rg --files tasks docs tests | exit 0 | targeted M0002 readiness/source inspection
+2026-11-06T16:19:06.008046+00:00 | M0002 | CMD | sed -n 1,100p /home/alonso/Documents/clavel-codex-kit/templates/REVIEW.md | exit 0 | targeted M0002 readiness/source inspection
+2026-11-06T16:19:06.008120+00:00 | M0002 | READ | /home/alonso/Documents/clavel-codex-kit/templates/REVIEW.md 1,100p
+2026-11-06T16:19:06.010134+00:00 | M0002 | CMD | rg -n 'M0002|M0001' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0 | targeted M0002 readiness/source inspection
+2026-11-06T16:19:06.010183+00:00 | M0002 | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md
+2026-11-06T16:19:06.012012+00:00 | M0002 | CMD | ls -la log | exit 0 | targeted M0002 readiness/source inspection
+2026-11-06T16:19:19.089410+00:00 | M0002 | CMD | rg -n '^\| M0002 \|' /home/alonso/Downloads/localSend/CLAVEL/docs/BACKLOG.md | exit 1 | M0002 scope and accepted contract evidence
+2026-11-06T16:19:19.089507+00:00 | M0002 | READ | /home/alonso/Downloads/localSend/CLAVEL/docs/BACKLOG.md | M0002 row only; no full backlog or prompts opened
+2026-11-06T16:19:19.092294+00:00 | M0002 | CMD | sed -n 1,140p docs/CONTRATO_FRONTEND_API.md | exit 0 | M0002 scope and accepted contract evidence
+2026-11-06T16:19:19.092419+00:00 | M0002 | READ | docs/CONTRATO_FRONTEND_API.md 1,140p
+2026-11-06T16:19:19.094838+00:00 | M0002 | CMD | sed -n 1,120p docs/REGISTRO_DECISIONES.md | exit 0 | M0002 scope and accepted contract evidence
+2026-11-06T16:19:19.094940+00:00 | M0002 | READ | docs/REGISTRO_DECISIONES.md 1,120p
+2026-11-06T16:19:19.097880+00:00 | M0002 | CMD | sed -n 1,95p docs/REVISION_E0001.md | exit 0 | M0002 scope and accepted contract evidence
+2026-11-06T16:19:19.097958+00:00 | M0002 | READ | docs/REVISION_E0001.md 1,95p
+2026-11-06T16:19:19.100565+00:00 | M0002 | CMD | sed -n 1,90p /home/alonso/Documents/clavel-codex-kit/templates/BLOCKER.md | exit 0 | M0002 scope and accepted contract evidence
+2026-11-06T16:19:19.100621+00:00 | M0002 | READ | /home/alonso/Documents/clavel-codex-kit/templates/BLOCKER.md 1,90p
+2026-11-06T16:19:38.548469+00:00 | M0002 | ERROR | Exact pipe-delimited M0002 lookup in external BACKLOG.md exited 1; inspect only its matching task record without printing other tasks.
+2026-11-06T16:19:38.548955+00:00 | M0002 | READ | /home/alonso/Downloads/localSend/CLAVEL/docs/BACKLOG.md | selected M0002 first-column record only; no full backlog output
+2026-11-06T16:19:38.551516+00:00 | M0002 | CMD | rg -n M0002 log/STATUS.md | exit 1 | M0002 absent from repository status
+2026-11-06T16:20:32.653130+00:00 | M0002 | EDIT | docs/BLOQUEO_M0002.md | documented proposed Emi ownership, missing M0001 acceptance, prerequisites, external-ID recognition and required next evidence; no reassignment or acceptance asserted
+2026-11-06T16:20:32.653197+00:00 | M0002 | BLOCKER | M0002 prerequisites are M0001 and P0006; P0006 Accepted but M0001 acceptance absent and no EXTERNAL_ACCEPTED.txt exists. Formal review stops. Owner/dependency change needs explicit recorded scope; no private prompts opened.
+2026-11-06T16:20:32.653230+00:00 | M0002 | DECISION | Do not edit orchestrator-managed STATUS.md or external kit. No acceptance, role reassignment, backend change or contract change performed; user supplied a proposal for discussion, not an attributable Emi signature.
+2026-11-06T16:20:32.653254+00:00 | M0002 | SKIP | M0002 contract checks and Done when | prerequisite M0001 not Accepted; task prompt excluded by user; no validation claimed for contract consumption or real authorization
+2026-11-06T16:20:42.954800+00:00 | M0002 | CMD | git diff --check | exit 0 | PASS; no output
+2026-11-06T16:20:42.957948+00:00 | M0002 | CMD | git status --short | exit 0 | M log/CODEX_LOG.md / ?? docs/BLOQUEO_M0002.md
+2026-11-06T16:20:42.958034+00:00 | M0002 | SKIP | commit | no task implementation performed; canonical M0002 task and prescribed commit message are unavailable within authorized inputs, and unmet prerequisites require stopping
+2026-11-06T16:20:42.958060+00:00 | M0002 | READ | log/CODEX_LOG.md | audited current session records for file inspections, failed lookups, missing templates directory, baseline correction, blocker and edited paths
+2026-11-06T16:20:42.958083+00:00 | M0002 | EDIT | log/CODEX_LOG.md | appended audit and M0002 session close
+END M0002 | Blocked | 6272e867183b1d07b66a500c8f0055586e1471d2 | M0001 acceptance or explicit dependency revision, authorized task scope, and Emi signature pending; blocker/audit uncommitted | agree ownership and dependency scope, then prepare pinned contract evidence
