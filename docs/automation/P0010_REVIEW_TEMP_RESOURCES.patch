@@ -1,0 +1,18 @@
+diff --git a/orchestrator.py b/orchestrator.py
+--- a/orchestrator.py
++++ b/orchestrator.py
+@@ -76,7 +76,13 @@
+ 
+ def review_prompt(c, tid, base):
+     return (f"Read AGENTS.md. The kit is at {c.kit} (read-only). You are the independent REVIEWER of {tid}. Read the kit's "
+-            f"templates/REVIEW.md and tasks/{tid}.md, then inspect `git diff {base}..HEAD`. Do NOT modify, create, or commit any file. "
++            f"templates/REVIEW.md and tasks/{tid}.md, then inspect `git diff {base}..HEAD`. "
++            f"Keep repository source, contracts, task status and Git history unchanged; do not create or commit repository files. "
++            f"You may create and clean up isolated temporary test resources under /tmp, including native PostgreSQL "
++            f"clusters/databases using the existing synthetic fixtures. Ignored test caches are also permitted. "
++            f"An already-running database service is not required when the fixture starts its own disposable cluster. "
++            f"For required PostgreSQL checks use CLAVEL_REQUIRE_POSTGRES=1 so skips cannot count as validation. "
++            f"Never use application .env/database settings or real data for these checks. "
+             f"Reproduce the riskiest 'Done when' check yourself. Record the exact reviewed source SHA. "
+             f"This is automatic independent review; project checkpoint signatures are not required. "
+             f"Missing inputs, failed checks and required live provider decisions remain blockers. "

@@ -2101,3 +2101,75 @@ END P0036 | Awaiting review | HEAD (log-only closure amendment of validated 2943
 2026-11-06T19:32:44Z | P0036 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 464 passed, 1 warning, 6 subtests passed in 61.61s (0:01:01)
 2026-11-06T19:34:09Z | P0036 | REVIEW | automatic Codex review; source b4246e5f5f9ee99ac5719dd0d2601e162d91a68e; attempt 2; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T19:34:09Z | P0036 | ORCH | ACCEPTED by automatic review at b4246e5f5f9ee99ac5719dd0d2601e162d91a68e
+START P0010 | 2026-11-06T19:36:06.727231+00:00 | main | 288a3cead827eb905abb4dd289ffe45736b6f8a7
+2026-11-06T19:36:06.727323+00:00 | P0010 | CMD | git status --short --branch | exit 0 | ## main...origin/main [ahead 22]
+2026-11-06T19:36:06.727368+00:00 | P0010 | CMD | git rev-parse HEAD | exit 0 | 288a3cead827eb905abb4dd289ffe45736b6f8a7
+2026-11-06T19:36:06.727401+00:00 | P0010 | CMD | git branch --show-current | exit 0 | main
+2026-11-06T19:36:06.727434+00:00 | P0010 | DECISION | User reports orchestration completed with no ready tasks. Continue previously discussed blocker resolution, one task only: P0010. Alonso host is NixOS. Inspect existing PostgreSQL tooling and tests; no production data or P0035 changes.
+2026-11-06T19:36:06.729810+00:00 | P0010 | CMD | rg -n '^\| P0010 \|' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0 | scoped P0010 readiness/environment discovery
+2026-11-06T19:36:06.729895+00:00 | P0010 | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md | targeted task/prerequisite/project configuration
+2026-11-06T19:36:06.732037+00:00 | P0010 | CMD | sed -n 1,95p /home/alonso/Documents/clavel-codex-kit/tasks/P0010.md | exit 0 | scoped P0010 readiness/environment discovery
+2026-11-06T19:36:06.732108+00:00 | P0010 | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0010.md | targeted task/prerequisite/project configuration
+2026-11-06T19:36:06.734616+00:00 | P0010 | CMD | rg -n '^\| (P0009|P0010) \|' log/STATUS.md | exit 0 | scoped P0010 readiness/environment discovery
+2026-11-06T19:36:06.734683+00:00 | P0010 | READ | log/STATUS.md | targeted task/prerequisite/project configuration
+2026-11-06T19:36:06.739109+00:00 | P0010 | CMD | rg --files -g '*postgres*' -g '*migration*' -g '*nix*' -g '*P0010*' -g '*customer*' -g '*session*' -g '*subject*' -g '*database*' -g '*conftest*' -g '*pyproject*' -g '!log/runs/**' -g '!.venv/**' | exit 0 | scoped P0010 readiness/environment discovery
+2026-11-06T19:36:06.743206+00:00 | P0010 | CMD | bash -c 'type -P nix nix-shell postgres initdb pg_ctl psql' | exit 0 | scoped P0010 readiness/environment discovery
+2026-11-06T19:36:06.745248+00:00 | P0010 | CMD | sed -n 1,130p pyproject.toml | exit 0 | scoped P0010 readiness/environment discovery
+2026-11-06T19:36:06.745318+00:00 | P0010 | READ | pyproject.toml | targeted task/prerequisite/project configuration
+2026-11-06T19:36:36.096149+00:00 | P0010 | CMD | rg --files src/clavel migrations tests/integration | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.098461+00:00 | P0010 | CMD | sed -n 1,180p tests/integration/conftest.py | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.098522+00:00 | P0010 | READ | tests/integration/conftest.py 1,180p
+2026-11-06T19:36:36.100673+00:00 | P0010 | CMD | sed -n 1,200p tests/integration/test_migrations.py | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.100725+00:00 | P0010 | READ | tests/integration/test_migrations.py 1,200p
+2026-11-06T19:36:36.102829+00:00 | P0010 | CMD | sed -n 1,170p tests/test_database.py | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.102892+00:00 | P0010 | READ | tests/test_database.py 1,170p
+2026-11-06T19:36:36.105211+00:00 | P0010 | CMD | sed -n 1,130p migrations/versions/0001_migration_baseline.py | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.105286+00:00 | P0010 | READ | migrations/versions/0001_migration_baseline.py 1,130p
+2026-11-06T19:36:36.108336+00:00 | P0010 | CMD | git diff --name-only e443f9e3563e4555662503af3206f03f63d82c94..e99e886bd2904e8145e95e6654eba5bd00baf65d | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.117290+00:00 | P0010 | CMD | postgres --version | exit 0 | P0010 database baseline/rejected candidate inspection
+2026-11-06T19:36:36.117415+00:00 | P0010 | DECISION | PostgreSQL server/client tools are already available on NixOS PATH; no package installation or system configuration change required. Inspect existing disposable integration fixture before choosing service lifecycle.
+2026-11-06T19:36:50.823233+00:00 | P0010 | CMD | git show e99e886bd2904e8145e95e6654eba5bd00baf65d:migrations/versions/0002_customer_session.py | exit 0 | rejected P0010 candidate only
+2026-11-06T19:36:50.823308+00:00 | P0010 | READ | migrations/versions/0002_customer_session.py at rejected candidate e99e886; historical evidence only
+2026-11-06T19:36:50.825725+00:00 | P0010 | CMD | git show e99e886bd2904e8145e95e6654eba5bd00baf65d:tests/integration/test_subject_schema.py | exit 0 | rejected P0010 candidate only
+2026-11-06T19:36:50.825776+00:00 | P0010 | READ | tests/integration/test_subject_schema.py at rejected candidate e99e886; historical evidence only
+2026-11-06T19:36:50.827870+00:00 | P0010 | CMD | git show e99e886bd2904e8145e95e6654eba5bd00baf65d:log/P0010_EVIDENCE.md | exit 0 | rejected P0010 candidate only
+2026-11-06T19:36:50.827916+00:00 | P0010 | READ | log/P0010_EVIDENCE.md at rejected candidate e99e886; historical evidence only
+2026-11-06T19:36:50.829719+00:00 | P0010 | CMD | sed -n 1,170p migrations/README.md | exit 0 | current migration conventions
+2026-11-06T19:36:50.829774+00:00 | P0010 | READ | migrations/README.md 1,170p
+2026-11-06T19:36:50.831527+00:00 | P0010 | CMD | sed -n 1,170p migrations/env.py | exit 0 | current migration conventions
+2026-11-06T19:36:50.831563+00:00 | P0010 | READ | migrations/env.py 1,170p
+2026-11-06T19:36:50.833667+00:00 | P0010 | CMD | sed -n 1,170p migrations/versions/0003_inventory_schema.py | exit 0 | current migration conventions
+2026-11-06T19:36:50.833714+00:00 | P0010 | READ | migrations/versions/0003_inventory_schema.py 1,170p
+2026-11-06T19:37:22.372863+00:00 | P0010 | CMD | rg -n '0003_inventory_schema|0002_catalog_schema|alembic_version|tables\(|customers|sessions' tests/integration tests/test_repository_rules.py | exit 0 | migration compatibility and synthetic service prerequisites
+2026-11-06T19:37:22.372981+00:00 | P0010 | READ | tests/integration and tests/test_repository_rules.py | only matching migration-head/table references
+2026-11-06T19:37:22.403561+00:00 | P0010 | CMD | .venv/bin/python -c 'import os, shutil; print("nonroot:", os.geteuid() != 0); print("native PostgreSQL:", bool(shutil.which("initdb") and shutil.which("pg_ctl"))); print("external test URL configured:", bool(os.environ.get("CLAVEL_MIGRATION_TEST_URL")))' | exit 0 | migration compatibility and synthetic service prerequisites
+2026-11-06T19:37:23.625549+00:00 | P0010 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_migrations.py -q --tb=short | exit 1 | baseline native PostgreSQL check
+2026-11-06T19:37:23.625625+00:00 | P0010 | TEST | baseline migrations required PostgreSQL | 2 errors in 0.75s
+2026-11-06T19:38:13.865959+00:00 | P0010 | ERROR | P0010 environment inspection emitted SyntaxWarning for regex string escape; read commands succeeded. Baseline required-PostgreSQL suite failed with 2 setup errors because sandbox could not start pg_ctl; escalated baseline retry requested.
+2026-11-06T19:38:13.873702+00:00 | P0010 | READ | log/runs/P0010-review1.txt | only reviewer rationale lines about disposable database, read-only instruction and permissions; no full run output
+2026-11-06T19:38:13.878627+00:00 | P0010 | READ | log/runs/P0010-review2.txt | only reviewer rationale lines about disposable database, read-only instruction and permissions; no full run output
+2026-11-06T19:39:35.782290+00:00 | P0010 | CMD | env CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_migrations.py -q --tb=short (escalated) | exit 0 | 2 passed in 7.55s; native PostgreSQL 17.11, zero skips
+2026-11-06T19:39:35.782364+00:00 | P0010 | TEST | baseline migration mechanics on actual native disposable PostgreSQL | 2 passed, 0 skipped; synthetic identities/data only; external sandbox execution required for sockets
+2026-11-06T19:39:35.782392+00:00 | P0010 | DECISION | Historical reviewer output proves blocker was blanket no-file instruction: reviewer explicitly declined fixture cluster creation. Correct interpretation of repository read-only review to permit temporary synthetic resources; no PostgreSQL install or external always-on service required.
+2026-11-06T19:39:35.782671+00:00 | P0010 | READ | /home/alonso/Documents/clavel-codex-kit/orchestrator.py | current installed kit snapshot
+2026-11-06T19:39:35.782702+00:00 | P0010 | EDIT | /tmp/clavel-p0010-review-fix/orchestrator.py | isolated candidate for reviewer fixture-permission fix
+2026-11-06T19:39:35.782877+00:00 | P0010 | READ | /home/alonso/Documents/clavel-codex-kit/tests/test_orchestrator.py | current installed kit snapshot
+2026-11-06T19:39:35.782906+00:00 | P0010 | EDIT | /tmp/clavel-p0010-review-fix/tests/test_orchestrator.py | isolated candidate for reviewer fixture-permission fix
+2026-11-06T19:39:35.783054+00:00 | P0010 | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md | current installed kit snapshot
+2026-11-06T19:39:35.783082+00:00 | P0010 | EDIT | /tmp/clavel-p0010-review-fix/INDEX.md | isolated candidate for reviewer fixture-permission fix
+2026-11-06T19:39:35.783195+00:00 | P0010 | READ | /home/alonso/Documents/clavel-codex-kit/gates.txt | current installed kit snapshot
+2026-11-06T19:39:35.783222+00:00 | P0010 | EDIT | /tmp/clavel-p0010-review-fix/gates.txt | isolated candidate for reviewer fixture-permission fix
+2026-11-06T19:39:35.783376+00:00 | P0010 | EDIT | /tmp/clavel-p0010-review-original.sha256 | original source fingerprint to prevent overwriting concurrent changes
+2026-11-06T19:39:35.950249+00:00 | P0010 | EDIT | /tmp/clavel-p0010-review-fix/orchestrator.py | explicitly allow isolated synthetic temporary PostgreSQL fixtures during independent repository read-only review; require non-skipped PostgreSQL verification
+2026-11-06T19:39:35.950817+00:00 | P0010 | EDIT | docs/automation/P0010_REVIEW_TEMP_RESOURCES.patch | reproducible incremental kit patch documenting root cause fix
+2026-11-06T19:39:36.466690+00:00 | P0010 | CMD | .venv/bin/python -m pytest /tmp/clavel-p0010-review-fix/tests/test_orchestrator.py -q --tb=short | exit 0 | 29 passed in 0.16s
+2026-11-06T19:39:36.466762+00:00 | P0010 | TEST | review-fixture permission fix, existing orchestration suite | 29 passed in 0.16s; synthetic doubles only
+2026-11-06T19:39:36.469281+00:00 | P0010 | CMD | git apply --check /home/alonso/Documents/GitRepos/Clavel/docs/automation/P0010_REVIEW_TEMP_RESOURCES.patch (cwd=/home/alonso/Documents/clavel-codex-kit) | exit 0 | incremental external patch validation
+2026-11-06T19:40:20.300372+00:00 | P0010 | EDIT | docs/automation/P0010_REVIEW_TEMP_RESOURCES.md | NixOS tooling, proven reviewer-instruction root cause and infrastructure validation
+2026-11-06T19:40:20.300385+00:00 | P0010 | EDIT | /tmp/prepare_clavel_p0010_retry.py | scoped installer/preparation: check original kit, preserve rejected logs, commit reviewed patch, requeue only P0010 without acceptance
+2026-11-06T19:41:24.980491+00:00 | P0010 | CMD | git branch --show-current | exit 0 | main
+2026-11-06T19:41:24.980745+00:00 | P0010 | EDIT | /home/alonso/Documents/clavel-codex-kit/orchestrator.py | permit isolated temporary synthetic PostgreSQL review resources; keep source/status/Git read-only
+2026-11-06T19:41:24.981460+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-impl2.txt | preserve rejected-run diagnostics before retry
+2026-11-06T19:41:24.981710+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-impl1.txt | preserve rejected-run diagnostics before retry
+2026-11-06T19:41:24.981905+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-review1.txt | preserve rejected-run diagnostics before retry
+2026-11-06T19:41:24.982091+00:00 | P0010 | EDIT | log/runs/P0010-before-temp-resource-fix/P0010-review2.txt | preserve rejected-run diagnostics before retry
