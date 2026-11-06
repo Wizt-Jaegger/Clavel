@@ -17,7 +17,7 @@
 | P0013 | Pending | — | — | — | — | — |
 | P0014 | Pending | — | — | — | — | — |
 | P0015 | Pending | — | — | — | — | — |
-| P0016 | Pending | — | — | — | — | — |
+| P0016 | Accepted | c319bf2beee3a8fdeee44f4eafbe42b776592e6f | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:39:15Z | — |
 | P0017 | Pending | — | — | — | — | — |
 | P0018 | Pending | — | — | — | — | — |
 | P0019 | Pending | — | — | — | — | — |
