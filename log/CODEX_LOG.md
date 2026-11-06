@@ -1207,3 +1207,13 @@ START P0009 | 2026-11-06T17:32:21.541549+00:00 | main | b51440dbaec8ef76e00a2eba
 2026-11-06T17:38:56.926327+00:00 | P0009 | DECISION | Final audit passed: scoped paths only, append-only log history preserved, relevant tests and fixture retry recorded, STATUS unstaged and unchanged by this task; Awaiting review after commit. COMMIT/END must be appended after the commit to record its actual SHA.
 2026-11-06T17:38:56.929913+00:00 | P0009 | CMD | git diff --cached --stat | exit 0 | final staging and validation
 2026-11-06T17:38:56.933954+00:00 | P0009 | CMD | git add -- log/CODEX_LOG.md | exit 0 | final staging and validation
+2026-11-06T17:39:18.333866+00:00 | P0009 | CMD | git add -- log/CODEX_LOG.md && git commit -m 'P0009 migration workflow' | exit 0 | commit validated migration workflow with accumulated task log; exclude orchestrator STATUS edits
+2026-11-06T17:39:18.335595+00:00 | P0009 | CMD | git rev-parse HEAD | exit 0 | 7a12f55e658d7e8ef861bf97eb0adf1e635679e9
+2026-11-06T17:39:18.335633+00:00 | P0009 | COMMIT | 7a12f55e658d7e8ef861bf97eb0adf1e635679e9 | P0009 migration workflow
+2026-11-06T17:39:18.338273+00:00 | P0009 | CMD | git status --short | exit 0 | only task closing log entries and pre-existing orchestrator STATUS edit remain unstaged
+2026-11-06T17:39:18.339214+00:00 | P0009 | READ | log/CODEX_LOG.md | final event coverage audit: task discovery, commands, edits, failure/retry, validation, staging and commit are covered
+END P0009 | Awaiting review | 7a12f55e658d7e8ef861bf97eb0adf1e635679e9 | no implementation blockers; post-commit COMMIT/END audit tail appended in worktree; hosted CI not executed | independent Codex reviewer checks committed evidence
+2026-11-06T17:39:35Z | P0009 | ORCH | attempt 1: codex exit 0; full output log/runs/P0009-impl1.txt
+2026-11-06T17:39:44Z | P0009 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 320 passed, 1 warning, 6 subtests passed in 8.93s
+2026-11-06T17:40:32Z | P0009 | REVIEW | automatic Codex review; source 7a12f55e658d7e8ef861bf97eb0adf1e635679e9; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T17:40:32Z | P0009 | ORCH | ACCEPTED by automatic review at 7a12f55e658d7e8ef861bf97eb0adf1e635679e9
