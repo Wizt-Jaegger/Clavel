@@ -2710,3 +2710,9 @@ START P0020 | 2026-11-06T23:41:46.290450+00:00 | main | 135fe7e3a7ada41646ce1985
 2026-11-06T23:43:45Z | P0020 | CMD | 'git' 'diff' '--cached' '--check' | exit 0
 2026-11-06T23:43:45Z | P0020 | CMD | 'git' 'diff' '--cached' '--quiet' '--' 'log/STATUS.md' | exit 0
 2026-11-06T23:43:45Z | P0020 | DECISION | Execute git add log/CODEX_LOG.md and git commit -m "P0020 offline import command"; append actual commit result/END in audit closure commit to avoid self-referential SHA.
+2026-11-06T23:43:45Z | P0020 | CMD | git add log/CODEX_LOG.md; git commit -m "P0020 offline import command" | exit 0
+2026-11-06T23:43:57.978543+00:00 | P0020 | CMD | python closure: git rev-parse HEAD; git status --short; assert only audit log and orchestrator STATUS remain modified | exit 0
+2026-11-06T23:43:57.978543+00:00 | P0020 | COMMIT | 94ab34cbac95c1199ab53fe3aa209689f6ddabb8 | P0020 offline import command
+2026-11-06T23:43:57.978543+00:00 | P0020 | DECISION | All commands/reads/edits and failed regression logged; finalize append-only audit closure using required message, preserve STATUS. Final audit SHA recorded in Git history.
+2026-11-06T23:43:57.978543+00:00 | P0020 | CMD | Final audit operation: git diff --check; git add log/CODEX_LOG.md; git diff --cached --check; git diff --cached --quiet -- log/STATUS.md; git commit -m "P0020 offline import command"; git rev-parse HEAD; git status --short | result in terminal and Git history
+END P0020 | Awaiting review | 94ab34cbac95c1199ab53fe3aa209689f6ddabb8 | Q01/Q02 production-feed checks Blocked; 247 tests and 7 subtests passed, zero skips | automatic independent Codex review
