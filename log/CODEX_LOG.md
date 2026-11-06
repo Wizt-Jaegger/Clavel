@@ -1584,3 +1584,7 @@ START P0012 | 2026-11-06T18:22:49.472245+00:00 | main | 33bcdb2a3b1d358cbc78c403
 2026-11-06T18:26:00.469956+00:00 | P0012 | DECISION | Append audit closure then amend the same task commit. END uses symbolic HEAD because embedding its own final commit hash is self-referential; concrete final SHA and amendment result reported to orchestrator in session result.
 2026-11-06T18:26:00.470004+00:00 | P0012 | CMD | git add log/CODEX_LOG.md && git commit --amend --no-edit && git status --short && git rev-parse HEAD | final closure operation; outcome reported by command stdout and final session result
 END P0012 | Awaiting review | HEAD (final amended task commit; concrete SHA in session result) | independent reviewer verdict pending; existing synthetic PostgreSQL service running | automated reviewer reproduces Done when using log/P0012_EVIDENCE.md; orchestrator manages STATUS.md and later service cleanup
+2026-11-06T18:26:10Z | P0012 | ORCH | attempt 2: codex exit 0; full output log/runs/P0012-impl2.txt
+2026-11-06T18:26:54Z | P0012 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 371 passed, 1 warning, 6 subtests passed in 43.31s
+2026-11-06T18:28:03Z | P0012 | REVIEW | automatic Codex review; source fa5125938dde418fdd24eddb92cbe0c2742acb40; attempt 2; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T18:28:03Z | P0012 | ORCH | ACCEPTED by automatic review at fa5125938dde418fdd24eddb92cbe0c2742acb40
