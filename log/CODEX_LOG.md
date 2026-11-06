@@ -2769,3 +2769,10 @@ START P0021 | 2026-11-06T23:49:37Z | main | 4f86d3ce1c307b276a64e208b0d0d6f8b554
 2026-11-06T23:53:36Z | P0021 | CMD | tail -n 30 /tmp/clavel-p0021-pytest.log | exit 0 | displayed bounded test summary, 221 passed
 2026-11-06T23:53:36Z | P0021 | DECISION | Validated fixture implementation ready for Awaiting review; append actual commit SHA and END after successful commit. Status remains orchestrator-owned.
 2026-11-06T23:53:36Z | P0021 | CMD | git add -- log/CODEX_LOG.md | exit 0 | refresh staged append-only audit log
+2026-11-06T23:53:36Z | P0021 | CMD | git commit -m 'P0021 synthetic fixture generator' | exit 0 | task implementation, tests, evidence and action log committed
+2026-11-06T23:53:36Z | P0021 | CMD | git rev-parse HEAD | exit 0 | f1f1e1c0a8a1a2c500203ce8b7cea6b72f4405a2
+2026-11-06T23:53:36Z | P0021 | COMMIT | f1f1e1c0a8a1a2c500203ce8b7cea6b72f4405a2 | P0021 synthetic fixture generator
+END P0021 | Awaiting review | f1f1e1c0a8a1a2c500203ce8b7cea6b72f4405a2 | live representativeness Blocked on Q03/Q04/Q08; no implementation blockers | independent Codex review, orchestrator acceptance
+2026-11-06T23:53:49Z | P0021 | DECISION | Commit SHA in END identifies the validated implementation f1f1e1c; follow-up commit records post-commit audit only, with identical source/tests/evidence. No status edits.
+2026-11-06T23:53:49Z | P0021 | CMD | git add -- log/CODEX_LOG.md && git commit -m 'P0021 synthetic fixture generator' | audit-only closure; outcome provided by git commit output and final response
+END P0021 | Awaiting review | f1f1e1c (validated implementation; audit-only closure follows) | live representativeness Blocked on Q03/Q04/Q08 | independent Codex review and orchestrator acceptance
