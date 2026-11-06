@@ -2405,3 +2405,48 @@ END P0014 | Awaiting review | 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3 | no impl
 2026-11-06T22:41:02Z | P0014 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 609 passed, 1 warning, 6 subtests passed in 182.77s (0:03:02)
 2026-11-06T22:45:10Z | P0014 | REVIEW | automatic Codex review; source 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T22:45:10Z | P0014 | ORCH | ACCEPTED by automatic review at 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3
+2026-11-06T22:45:10Z | P0015 | ORCH | starting from fc9058c24a7d3b7d55f981083b025e25ac02082f
+
+START P0015 | 2026-11-06T22:45:34.583206Z | main | fc9058c24a7d3b7d55f981083b025e25ac02082f
+2026-11-06T22:45:34.583206Z | P0015 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && ls -ld log && sed -n '1,240p' AGENTS.md | exit 0 | main; pre-existing changes in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T22:45:34.583206Z | P0015 | READ | AGENTS.md
+2026-11-06T22:45:34.583206Z | P0015 | DECISION | User verified prerequisites Accepted; preserve existing log changes; do not edit or stage orchestrator-managed log/STATUS.md
+2026-11-06T22:45:34.659988Z | P0015 | CMD | rg -n '^\|.*P0015.*\|' /home/alonso/Documents/clavel-codex-kit/INDEX.md && sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0015.md | exit 0 | completed
+2026-11-06T22:45:34.660079Z | P0015 | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md (P0015 row only)
+2026-11-06T22:45:34.660154Z | P0015 | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0015.md
+2026-11-06T22:45:38.806031Z | P0015 | CMD | ls -la && rg --files app tests log | rg '(^app/database/|^tests/|^log/log.sh$)' && rg -n 'customer|session|subject|identity|anonymous' app/database tests pyproject.toml | exit 2 | failed
+2026-11-06T22:45:44.330493Z | P0015 | CMD | ls -d src/clavel/database tests/integration tests/unit .venv && rg --files src/clavel/database tests | rg '(repository|conftest|customer|database)' && sed -n '1,160p' pyproject.toml && sed -n '1,200p' src/clavel/database/customers.py && sed -n '1,200p' tests/conftest.py | exit 2 | failed
+2026-11-06T22:45:44.330603Z | P0015 | READ | pyproject.toml; src/clavel/database/customers.py; tests/conftest.py
+2026-11-06T22:45:49.466035Z | P0015 | CMD | rg --files src/clavel/database tests | rg '(repository|conftest|customer|database)' | exit 0 | completed
+2026-11-06T22:45:49.546313Z | P0015 | CMD | sed -n '1,160p' pyproject.toml && sed -n '1,180p' src/clavel/database/customers.py && sed -n '1,200p' tests/conftest.py | exit 2 | failed
+2026-11-06T22:45:49.546375Z | P0015 | READ | pyproject.toml; src/clavel/database/customers.py; tests/conftest.py
+2026-11-06T22:45:55.289765Z | P0015 | CMD | sed -n '1,240p' src/clavel/database/repositories.py && sed -n '1,200p' src/clavel/database/__init__.py && sed -n '1,230p' tests/integration/conftest.py && sed -n '1,130p' tests/test_repository_rules.py | exit 0 | completed
+2026-11-06T22:45:55.289825Z | P0015 | READ | src/clavel/database/repositories.py; src/clavel/database/__init__.py; tests/integration/conftest.py; tests/test_repository_rules.py
+2026-11-06T22:46:00.100930Z | P0015 | CMD | rg --files tests/integration | rg '(catalog|stock|migration)' && sed -n '1,110p' tests/integration/test_customer_session_schema.py && sed -n '1,140p' tests/integration/test_catalog_repositories.py && command -v initdb && command -v pg_ctl && .venv/bin/python --version | exit 2 | failed
+2026-11-06T22:46:00.100998Z | P0015 | READ | tests/integration/test_customer_session_schema.py; tests/integration/test_catalog_repositories.py (attempted)
+2026-11-06T22:46:04.196196Z | P0015 | CMD | rg --files tests | rg '(repositories|repository)' | exit 0 | completed
+2026-11-06T22:46:04.269815Z | P0015 | CMD | command -v initdb; command -v pg_ctl; .venv/bin/python --version | exit 0 | completed
+2026-11-06T22:46:04.343119Z | P0015 | CMD | sed -n '1,105p' tests/integration/test_migrations.py | exit 0 | completed
+2026-11-06T22:46:04.343202Z | P0015 | READ | tests/integration/test_migrations.py
+2026-11-06T22:46:18.836852Z | P0015 | CMD | sed -n '1,135p' tests/integration/test_repositories.py && rg -n 'concurr|Thread|Executor|rollback|autocommit' tests/integration/test_repositories.py && ls docs | exit 0 | completed
+2026-11-06T22:46:18.836944Z | P0015 | READ | tests/integration/test_repositories.py
+2026-11-06T22:46:51.695216Z | P0015 | ERROR | Initial INDEX search also returned two dependent-task rows; no other task files opened; subsequent kit access remains limited to P0015
+2026-11-06T22:46:51.695216Z | P0015 | ERROR | Discovery attempts used absent app/database, tests/unit, tests/conftest.py and test_catalog_repositories.py; READ entries for absent files denote attempts only; actual path is src/clavel/database
+2026-11-06T22:46:51.695216Z | P0015 | DECISION | P0015 is implementation, not checkpoint/review/handoff/blocker; no template required. Use existing caller-owned transactions and PostgreSQL fixture infrastructure
+2026-11-06T22:46:51.695216Z | P0015 | DECISION | Unknown lookup returns None without writes. Explicit creation requires subject kind; session ownership and subject kind remain immutable, including unlinked sessions. No merges, promotion or historical attribution
+2026-11-06T22:46:51.695216Z | P0015 | DECISION | Concurrent resolution uses ON CONFLICT with identity guards; matching replays keep first creation time and greatest activity time. Prepare synthetic PostgreSQL evidence for independent reviewer; do not set Accepted
+2026-11-06T22:46:51.761975Z | P0015 | EDIT | src/clavel/database/customer_sessions.py: immutable records, lookup and atomic explicit resolution with identity guards, opaque-reference and aware-time validation
+2026-11-06T22:47:57.750842Z | P0015 | EDIT | tests/integration/test_customer_session_repositories.py: synthetic PostgreSQL tests for replay, unknown lookup, anonymous separation, immutable explicit identity, rollback, input validation and concurrent resolution
+2026-11-06T22:48:19.367403Z | P0015 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_customer_session_repositories.py | exit 0 | completed
+2026-11-06T22:48:27.131407Z | P0015 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_customer_session_repositories.py | 28 passed, 0 failed, 0 skipped in 21.10s; disposable PostgreSQL with synthetic data only
+2026-11-06T22:48:35.962698Z | P0015 | CMD | git diff --check && git status --short && git diff --numstat && git ls-files --others --exclude-standard | exit 0 | completed
+2026-11-06T22:49:06.674254Z | P0015 | CMD | git show HEAD:log/CODEX_LOG.md | tail -n 12 | exit 0 | completed
+2026-11-06T22:49:06.674314Z | P0015 | READ | log/CODEX_LOG.md (last 12 committed lines only)
+2026-11-06T22:49:08.223790Z | P0015 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_customer_session_schema.py tests/integration/test_repositories.py tests/test_database.py | exit 0 | completed
+2026-11-06T22:49:39.338429Z | P0015 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_customer_session_schema.py tests/integration/test_repositories.py tests/test_database.py | 59 passed, 0 failed, 0 skipped in 40.33s; existing Starlette/httpx deprecation warning
+2026-11-06T22:49:39.338429Z | P0015 | EDIT | docs/P0015_CUSTOMER_SESSION_REPOSITORIES.md: explicit identity policy, synthetic example and reproducible independent-review evidence; Awaiting review only
+2026-11-06T22:49:39.338429Z | P0015 | DECISION | Relevant tests and Done when checks passed (87 total); no live gate or missing input for repository slice; no broader suite needed
+2026-11-06T22:49:39.418577Z | P0015 | CMD | git diff --check && git diff --numstat && tail -n 18 log/CODEX_LOG.md | exit 0 | completed
+2026-11-06T22:49:39.418653Z | P0015 | READ | log/CODEX_LOG.md (P0015 audit tail)
+2026-11-06T22:49:49.278399Z | P0015 | CMD | git add -- src/clavel/database/customer_sessions.py tests/integration/test_customer_session_repositories.py docs/P0015_CUSTOMER_SESSION_REPOSITORIES.md log/CODEX_LOG.md && git diff --cached --check && git diff --cached --stat && git diff --cached --name-only | exit 0 | completed
+2026-11-06T22:49:58.891441Z | P0015 | DECISION | Audited command/read/edit coverage and failed discovery attempts; staged exactly four P0015 paths; staged whitespace check passed; orchestrator STATUS excluded. Refresh audit log before commit; actual commit SHA and END necessarily append after commit, following existing repository log practice
