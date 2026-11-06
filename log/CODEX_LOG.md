@@ -2520,3 +2520,7 @@ START P0017 | 2026-11-06T22:55:44Z | main | ef48ebc82e27f484fdb31c02f4c0a7e083ff
 2026-11-06T23:01:31Z | P0017 | CMD | git diff --check -- log/CODEX_LOG.md | exit 0 | closing audit whitespace check
 2026-11-06T23:01:31Z | P0017 | DECISION | Audit coverage checked: repository discovery failures, all opened files, implementation/test/evidence edits, both test runs, staging and implementation commit recorded. Persist this closing append with git add -- log/CODEX_LOG.md and git commit -m 'P0017 sales and return repository'; no implementation changes. Validated implementation SHA 772d94fd54058bb683784fc4e5cef2be53b1cdd5.
 END P0017 | Awaiting review | 772d94fd54058bb683784fc4e5cef2be53b1cdd5 | independent review pending; no implementation blockers | independent Codex reviewer and orchestrator resolve review
+2026-11-06T23:01:37Z | P0017 | ORCH | attempt 1: codex exit 0; full output log/runs/P0017-impl1.txt
+2026-11-06T23:05:10Z | P0017 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 666 passed, 1 warning, 6 subtests passed in 212.69s (0:03:32)
+2026-11-06T23:07:00Z | P0017 | REVIEW | automatic Codex review; source ad74d63245286a11dd130a9fc425bd8dba6dd42f; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T23:07:00Z | P0017 | ORCH | ACCEPTED by automatic review at ad74d63245286a11dd130a9fc425bd8dba6dd42f
