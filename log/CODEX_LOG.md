@@ -1137,3 +1137,10 @@ START P0008 | 2026-11-06T17:25:18.414581+00:00 | main | b29721027e3dd3f810c35be2
 2026-11-06T17:30:33.222347+00:00 | P0008 | CMD | git diff --cached --check | exit 0 | whitespace check passed
 2026-11-06T17:30:33.224497+00:00 | P0008 | CMD | git diff --cached --name-only | exit 0 | staged paths checked; STATUS.md excluded
 2026-11-06T17:30:33.224540+00:00 | P0008 | DECISION | Implementation validation complete; commit on main with task message. COMMIT/END records follow commit because its SHA is only then available; preserve orchestrator-owned STATUS.md changes.
+2026-11-06T17:30:33.236592+00:00 | P0008 | CMD | git commit -m 'P0008 postgresql access' | exit 0 | task changes committed
+2026-11-06T17:30:33.238361+00:00 | P0008 | CMD | git rev-parse HEAD | exit 0 | c040bf687377a733f0b0c739b870628fbefd680e
+2026-11-06T17:30:33.238426+00:00 | P0008 | COMMIT | c040bf687377a733f0b0c739b870628fbefd680e | P0008 postgresql access
+END P0008 | Awaiting review | c040bf687377a733f0b0c739b870628fbefd680e | independent Codex review pending; no implementation blockers | reviewer/orchestrator assesses evidence; STATUS.md unchanged
+2026-11-06T17:30:55.526132+00:00 | P0008 | DECISION | Finalize audit-only follow-up with the same task commit message so START/END and implementation SHA are committed; implementation remains c040bf687377a733f0b0c739b870628fbefd680e. A commit cannot embed its own SHA; the final audit commit is identified by Git HEAD.
+2026-11-06T17:30:55.530418+00:00 | P0008 | CMD | git add -- log/CODEX_LOG.md | exit 0 | stage implementation COMMIT/END records
+2026-11-06T17:30:55.533474+00:00 | P0008 | CMD | git diff --cached --check | exit 0 | audit-only whitespace validation
