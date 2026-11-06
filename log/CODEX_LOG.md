@@ -452,3 +452,13 @@ START P0004 | 2026-11-06T09:15:19Z | main | 7d637aff287ca8781ca8a71a52a586357f65
 2026-11-06T09:18:11Z | P0004 | DECISION | Preserve orchestrator STATUS.md change and existing CODEX_LOG.md append; only explicitly stage task paths. No business or deployment changes.
 2026-11-06T09:18:11Z | P0004 | CMD | "git diff --check; git diff --stat; git status --short; git ls-files --others --exclude-standard" | exit 0 | Checked whitespace, task scope and untracked files before commit
 2026-11-06T09:19:04Z | P0004 | CMD | "git add pyproject.toml src/clavel/api/__init__.py src/clavel/api/app.py src/clavel/core/correlation.py src/clavel/core/errors.py tests/test_api_shell.py log/CODEX_LOG.md && git diff --cached --check && git diff --cached --stat" | exit 0 | Staged only task implementation, tests and append-only log; staged whitespace check passed
+2026-11-06T09:19:04Z | P0004 | CMD | "git add log/CODEX_LOG.md && git commit -m \"P0004 fastapi shell\"" | exit 0 | Committed validated FastAPI shell and task log
+2026-11-06T09:19:22Z | P0004 | CMD | ['git', 'rev-parse', 'HEAD'] | exit 0 | 7c85a83b5db99c28c2bdde6d61e924fb8d38fd7e
+2026-11-06T09:19:22Z | P0004 | COMMIT | 7c85a83b5db99c28c2bdde6d61e924fb8d38fd7e | P0004 fastapi shell
+2026-11-06T09:19:22Z | P0004 | CMD | ['git', 'status', '--short'] | exit 0 | M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-06T09:19:36Z | P0004 | ERROR | Closing audit Python command exited 1: stripping status output removed its leading status-column space, causing an incorrect scope assertion; no files staged or committed by failed closure. Retry preserves leading whitespace.
+2026-11-06T09:19:36Z | P0004 | CMD | git rev-parse HEAD | exit 0 | 7c85a83b5db99c28c2bdde6d61e924fb8d38fd7e
+2026-11-06T09:19:36Z | P0004 | CMD | git status --short | exit 0 | only log/CODEX_LOG.md and orchestrator log/STATUS.md modified
+2026-11-06T09:19:36Z | P0004 | DECISION | Audit confirms discovery, reads, implementation edits, failed helper/dependency/closure attempts, retries, install, validation and implementation commit are recorded. STATUS.md left untouched and unstaged. Archive closing records in a log-only commit with the task message; END identifies the validated implementation SHA because an audit commit cannot contain its own hash.
+2026-11-06T09:19:36Z | P0004 | DECISION | Closing archive command: git add log/CODEX_LOG.md && git commit -m "P0004 fastapi shell"; git reports its result and SHA in the final response.
+END P0004 | Awaiting review | 7c85a83b5db99c28c2bdde6d61e924fb8d38fd7e | reviewer acceptance pending; upstream TestClient deprecation warning | review implementation and test evidence
