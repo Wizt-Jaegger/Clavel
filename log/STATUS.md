@@ -48,3 +48,46 @@
 | P0044 | Pending | — | — | — | — | — |
 | P0045 | Pending | — | — | — | — | — |
 | P0046 | Pending | — | — | — | — | — |
+| E0001 | Awaiting review | 1a8cb5f | — | needs human acceptance | — | — |
+| E0002 | Pending | — | — | — | — | — |
+| E0003 | Pending | — | — | — | — | — |
+| E0004 | Pending | — | — | — | — | — |
+| E0005 | Pending | — | — | — | — | — |
+| E0006 | Pending | — | — | — | — | — |
+| E0007 | Pending | — | — | — | — | — |
+| E0008 | Pending | — | — | — | — | — |
+| E0009 | Pending | — | — | — | — | — |
+| E0010 | Pending | — | — | — | — | — |
+| E0011 | Pending | — | — | — | — | — |
+| E0012 | Pending | — | — | — | — | — |
+| E0013 | Pending | — | — | — | — | — |
+| E0014 | Blocked | — | — | live inputs: set Pending once the Q gates are resolved | — | — |
+| E0015 | Pending | — | — | — | — | — |
+| E0016 | Pending | — | — | — | — | — |
+| E0017 | Pending | — | — | — | — | — |
+| E0018 | Pending | — | — | — | — | — |
+| E0019 | Blocked | — | — | live inputs: set Pending once the Q gates are resolved | — | — |
+| E0020 | Pending | — | — | — | — | — |
+| E0021 | Pending | — | — | — | — | — |
+| E0022 | Pending | — | — | — | — | — |
+| E0023 | Pending | — | — | — | — | — |
+| E0024 | Pending | — | — | — | — | — |
+| E0025 | Pending | — | — | — | — | — |
+| E0026 | Pending | — | — | — | — | — |
+| E0027 | Pending | — | — | — | — | — |
+| E0028 | Pending | — | — | — | — | — |
+| E0029 | Pending | — | — | — | — | — |
+| E0030 | Pending | — | — | — | — | — |
+| E0031 | Pending | — | — | — | — | — |
+| E0032 | Pending | — | — | — | — | — |
+| E0033 | Pending | — | — | — | — | — |
+| E0034 | Pending | — | — | — | — | — |
+| E0035 | Pending | — | — | — | — | — |
+| E0036 | Pending | — | — | — | — | — |
+| E0037 | Pending | — | — | — | — | — |
+| E0038 | Pending | — | — | — | — | — |
+| E0039 | Pending | — | — | — | — | — |
+| E0040 | Pending | — | — | — | — | — |
+| E0041 | Blocked | — | — | live inputs: set Pending once the Q gates are resolved | — | — |
+| E0042 | Pending | — | — | — | — | — |
+| E0043 | Blocked | — | — | live inputs: set Pending once the Q gates are resolved | — | — |
