@@ -2460,3 +2460,56 @@ END P0015 | Awaiting review | d6762f41fbd1a98ade06db33e41da7c5fba9dfbb | post-co
 2026-11-06T22:53:38Z | P0015 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 637 passed, 1 warning, 6 subtests passed in 201.92s (0:03:21)
 2026-11-06T22:55:25Z | P0015 | REVIEW | automatic Codex review; source d6762f41fbd1a98ade06db33e41da7c5fba9dfbb; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T22:55:25Z | P0015 | ORCH | ACCEPTED by automatic review at d6762f41fbd1a98ade06db33e41da7c5fba9dfbb
+2026-11-06T22:55:25Z | P0017 | ORCH | starting from ef48ebc82e27f484fdb31c02f4c0a7e083ff0baa
+START P0017 | 2026-11-06T22:55:44Z | main | ef48ebc82e27f484fdb31c02f4c0a7e083ff0baa
+2026-11-06T22:55:44Z | P0017 | CMD | pwd && git status --short && git branch --show-current && git rev-parse HEAD && rg --files -g AGENTS.md -g log.sh -g CODEX_LOG.md -g !**/.venv/** | exit 0 | main at ef48ebc; pre-existing changes in CODEX_LOG.md and STATUS.md
+2026-11-06T22:55:44Z | P0017 | READ | AGENTS.md; command sed -n 1,240p AGENTS.md | exit 0
+2026-11-06T22:55:44Z | P0017 | READ | kit INDEX.md P0017 row; command rg -n P0017 /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0
+2026-11-06T22:55:44Z | P0017 | READ | kit tasks/P0017.md; command sed -n 1,240p /home/alonso/Documents/clavel-codex-kit/tasks/P0017.md | exit 0
+2026-11-06T22:55:44Z | P0017 | READ | log/log.sh; command sed -n 1,120p log/log.sh | exit 0
+2026-11-06T22:55:53Z | P0017 | DECISION | Use verified Accepted prerequisites supplied by orchestrator; keep current main branch and leave log/STATUS.md untouched. Preserve pre-existing log changes.
+2026-11-06T22:55:53Z | P0017 | ERROR | Initial INDEX search also matched dependent task rows; no other task files opened. Restrict any further INDEX lookup to exact row.
+2026-11-06T22:55:53Z | P0017 | CMD | rg --files app/database tests | head -70 | exit 0 | discovered database and test paths
+2026-11-06T22:55:53Z | P0017 | CMD | rg --files -g pyproject.toml -g *requirements* -g *alembic* -g AGENTS.md -g !**/.venv/** | exit 0 | discovered configuration
+2026-11-06T22:55:53Z | P0017 | CMD | rg -n 'Sale|Return|Order|sales|returns|order|source_id' app/database tests/test* pyproject.toml | head -100 | rg exit 2 | targeted persistence search
+2026-11-06T22:56:03Z | P0017 | ERROR | Discovery: app/database reference path absent; first rg --files returned exit 2 (head masked it). Locate src layout before implementation.
+2026-11-06T22:56:03Z | P0017 | CMD | rg --files src migrations | head -70 | rg exit 0 | discovered src layout and migrations
+2026-11-06T22:56:03Z | P0017 | READ | tests/integration/test_sales_return_schema.py; sed -n 1,220p | exit 0
+2026-11-06T22:56:03Z | P0017 | READ | tests/integration/conftest.py; sed -n 1,240p | exit 0
+2026-11-06T22:56:03Z | P0017 | READ | pyproject.toml; sed -n 1,200p | exit 0
+2026-11-06T22:56:03Z | P0017 | READ | tests/integration/test_customer_session_repositories.py; sed -n 1,200p | exit 0
+2026-11-06T22:56:12Z | P0017 | READ | src/clavel/database/sales.py; sed -n 1,260p | exit 0
+2026-11-06T22:56:12Z | P0017 | READ | src/clavel/database/customer_sessions.py; sed -n 1,220p | exit 0
+2026-11-06T22:56:12Z | P0017 | READ | src/clavel/database/repositories.py; sed -n 1,200p | exit 0
+2026-11-06T22:56:12Z | P0017 | READ | src/clavel/database/__init__.py; sed -n 1,180p | exit 0
+2026-11-06T22:56:12Z | P0017 | READ | migrations/versions/0005_sales_return_schema.py; sed -n 1,260p | exit 0
+2026-11-06T22:56:12Z | P0017 | CMD | ls .venv/bin/python /usr/lib/postgresql | exit 2 | checked local Python and PostgreSQL availability
+2026-11-06T22:56:32Z | P0017 | ERROR | ls .venv/bin/python /usr/lib/postgresql | exit 2 | local Python exists; PostgreSQL is not under /usr/lib/postgresql
+2026-11-06T22:56:32Z | P0017 | CMD | command -v initdb pg_ctl | exit 0 | checked PostgreSQL executables on PATH
+2026-11-06T22:56:32Z | P0017 | CMD | .venv/bin/python --version | exit 0 | project interpreter
+2026-11-06T22:56:32Z | P0017 | CMD | git diff --numstat -- log/CODEX_LOG.md log/STATUS.md | exit 0 | pre-existing orchestrator edits preserved
+2026-11-06T22:56:32Z | P0017 | DECISION | Add sales_repository.py using caller-owned transactions and per-call savepoints; order replays must match the whole immutable payload, return-line batches deduplicate by source return/line and resolve sales by source IDs. Rely on migrated PostgreSQL constraints for quantity and linkage safety. No REST or schema changes.
+2026-11-06T22:57:23Z | P0017 | EDIT | src/clavel/database/sales_repository.py | added immutable order snapshots, source-linked incremental return batches, replay conflicts, exact Decimal inputs and atomic savepoints; apply_patch succeeded
+2026-11-06T22:58:43Z | P0017 | EDIT | src/clavel/database/sales_repository.py | ensure savepoint never commits an idle caller transaction; apply_patch succeeded
+2026-11-06T22:58:43Z | P0017 | EDIT | tests/integration/test_sales_repository.py | synthetic replay, payload conflicts, rollback, source scoping, validation and concurrent writer tests; apply_patch succeeded
+2026-11-06T22:59:03Z | P0017 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_sales_repository.py > /tmp/clavel-p0017-tests.log 2>&1 | exit 0 | 27 passed in 20.28s
+2026-11-06T22:59:09Z | P0017 | CMD | git diff --check | exit 0 | whitespace validation
+2026-11-06T22:59:09Z | P0017 | CMD | Polling pytest session 37190 with write_stdin | running | no output yet; test command logs final result on exit
+2026-11-06T22:59:39Z | P0017 | EDIT | src/clavel/database/sales_repository.py | start implicit caller transaction with SELECT 1 before savepoint, avoiding redundant explicit BEGIN; apply_patch succeeded
+2026-11-06T22:59:39Z | P0017 | EDIT | tests/integration/test_sales_repository.py | add combined order/returns unit-of-work rollback and reversed multi-parent concurrent batches; apply_patch succeeded
+2026-11-06T22:59:39Z | P0017 | CMD | write_stdin pytest session 37190 | exit 0 | 27 synthetic PostgreSQL tests passed
+2026-11-06T22:59:48Z | P0017 | CMD | git status --short | exit 0 | only task additions plus pre-existing CODEX_LOG.md and STATUS.md changes
+2026-11-06T22:59:48Z | P0017 | CMD | git diff --check -- src/clavel/database/sales_repository.py tests/integration/test_sales_repository.py log/CODEX_LOG.md | exit 0 | task whitespace check
+2026-11-06T23:00:06Z | P0017 | CMD | tail -5 /tmp/clavel-p0017-validation.log | exit 0 | inspected focused validation progress
+2026-11-06T23:00:06Z | P0017 | CMD | write_stdin pytest session 45933 | running | waiting for focused PostgreSQL validation
+2026-11-06T23:00:35Z | P0017 | CMD | tail -5 /tmp/clavel-p0017-validation.log | exit 0 | progress only; final counts pending
+2026-11-06T23:00:35Z | P0017 | DECISION | Review preparation will describe fixture provenance, immutable replay semantics, savepoint rollback, concurrency coverage and transaction-level retry responsibility. No independent acceptance or live feed claims.
+2026-11-06T23:00:40Z | P0017 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest -q tests/integration/test_sales_repository.py tests/integration/test_sales_return_schema.py tests/test_database.py > /tmp/clavel-p0017-validation.log 2>&1 | exit 0 | 93 passed, 1 warning in 60.43s (0:01:00)
+2026-11-06T23:01:03Z | P0017 | CMD | write_stdin pytest session 45933 | exit 0 | 93 passed, 1 dependency deprecation warning, no skips
+2026-11-06T23:01:03Z | P0017 | EDIT | log/P0017_EVIDENCE.md | prepared synthetic PostgreSQL evidence and independent review scope; apply_patch succeeded
+2026-11-06T23:01:03Z | P0017 | CMD | git add -- src/clavel/database/sales_repository.py tests/integration/test_sales_repository.py log/P0017_EVIDENCE.md log/CODEX_LOG.md | exit 0 | staged task files only
+2026-11-06T23:01:03Z | P0017 | CMD | git diff --cached --check | exit 0 | staged files pass whitespace validation
+2026-11-06T23:01:03Z | P0017 | CMD | git diff --cached --stat | exit 0 | reviewed task-only staged paths
+2026-11-06T23:01:03Z | P0017 | READ | tail -30 log/CODEX_LOG.md | exit 0 | audited current task event coverage, failed discovery attempts, edits and validation
+2026-11-06T23:01:31Z | P0017 | DECISION | Validation complete: 93 passed, no skips; status Awaiting review. Commit implementation and evidence with task message, then persist COMMIT/END in a log-only audit commit; closing SHA identifies validated implementation.
+2026-11-06T23:01:31Z | P0017 | CMD | git add -- log/CODEX_LOG.md | exit 0 | refreshed audit entries before task commit
