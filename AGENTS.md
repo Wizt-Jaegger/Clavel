@@ -6,12 +6,9 @@ Stack: Python, FastAPI, PostgreSQL, pytest, REST, modular monolith. BIRCH cluste
 1. Per session read ONLY: this file, INDEX.md row for the task, `tasks/<ID>.md`. Do not open other tasks, the full backlog or the original docs.
 2. Check prerequisites in INDEX.md against `log/STATUS.md`. If one is not Accepted, write a blocker and stop.
 3. Explore the repo with targeted `rg`/`ls`/`sed -n` ranges. Never `cat` large files or print full test/command output; show the last ~30 lines or failures only.
-4. One task per session/branch (`codex/<id>-<slug>`). Do not touch unrelated files. No refactors outside scope.
+4. One task per session. Work and commit directly on `main` (no task branches). Do not touch unrelated files. No refactors outside scope.
 5. Replies stay short: changed paths, commands + result, SHA, next step. No restating the prompt.
 6. Paths in tasks are references: discover real paths first. Empty tree is OK only for bootstrap tasks.
-
-## Ownership
-The task implementer owns scoped changes, validation evidence, and the handoff. The reviewer owns acceptance and records their name, reviewed SHA, and date in `log/STATUS.md`. Start contributions at `README.md`; use `INDEX.md` for imported tasks. The external planning kit stays read-only.
 
 ## Work rules
 - Smallest relevant test suite plus the task's "Done when" check. Commit only after validation, with the message in the task file.
