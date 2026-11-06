@@ -423,3 +423,32 @@ END P0003 | Awaiting review | f7eefa49b0cdf9125e4e553bc0cfce3fbed2bb1b | reviewe
 2026-11-06T09:13:20Z | P0003 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 16 passed, 6 subtests passed in 0.28s
 2026-11-06T09:14:43Z | P0003 | REVIEW | attempt 1: ACCEPTED
 2026-11-06T09:14:43Z | P0003 | ORCH | ACCEPTED at f7eefa4
+2026-11-06T09:14:43Z | P0004 | ORCH | starting from 7d637af
+START P0004 | 2026-11-06T09:15:19Z | main | 7d637aff287ca8781ca8a71a52a586357f656d29
+2026-11-06T09:15:19Z | P0004 | CMD | "pwd; git branch --show-current; git rev-parse HEAD; git status --short; ls -ld log; sed -n '1,180p' AGENTS.md; rg -n '^\\|? *P0004\\b|P0004' /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0004.md" | exit 0 | main at base SHA; CODEX_LOG.md and STATUS.md already modified; P0004 FastAPI shell
+2026-11-06T09:15:19Z | P0004 | READ | AGENTS.md; kit INDEX.md P0004 row; kit tasks/P0004.md
+2026-11-06T09:15:19Z | P0004 | ERROR | Initial INDEX search also printed P0006 dependency row; no other task file opened. START appended immediately after initial instruction and task discovery.
+2026-11-06T09:15:19Z | P0004 | DECISION | Prerequisites already verified Accepted by user; do not read or edit STATUS.md; preserve existing modifications; use current main branch.
+2026-11-06T09:15:19Z | P0004 | EDIT | log/CODEX_LOG.md append START and discovery events; /tmp/p0004_run.py created command logging helper outside repository
+2026-11-06T09:15:31Z | P0004 | CMD | python3 /tmp/p0004_run.py discovery command | exit 1 | FileNotFoundError /bin/bash before repository commands executed
+2026-11-06T09:15:31Z | P0004 | ERROR | Logging helper assumed /bin/bash; resolve bash from PATH and retry
+2026-11-06T09:15:31Z | P0004 | EDIT | /tmp/p0004_run.py resolve bash from PATH
+2026-11-06T09:15:31Z | P0004 | CMD | "rg --files -g \"!tasks/**\" -g \"!log/STATUS.md\" -g \"!INDEX.md\" -g \"!CONTEXT.md\" -g \"!.venv/**\" -g \"!docs/**\" -g \"!templates/**\" -g \"!log/**\" -g \"!AGENTS.md\" -g \"!README.md\"; git diff --numstat; tail -n 14 log/CODEX_LOG.md" | exit 0 | Discovered implementation paths and existing changes; inspected log tail
+2026-11-06T09:15:35Z | P0004 | CMD | "sed -n \"1,200p\" pyproject.toml; sed -n \"1,220p\" src/clavel/core/settings.py; sed -n \"1,160p\" tests/test_project_smoke.py; sed -n \"1,140p\" tests/test_repository_rules.py; ls -ld .venv .venv/bin/python" | exit 0 | READ pyproject.toml, settings.py, smoke and repository rule tests; confirmed project venv
+2026-11-06T09:16:14Z | P0004 | CMD | ".venv/bin/python -c \"from importlib.metadata import version; print({name: version(name) for name in (\\\"fastapi\\\", \\\"starlette\\\", \\\"httpx\\\", \\\"pytest\\\")})\"" | exit 1 | Checked installed test client dependencies
+2026-11-06T09:16:14Z | P0004 | READ | pyproject.toml; src/clavel/core/settings.py; tests/test_project_smoke.py; tests/test_repository_rules.py
+2026-11-06T09:16:14Z | P0004 | DECISION | Use src/clavel/api and src/clavel/core existing package layout. Add factory lifespan settings load without database connectivity. Proposed GET /health 200 status ok and typed redacted errors with request_id and X-Request-ID. New API surface; no existing contract or data migration.
+2026-11-06T09:17:22Z | P0004 | EDIT | pyproject.toml | add httpx test client dev dependency
+2026-11-06T09:17:22Z | P0004 | EDIT | src/clavel/api/__init__.py | add API package
+2026-11-06T09:17:22Z | P0004 | EDIT | src/clavel/api/app.py | factory with settings lifespan, health and sanitized exception handlers
+2026-11-06T09:17:22Z | P0004 | EDIT | src/clavel/core/correlation.py | bounded request IDs and response headers
+2026-11-06T09:17:22Z | P0004 | EDIT | src/clavel/core/errors.py | typed error codes and safe response schema
+2026-11-06T09:17:22Z | P0004 | EDIT | tests/test_api_shell.py | synthetic health, correlation, redaction and startup validation tests
+2026-11-06T09:17:22Z | P0004 | DECISION | Missing httpx metadata requires dev dependency installation; synthetic fixtures prove mechanics only.
+2026-11-06T09:17:26Z | P0004 | CMD | "uv pip install --python .venv/bin/python -e \".[dev]\"" | exit 0 | Install project and development dependencies in project-local venv
+2026-11-06T09:17:37Z | P0004 | CMD | ".venv/bin/python -m pytest -q tests/test_api_shell.py tests/test_settings.py tests/test_project_smoke.py" | exit 0 | Validate FastAPI shell and settings/installation integration
+2026-11-06T09:18:11Z | P0004 | TEST | .venv/bin/python -m pytest -q tests/test_api_shell.py tests/test_settings.py tests/test_project_smoke.py | 25 passed, 0 failed; health and redacted errors verified; 1 upstream Starlette TestClient deprecation warning
+2026-11-06T09:18:11Z | P0004 | SKIP | Full repository rules suite omitted: unrelated documentation checks open other task/index/status contents; focused shell and settings suites satisfy Done when.
+2026-11-06T09:18:11Z | P0004 | DECISION | Preserve orchestrator STATUS.md change and existing CODEX_LOG.md append; only explicitly stage task paths. No business or deployment changes.
+2026-11-06T09:18:11Z | P0004 | CMD | "git diff --check; git diff --stat; git status --short; git ls-files --others --exclude-standard" | exit 0 | Checked whitespace, task scope and untracked files before commit
+2026-11-06T09:19:04Z | P0004 | CMD | "git add pyproject.toml src/clavel/api/__init__.py src/clavel/api/app.py src/clavel/core/correlation.py src/clavel/core/errors.py tests/test_api_shell.py log/CODEX_LOG.md && git diff --cached --check && git diff --cached --stat" | exit 0 | Staged only task implementation, tests and append-only log; staged whitespace check passed
