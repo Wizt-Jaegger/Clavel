@@ -11,7 +11,8 @@ import pytest
 import sqlalchemy as sa
 from sqlalchemy.engine import make_url
 
-from clavel.database.inventory import inventory, metadata
+from clavel.database.customers import metadata
+from clavel.database.inventory import inventory
 from tests.integration.test_migrations import HEAD, revisions, run_alembic, tables
 
 

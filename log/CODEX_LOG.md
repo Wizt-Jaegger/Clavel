@@ -2178,3 +2178,48 @@ START P0010 | 2026-11-06T19:36:06.727231+00:00 | main | 288a3cead827eb905abb4dd2
 2026-11-06T19:41:25.000436+00:00 | P0010 | CMD | git rev-parse HEAD | exit 0 | f5b2aeaeb655cf9b9875d2d0eddea203940c2cca
 2026-11-06T19:41:25.000489+00:00 | P0010 | COMMIT | f5b2aeaeb655cf9b9875d2d0eddea203940c2cca | P0010 customer and session schema | review infrastructure fix; not task acceptance
 2026-11-06T19:41:25Z | P0010 | DECISION | Requeue Blocked to Pending after verified native PostgreSQL and review-instruction fix; acceptance remains independent
+2026-11-06T19:41:44.116532+00:00 | P0010 | CMD | python3 /tmp/prepare_clavel_p0010_retry.py (escalated) | exit 0 | installed reviewed kit fix, preserved prior P0010 outputs, committed evidence and requeued only P0010
+2026-11-06T19:41:44.116543+00:00 | P0010 | DECISION | Retry exactly P0010 through existing implementation/checks/independent-review pipeline with CLAVEL_REQUIRE_POSTGRES=1; do not run other tasks or manually accept. Native PostgreSQL tools already verified on NixOS.
+2026-11-06T19:42:43Z | P0010 | ORCH | starting from 6331c5a14eabcf986b6f95954d29b7507581d749
+START P0010 | 2026-11-06T19:42:57.883610+00:00 | main | 6331c5a14eabcf986b6f95954d29b7507581d749
+2026-11-06T19:42:57.883610+00:00 | P0010 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && ls -l AGENTS.md log/log.sh log/CODEX_LOG.md | exit 0 | main; existing modifications in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T19:42:57.883610+00:00 | P0010 | DECISION | Prerequisites already verified Accepted by user; preserve existing log content and orchestrator-owned STATUS.md; work on current main branch
+2026-11-06T19:43:08Z | P0010 | READ | AGENTS.md; kit INDEX.md P0010 row (rg also returned dependent rows); kit tasks/P0010.md; log/log.sh
+2026-11-06T19:43:08Z | P0010 | CMD | python heredoc appended START and initial inspection events; sed -n 1,220p AGENTS.md; rg -n P0010 /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n 1,220p /home/alonso/Documents/clavel-codex-kit/tasks/P0010.md; sed -n 1,60p log/log.sh | exit 0 | schema task; exact commit message identified
+2026-11-06T19:43:08Z | P0010 | CMD | rg --files with task/docs/log exclusions, piped to head -70 | exit 0 | discovered project source, tests and migration paths
+2026-11-06T19:43:08Z | P0010 | CMD | ls -ld .venv .venv/bin/python migrations app app/database tests pyproject.toml alembic.ini 2>/dev/null | exit 2 | project environment and real path inspection
+2026-11-06T19:43:16Z | P0010 | READ | sed -n '1,240p' tests/integration/conftest.py; sed -n '1,240p' tests/integration/test_catalog_schema.py | exit 0
+2026-11-06T19:43:16Z | P0010 | READ | sed -n '1,220p' src/clavel/database/__init__.py; sed -n '1,220p' src/clavel/database/catalog.py; sed -n '1,220p' migrations/versions/0002_catalog_schema.py | exit 0
+2026-11-06T19:43:16Z | P0010 | READ | sed -n '1,220p' tests/integration/test_migrations.py; sed -n '1,160p' tests/test_database.py; sed -n '1,120p' pyproject.toml; sed -n '1,160p' migrations/env.py | exit 0
+2026-11-06T19:43:32Z | P0010 | READ | sed -n '1,180p' src/clavel/database/inventory.py; sed -n '1,180p' migrations/versions/0003_inventory_schema.py; rg -n 'HEAD|metadata|expected|tables\(' tests/integration/test_inventory_schema.py tests/integration/test_repositories.py tests/test_repository_rules.py; ls -d docs/* log/*/ 2>/dev/null | exit 0 | inspected shared metadata, regression expectations, environment and pre-existing log changes
+2026-11-06T19:43:33Z | P0010 | READ | command -v initdb; command -v pg_ctl; .venv/bin/python -c 'import sys,pytest,sqlalchemy,psycopg; print(sys.version.split()[0]); print("project venv dependencies available")'; git diff --numstat -- log/CODEX_LOG.md log/STATUS.md | exit 0 | inspected shared metadata, regression expectations, environment and pre-existing log changes
+2026-11-06T19:43:53.917742+00:00 | P0010 | READ | log/CODEX_LOG.md | five latest P0010 progress events during only-task retry; no source/status changes
+2026-11-06T19:44:29Z | P0010 | DECISION | Use customers as an opaque subject registry with explicit anonymous/registered kind; sessions have unique opaque references and nullable customer FK. Store only resolution references and finite ordered timestamptz activity. No automatic merge, reclassification, or attribution policy; document anonymous-to-known linkage as Pending separate review.
+2026-11-06T19:44:29Z | P0010 | READ | sed -n 1,90p and 180,230p tests/integration/test_inventory_schema.py | exit 0 | inspected metadata comparison and round-trip regression checks
+2026-11-06T19:44:29Z | P0010 | EDIT | src/clavel/database/customers.py and migrations/versions/0004_customer_session_schema.py: minimal opaque subjects/sessions, nullable FK, uniqueness and finite ordered activity
+2026-11-06T19:44:29Z | P0010 | EDIT | migrations/env.py: register new shared metadata; tests/integration/test_migrations.py: advance HEAD; test_catalog_schema.py and test_inventory_schema.py: include customer/session metadata and table expectations
+2026-11-06T19:44:29Z | P0010 | EDIT | docs/P0010_CUSTOMER_SESSION_SCHEMA.md: schema contract, synthetic evidence limits, migration impact and separate Pending linkage policy
+2026-11-06T19:44:36.243992+00:00 | P0010 | READ | log/CODEX_LOG.md | four latest P0010 implementation/test milestones only
+2026-11-06T19:45:31Z | P0010 | EDIT | tests/integration/test_customer_session_schema.py: synthetic PostgreSQL checks for uniqueness, anonymous persistence, nullable/invalid links, finite ordered UTC activity, metadata parity and reversible migration preserving prior data
+2026-11-06T19:45:39Z | P0010 | CMD | git diff --check | exit 0 | whitespace validation
+2026-11-06T19:45:39Z | P0010 | CMD | git diff --stat | exit 0 | inspected tracked change scope; new files reviewed in patch
+2026-11-06T19:45:39Z | P0010 | CMD | git status --short | exit 0 | only task files plus pre-existing orchestrator status modification
+2026-11-06T19:45:39Z | P0010 | SKIP | Kit templates not read: P0010 is an implementation task, not review, handoff, checkpoint or blocker
+2026-11-06T19:45:39Z | P0010 | SKIP | log/STATUS.md left untouched as explicitly required by user; orchestrator manages state
+2026-11-06T19:45:41.824098+00:00 | P0010 | READ | log/CODEX_LOG.md | latest validation milestones during orchestrator retry; no source mutation
+2026-11-06T19:46:08Z | P0010 | CMD | tail -n 4 /tmp/clavel-p0010-tests.txt | exit 0 | checked in-progress focused suite output
+2026-11-06T19:46:25.718539+00:00 | P0010 | CMD | sed -n 1,180p src/clavel/database/customers.py | exit 0 | inspect task schema while validation runs
+2026-11-06T19:46:25.718539+00:00 | P0010 | READ | src/clavel/database/customers.py 1,180p
+2026-11-06T19:46:25.720860+00:00 | P0010 | CMD | sed -n 1,180p migrations/versions/0004_customer_session_schema.py | exit 0 | inspect task schema while validation runs
+2026-11-06T19:46:25.720860+00:00 | P0010 | READ | migrations/versions/0004_customer_session_schema.py 1,180p
+2026-11-06T19:46:26Z | P0010 | CMD | git diff -- migrations/env.py tests/integration/test_migrations.py tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py | exit 0 | reviewed metadata registration and existing migration/schema regression updates
+2026-11-06T19:46:26Z | P0010 | READ | tail -n 18 log/CODEX_LOG.md | exit 0 | audited recent P0010 events for read/edit/command coverage
+2026-11-06T19:46:39Z | P0010 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_customer_session_schema.py tests/integration/test_migrations.py tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py -q > /tmp/clavel-p0010-tests.txt 2>&1 | exit 0 | 83 passed in 67.74s (0:01:07)
+2026-11-06T19:46:45Z | P0010 | CMD | tail -n 4 /tmp/clavel-p0010-tests.txt | exit 0 | checked focused validation progress
+2026-11-06T19:46:57.472653+00:00 | P0010 | READ | log/CODEX_LOG.md | latest P0010 validation/review milestones only
+2026-11-06T19:47:19Z | P0010 | EDIT | docs/P0010_CUSTOMER_SESSION_SCHEMA.md: recorded exact validation command, 83 passed/0 failed/0 skipped in 67.74s, done-check coverage and synthetic evidence limits
+2026-11-06T19:47:19Z | P0010 | CMD | git diff --check | exit 0 | final whitespace validation after evidence-only documentation update
+2026-11-06T19:47:19Z | P0010 | DECISION | P0010 ready for independent review: all required schema mechanics validated; no human signatures requested or Accepted status set. Separate linkage policy remains Pending and outside this storage-only task.
+2026-11-06T19:47:19.090506+00:00 | P0010 | CMD | python heredoc checked CODEX_LOG prefix against git show HEAD:log/CODEX_LOG.md and mandatory P0010 action coverage | exit 0 | append-only history preserved and required reads/edits/tests logged
+2026-11-06T19:47:19Z | P0010 | CMD | git add src/clavel/database/customers.py migrations/versions/0004_customer_session_schema.py migrations/env.py tests/integration/test_customer_session_schema.py tests/integration/test_migrations.py tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py docs/P0010_CUSTOMER_SESSION_SCHEMA.md log/CODEX_LOG.md | exit 0 | staged only task paths; STATUS excluded
+2026-11-06T19:47:19Z | P0010 | CMD | git diff --cached --stat | exit 0 | reviewed nine staged task/audit paths
