@@ -959,3 +959,37 @@ START P0007 | 2026-11-06T16:26:21.809919+00:00 | main | 69dcc6c6b8407a5413b06505
 2026-11-06T17:02:10.652894+00:00 | P0007 | DECISION | Source changes committed and tested; close audit in a separate logging commit so the task commit SHA can be recorded without rewriting history. Final audit commit result is visible in git history.
 2026-11-06T17:02:10.652916+00:00 | P0007 | EDIT | log/CODEX_LOG.md | final source SHA, installed readiness and session close; no STATUS.md edits
 END P0007 | Awaiting review | 782e43b81355eb7047865610bafa5a10b12fec15 | CP0/P0007 not executed; installed kit ready; audit closure commit follows | coordinate single-orchestrator turn and run installed kit
+2026-11-06T17:05:17Z | E0002 | ORCH | starting from eeb62d3
+START E0002 | 2026-11-06T17:05:33Z | main | eeb62d368ef35091d7c0033d926a4bed93d159b8
+2026-11-06T17:05:33Z | E0002 | CMD | git branch --show-current; git rev-parse HEAD (0) branch main base eeb62d368ef35091d7c0033d926a4bed93d159b8
+2026-11-06T17:05:33Z | E0002 | READ | sed -n 1,180p AGENTS.md (0)
+2026-11-06T17:05:33Z | E0002 | READ | kit INDEX.md E0002 row via rg and awk
+2026-11-06T17:05:33Z | E0002 | READ | sed -n 1,160p kit tasks/E0002.md (0)
+2026-11-06T17:05:43Z | E0002 | CMD | git status --short (0) log only expected
+2026-11-06T17:05:43Z | E0002 | CMD | git ls-files matching decisions, Ollama and Jeff paths (0)
+2026-11-06T17:05:43Z | E0002 | CMD | rg -l -i 'ollama|qwen|\bjeff\b' --glob '!log/**' --glob '!AGENTS.md' --glob '!*.lock' | head -30 (0) located candidate source files
+2026-11-06T17:05:43Z | E0002 | CMD | command -v ollama (0) local CLI availability
+2026-11-06T17:05:43Z | E0002 | CMD | timeout 10s ollama list (0) local model inventory
+2026-11-06T17:05:43Z | E0002 | CMD | git rev-parse HEAD (0) source revision
+2026-11-06T17:05:43Z | E0002 | CMD | git diff --stat (0) inspected current changes
+2026-11-06T17:05:52Z | E0002 | CMD | git ls-files docs | head -30 (0) inventoried documentation
+2026-11-06T17:05:52Z | E0002 | CMD | rg -l -i 'ollama|qwen|\bjeff\b' docs --glob '*.md' (1) checked documentation for evidence
+2026-11-06T17:05:52Z | E0002 | CMD | timeout 10s ollama --version (0) recorded sanitized version
+2026-11-06T17:05:52Z | E0002 | ASSUMPTION | OLLAMA_HOST unset, CLI uses default local target
+2026-11-06T17:05:52Z | E0002 | CMD | git status --short -- docs/DECISIONES_PENDIENTES.md (0) checked intended deliverable path
+2026-11-06T17:06:03Z | E0002 | CMD | git grep -ilE for Ollama, Qwen and Jeff at HEAD excluding logs, AGENTS.md and automation patch (1) checked tracked source evidence
+2026-11-06T17:06:03Z | E0002 | CMD | curl --noproxy '*' --fail --silent --show-error --max-time 5 http://127.0.0.1:11434/api/version (0) checked local HTTP version endpoint
+2026-11-06T17:06:03Z | E0002 | CMD | git diff --cached --name-only (0) checked staging area before task changes
+2026-11-06T17:06:03Z | E0002 | CMD | git branch --show-current (0) confirmed current branch
+2026-11-06T17:06:30Z | E0002 | DECISION | Use the task-specified documentation path. Record local runtime evidence separately from unresolved target and Jeff facts.
+2026-11-06T17:06:30Z | E0002 | EDIT | docs/DECISIONES_PENDIENTES.md (0) created E0002 record with source revision, local evidence and unresolved facts
+2026-11-06T17:06:30Z | E0002 | TEST | git diff --check (0) whitespace check
+2026-11-06T17:06:30Z | E0002 | TEST | awk unresolved-row count and rg source, log link, version and inventory checks (0) documentation checks
+2026-11-06T17:06:30Z | E0002 | SKIP | pytest has no relevant backend changes for this read-only discovery task. Validated the documentation against observed runtime evidence.
+2026-11-06T17:06:30Z | E0002 | SKIP | Jeff and confirmed target checks lack provider details and target identity.
+2026-11-06T17:06:30Z | E0002 | CMD | git add -- docs/DECISIONES_PENDIENTES.md log/CODEX_LOG.md (0) staged task paths
+2026-11-06T17:06:30Z | E0002 | TEST | git diff --cached --check && git diff --cached --name-only (0) staged whitespace and scope
+2026-11-06T17:06:39Z | E0002 | DECISION | Documentation checks passed. The orchestrator owns the pre-existing STATUS.md edit. Use the containing commit as the SHA reference inside this append-only log because the commit hash depends on the log content.
+2026-11-06T17:06:39Z | E0002 | CMD | Audited E0002 log coverage through validation. Final command: git commit -m "E0002 provider and runtime discovery" -- docs/DECISIONES_PENDIENTES.md log/CODEX_LOG.md
+2026-11-06T17:06:39Z | E0002 | COMMIT | SHA of containing commit | E0002 provider and runtime discovery
+END E0002 | Awaiting review | SHA of containing commit | Jeff details, intended runtime and approved tag unresolved | independent review and target confirmation
