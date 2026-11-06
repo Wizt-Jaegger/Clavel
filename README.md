@@ -4,6 +4,8 @@ MVP local para administrar clientes, catálogo y ventas; segmentar clientes con 
 
 ## Requisitos
 
+
+
 - Python 3.10 o superior.
 - Linux, macOS o Windows.
 
