@@ -670,3 +670,9 @@ START P0006 | 2026-11-06T09:41:40.397516Z | main | 3cc9763f0f04d1e16d04b02a9d7b4
 2026-11-06T09:45:06Z | P0006 | CMD | git add -- log/CODEX_LOG.md | exit 0 | staged append-only task audit
 2026-11-06T09:45:06Z | P0006 | DECISION | Commit validated task artifacts using required message; then append actual commit SHA and END, and persist closeout in an audit-only commit using same required task message. END identifies validated implementation SHA; final HEAD includes audit persistence.
 2026-11-06T09:45:06Z | P0006 | CMD | git add -- log/CODEX_LOG.md | exit 0 | refreshed audit staging before implementation commit
+2026-11-06T09:45:06Z | P0006 | CMD | git commit -m 'P0006 initial openapi and fixture contract' > /tmp/clavel-p0006-commit.txt 2>&1 | exit 0 | committed validated task artifacts and audit
+2026-11-06T09:45:06Z | P0006 | CMD | git rev-parse HEAD | exit 0 | 042c2f1a30d7af4840339e105445d21342d9ee18
+2026-11-06T09:45:06Z | P0006 | COMMIT | 042c2f1a30d7af4840339e105445d21342d9ee18 | P0006 initial openapi and fixture contract
+2026-11-06T09:45:06Z | P0006 | CMD | git status --short | exit 0 | only closeout log append and orchestrator-owned STATUS remain modified
+2026-11-06T09:45:06Z | P0006 | DECISION | Terminal audit persistence commands: git add -- log/CODEX_LOG.md; git -c core.whitespace=-blank-at-eol diff --cached --check; git commit -m 'P0006 initial openapi and fixture contract'; git rev-parse HEAD; git status --short. Recorded before terminal persistence to avoid recursive audit-only commits; validated task revision is 042c2f1a30d7af4840339e105445d21342d9ee18.
+END P0006 | Awaiting review | 042c2f1a30d7af4840339e105445d21342d9ee18 | draft contract requires reviewer acceptance; runtime remains design-time; inherited audit trailing space preserved | reviewer verify paused-preview 503; orchestrator manages STATUS
