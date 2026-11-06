@@ -1,63 +1,44 @@
-# Clavel — MVP de inteligencia comercial para hardware
+# Clavel
 
-MVP local para administrar clientes, catálogo y ventas; segmentar clientes con **StandardScaler → TruncatedSVD (cuando aplica) → Normalizer L2 → BIRCH** y recomendar productos por popularidad del segmento o popularidad global.
+Clavel is planned as a Python/FastAPI modular monolith with PostgreSQL,
+pytest, BIRCH clustering, and segment-level popularity recommendations.
+This checkout establishes the repository operating rules; application setup
+and business features belong to later tasks.
 
-## Requisitos
+## Start contributing
 
+1. Read [AGENTS.md](AGENTS.md) before making changes.
+2. Select the assigned task in [INDEX.md](INDEX.md), then read its task file.
+3. Check its prerequisites in [log/STATUS.md](log/STATUS.md). Every prerequisite
+   must be Accepted by a reviewer before dependent work starts.
+4. Follow the branch, scope, validation, and append-only logging rules in
+   AGENTS.md. Record work in [log/CODEX_LOG.md](log/CODEX_LOG.md).
+5. Submit the validated commit as Awaiting review. A reviewer records acceptance
+   with their name, the reviewed SHA, and date in STATUS.md.
 
+The task implementer owns scoped edits, evidence, and the handoff. The reviewer
+owns acceptance; implementing a task does not authorize self-acceptance.
 
-- Python 3.10 o superior.
-- Linux, macOS o Windows.
+## Planning source
 
-## Instalación y ejecución
+The initial planning kit is read-only at
+`/home/alonso/Documents/clavel-codex-kit`. Only P0001 is imported here.
+For a future task, read only its INDEX.md row, task file, prerequisite statuses,
+and any required template from that kit, then import the assigned task's row
+and task file. Record its local status without changing the source kit.
+The source status file contains duplicate rows; use one canonical local row
+per imported task and preserve reviewer evidence. Conflicting prerequisite
+statuses require a blocker, not inferred acceptance.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate       # Windows: .venv\\Scripts\\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+## Bootstrap verification
+
+Run the contribution checks from the repository root:
+
+```sh
+python3 -m unittest discover -s tests -p 'test_repository_rules.py' -v
 ```
 
-Abre http://127.0.0.1:8000. La base SQLite `clavel.db` se crea automáticamente y se carga con datos ficticios al primer inicio. La documentación interactiva está en http://127.0.0.1:8000/docs.
-
-## Funcionalidades
-
-- Dashboard con métricas, ventas y productos populares.
-- API CRUD de productos (`GET/POST /api/products`, `PUT/DELETE /api/products/{id}`).
-- Registro y consulta de clientes (`POST/GET /api/customers`).
-- Registro de compras (`POST /api/purchases`), validación de stock y descuento automático.
-- Segmentación (`POST /api/segments/run`) y asignación visible por cliente.
-- Recomendaciones (`GET /api/recommendations/{customer_id}`), excluyendo productos sin stock y ya comprados por el cliente.
-- Restauración de datos de demo (`POST /api/demo/reset`) o botón del dashboard.
-
-## Datos y segmentación
-
-El dataset tiene 20 clientes ficticios, 16 productos de hardware y compras simuladas con perfiles de gaming, productividad y periféricos. BIRCH se ejecuta con umbral 0.65 y un número de clusters derivado del tamaño de la muestra. Se requieren al menos 6 clientes y compras registradas. En muestras pequeñas o matrices con pocas dimensiones, SVD se omite cuando no es matemáticamente aplicable.
-
-Las variables de entrada combinan edad, presupuesto, gasto, volumen de compra y cantidades compradas por categoría. Los valores categóricos del catálogo aparecen indirectamente como categorías de compra. La segmentación es exploratoria y no debe interpretarse como una clasificación demográfica validada.
-
-## Compatibilidad
-
-La recomendación descarta conflictos evidentes de socket y tipo de memoria cuando hay especificaciones y compras previas suficientes. No existe un modelo completo de compatibilidad de placas, BIOS, dimensiones, conectores, consumo eléctrico o generación PCIe. El mensaje de compatibilidad es orientativo, no una garantía.
-
-## Pruebas
-
-```bash
-pytest -q
-```
-
-## Limitaciones conocidas
-
-- Sin autenticación, roles, impuestos, devoluciones ni pagos.
-
-- No hay edición de clientes ni interfaz visual dedicada para altas/edición de productos; esas operaciones están disponibles por API en `/docs`.
-
-- Las recomendaciones son estadísticas, no generadas por un LLM.
-
-- No hay agente autónomo, LangGraph, optimización de prompts, backtesting de margen ni experimentos A/B en esta primera entrega. Son fases posteriores; el evaluador debe usar separación temporal train/validation antes de aceptar cambios de modelo.
-
-- Los datos demo se cargan automáticamente solo cuando el catálogo está vacío. El reset restaura el dataset completo.
-
-## Configurar otra base
-
-Define `CLAVEL_DB=/ruta/a/clavel.db` antes de iniciar la aplicación.
+These standard-library checks validate the contribution entry point, task links,
+operating rules, and canonical P0001 status. They do not validate application
+behavior. P0001 also runs these checks from a clean export of the P0001 files to
+verify that the committed files are sufficient for a fresh checkout.
