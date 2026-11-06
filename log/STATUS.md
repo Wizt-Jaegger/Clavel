@@ -3,7 +3,7 @@
 | Task | Status | Branch/SHA | Tests | Blocker | Reviewer/date | Next |
 |---|---|---|---|---|---|---|
 | P0001 | Accepted | 1b86090 | 3/3 unittest checks pass locally and in clean export; shell syntax and whitespace pass | human accepted 2026-11-06T08:40:17Z | — | Confirm branch, stage explicit P0001 files, commit, request review |
-| P0002 | Pending | — | — | — | — | — |
+| P0002 | Blocked | 5c154bd | — | failed 2 attempts: codex exit code 2 log lacks START line for the task log lacks END line for the t | — | — |
 | P0003 | Pending | — | — | — | — | — |
 | P0004 | Pending | — | — | — | — | — |
 | P0005 | Pending | — | — | — | — | — |
