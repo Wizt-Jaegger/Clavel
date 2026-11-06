@@ -1356,3 +1356,71 @@ END P0010 | Awaiting review | abb8af7ab6249cc1bca7f8a25c2532556e571331 | indepen
 2026-11-06T18:05:15Z | P0010 | ORCH | attempt 2 rejected: reviewer stdout did not end with exact VERDICT: ACCEPTED
 2026-11-06T18:05:15Z | P0010 | ORCH | reverted to e443f9e3563e4555662503af3206f03f63d82c94 after rejected attempt 2
 2026-11-06T18:05:15Z | P0010 | BLOCKER | reviewer stdout did not end with exact VERDICT: ACCEPTED
+2026-11-06T18:05:15Z | P0011 | ORCH | starting from 1641085041025dbb455ce71f7a9f5ca605f9d565
+
+START P0011 | 2026-11-06T18:05:33.813901+00:00 | main | 1641085041025dbb455ce71f7a9f5ca605f9d565
+2026-11-06T18:05:33.813901+00:00 | P0011 | CMD | pwd && git status --short && git branch --show-current && git rev-parse HEAD && sed -n '1,210p' AGENTS.md && rg -n '^\|? *P0011\b|P0011' /home/alonso/Documents/clavel-codex-kit/INDEX.md && sed -n '1,230p' /home/alonso/Documents/clavel-codex-kit/tasks/P0011.md | exit 0 | rules/task discovered; pre-existing CODEX_LOG.md and STATUS.md modifications
+2026-11-06T18:05:33.813901+00:00 | P0011 | READ | AGENTS.md; kit INDEX.md P0011 match (search also returned dependent rows); kit tasks/P0011.md
+2026-11-06T18:05:33.813901+00:00 | P0011 | DECISION | User verified prerequisites Accepted; preserve orchestrator STATUS.md and existing log; work on current main; no review template applies to schema task
+2026-11-06T18:05:33.813901+00:00 | P0011 | CMD | python heredoc | exit 0 | append START and bootstrap audit entries
+2026-11-06T18:05:51Z | P0011 | CMD | ls -a | exit 0 | project tree discovered
+2026-11-06T18:05:51Z | P0011 | CMD | rg --files app migrations tests log -g '!CODEX_LOG.md' -g '!STATUS.md' -g '!EXTERNAL_ACCEPTED.txt' | exit 2 | app absent; src is actual source root; other paths discovered
+2026-11-06T18:05:51Z | P0011 | ERROR | Discovery referenced app directory from task; absent, use src after targeted discovery
+2026-11-06T18:05:51Z | P0011 | CMD | sed -n '1,110p' log/log.sh | exit 0 | append-only helper read
+2026-11-06T18:05:51Z | P0011 | READ | log/log.sh
+2026-11-06T18:05:51Z | P0011 | CMD | sed -n '1,190p' pyproject.toml | exit 0 | SQLAlchemy/Alembic/pytest dependencies inspected
+2026-11-06T18:05:51Z | P0011 | READ | pyproject.toml
+2026-11-06T18:05:51.408696+00:00 | P0011 | CMD | rg --files src | exit 0 | completed
+2026-11-06T18:05:51.410630+00:00 | P0011 | CMD | sed -n 1,240p src/clavel/database.py | exit 2 | failed; see recorded output
+2026-11-06T18:05:51.410677+00:00 | P0011 | READ | src/clavel/database.py
+2026-11-06T18:05:51.412580+00:00 | P0011 | CMD | sed -n 1,220p migrations/env.py | exit 0 | completed
+2026-11-06T18:05:51.412641+00:00 | P0011 | READ | migrations/env.py
+2026-11-06T18:05:51.414376+00:00 | P0011 | CMD | sed -n 1,180p migrations/versions/0001_migration_baseline.py | exit 0 | completed
+2026-11-06T18:05:51.414425+00:00 | P0011 | READ | migrations/versions/0001_migration_baseline.py
+2026-11-06T18:05:51.415924+00:00 | P0011 | CMD | sed -n 1,250p tests/integration/test_migrations.py | exit 0 | completed
+2026-11-06T18:05:51.415963+00:00 | P0011 | READ | tests/integration/test_migrations.py
+2026-11-06T18:05:51.417510+00:00 | P0011 | CMD | sed -n 1,230p tests/integration/conftest.py | exit 0 | completed
+2026-11-06T18:05:51.417554+00:00 | P0011 | READ | tests/integration/conftest.py
+2026-11-06T18:05:51.419487+00:00 | P0011 | CMD | sed -n 1,230p tests/test_database.py | exit 0 | completed
+2026-11-06T18:05:51.419557+00:00 | P0011 | READ | tests/test_database.py
+2026-11-06T18:06:13.841564+00:00 | P0011 | CMD | sed -n 1,160p src/clavel/database/__init__.py | exit 0 | completed
+2026-11-06T18:06:13.841629+00:00 | P0011 | READ | src/clavel/database/__init__.py
+2026-11-06T18:06:13.843795+00:00 | P0011 | CMD | sed -n 1,110p alembic.ini | exit 0 | completed
+2026-11-06T18:06:13.843862+00:00 | P0011 | READ | alembic.ini
+2026-11-06T18:06:13.845625+00:00 | P0011 | CMD | sed -n 1,150p tests/test_repository_rules.py | exit 0 | completed
+2026-11-06T18:06:13.845702+00:00 | P0011 | READ | tests/test_repository_rules.py
+2026-11-06T18:06:13.847646+00:00 | P0011 | CMD | sed -n 1,120p .github/workflows/ci.yml | exit 2 | failed; see recorded output
+2026-11-06T18:06:13.847689+00:00 | P0011 | READ | .github/workflows/ci.yml
+2026-11-06T18:06:13.854179+00:00 | P0011 | CMD | bash -c 'command -v initdb; command -v pg_ctl; id -u; .venv/bin/python --version' | exit 0 | completed
+2026-11-06T18:06:13.858130+00:00 | P0011 | CMD | git diff --numstat -- log/CODEX_LOG.md log/STATUS.md | exit 0 | completed
+2026-11-06T18:06:13.858207+00:00 | P0011 | ERROR | sed src/clavel/database.py failed; discovery identifies database/__init__.py; corrected read completed
+2026-11-06T18:06:13.858264+00:00 | P0011 | DECISION | Model normalized category, SKU, and hardware attributes with explicit text/number/boolean/unknown variants; nullable category and missing attributes remain unknown; no API contract changes
+2026-11-06T18:07:13.449519+00:00 | P0011 | ERROR | Optional CI file read failed (ci.yml absent); no CI changes needed; native PostgreSQL and project .venv available
+2026-11-06T18:07:13Z | P0011 | EDIT | src/clavel/database/catalog.py: normalized metadata, typed attributes, explicit unknowns and database constraints
+2026-11-06T18:07:13Z | P0011 | EDIT | migrations/versions/0002_catalog_schema.py: frozen reversible catalog migration
+2026-11-06T18:07:13Z | P0011 | EDIT | migrations/env.py: register catalog metadata for Alembic
+2026-11-06T18:07:13Z | P0011 | EDIT | tests/integration/test_migrations.py: pin baseline mechanics and test generated revisions against new catalog head
+2026-11-06T18:07:13Z | P0011 | CMD | python bootstrap error-log append and apply_patch | exit 0 | catalog implementation and migration regression updates written
+2026-11-06T18:08:13Z | P0011 | EDIT | tests/integration/test_catalog_schema.py: synthetic native PostgreSQL coverage for uniqueness, typed/unknown values, malformed attributes, FK integrity, metadata parity and migration cycle
+2026-11-06T18:08:13Z | P0011 | CMD | apply_patch | exit 0 | catalog integration tests added
+2026-11-06T18:08:36.398162+00:00 | P0011 | CMD | git diff --check | exit 0 | completed
+2026-11-06T18:08:36.402786+00:00 | P0011 | CMD | git diff -- migrations/env.py tests/integration/test_migrations.py | exit 0 | completed
+2026-11-06T18:08:36.405656+00:00 | P0011 | CMD | git status --short | exit 0 | completed
+2026-11-06T18:08:36.407183+00:00 | P0011 | CMD | sha256sum log/STATUS.md | exit 0 | completed
+2026-11-06T18:08:40.768251+00:00 | P0011 | CMD | .venv/bin/python -m pytest tests/integration/test_catalog_schema.py tests/integration/test_migrations.py -q | exit 0 | completed
+2026-11-06T18:08:40.768365+00:00 | P0011 | TEST | Focused catalog and migration tests: see command output for pass/fail counts; native PostgreSQL with synthetic data only
+2026-11-06T18:09:31.696713+00:00 | P0011 | CMD | git diff --check | exit 0 | completed
+2026-11-06T18:09:31.700624+00:00 | P0011 | CMD | git diff --stat | exit 0 | completed
+2026-11-06T18:09:31.702033+00:00 | P0011 | CMD | sha256sum log/STATUS.md | exit 0 | completed
+2026-11-06T18:09:31.702083+00:00 | P0011 | EDIT | src/clavel/database/catalog.py: clarify that code trimming rejects surrounding spaces
+2026-11-06T18:09:31.702119+00:00 | P0011 | EDIT | log/P0011_EVIDENCE.md: Awaiting review; schema decisions, migration impact, synthetic provenance and validation evidence
+2026-11-06T18:09:31.702153+00:00 | P0011 | CMD | apply_patch | exit 0 | evidence and metadata wording finalized
+2026-11-06T18:09:31.702191+00:00 | P0011 | TEST | .venv/bin/python -m pytest tests/integration/test_catalog_schema.py tests/integration/test_migrations.py -q | PASS: 33 passed in 27.09s, 0 failed, 0 skipped; actual disposable PostgreSQL, synthetic data only
+2026-11-06T18:09:31.702233+00:00 | P0011 | SKIP | Full suite not run: focused catalog and existing migration suite covers changed database metadata and migrations; no API contract changes
+2026-11-06T18:09:31.702263+00:00 | P0011 | DECISION | Awaiting independent review; never set Accepted; STATUS.md preserved (sha256 0a506a989e76fe460ecb85ae091a160b4fc615a2a6e8ab7412595606fa340a43)
+2026-11-06T18:09:57.702148+00:00 | P0011 | CMD | git show HEAD:log/CODEX_LOG.md (captured, not printed) | exit 0 | append-only prefix validated
+2026-11-06T18:09:57.702962+00:00 | P0011 | DECISION | Audit covers bootstrap, failed reads, schema/test/evidence edits and validation; append-only prefix preserved. Commit implementation, then commit closure recording its actual SHA to avoid self-referential commit hashing.
+2026-11-06T18:09:57.729381+00:00 | P0011 | CMD | git add -- src/clavel/database/catalog.py migrations/env.py migrations/versions/0002_catalog_schema.py tests/integration/test_catalog_schema.py tests/integration/test_migrations.py log/P0011_EVIDENCE.md log/CODEX_LOG.md | exit 0 | completed
+2026-11-06T18:09:57.733457+00:00 | P0011 | CMD | git diff --cached --check | exit 0 | completed
+2026-11-06T18:09:57.735596+00:00 | P0011 | CMD | git diff --cached --name-only | exit 0 | completed
+2026-11-06T18:09:57.738924+00:00 | P0011 | CMD | git diff --cached --stat | exit 0 | completed
