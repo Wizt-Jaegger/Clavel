@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+clavel.db
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python environments and caches
+venv/
+.coverage
+htmlcov/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS files
+.DS_Store
