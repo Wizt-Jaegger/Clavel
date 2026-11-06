@@ -1,0 +1,45 @@
+[
+  {
+    "op": "replace",
+    "path": "/paths/~1v1~1inventory/get/description",
+    "value": "Local-validation implementation; production activation requires approved authentication and provider freshness inputs. item_id is the immutable PostgreSQL SKU ID serialized as a string. Missing rows and NULL quantities remain unknown; stored timestamp/version are preserved. Positive stock without a configured freshness policy remains unknown. Existing snapshot-bound cursor semantics are retained: continuation is rejected with 400 if the PostgreSQL snapshot changes or the cursor expires, is altered, or is used with a different limit or policy. Freshness evaluation time is frozen across valid pages. No live acceptance is claimed."
+  },
+  {
+    "op": "replace",
+    "path": "/paths/~1v1~1inventory/get/x-availability",
+    "value": "local-validation-only"
+  },
+  {
+    "op": "add",
+    "path": "/paths/~1v1~1inventory/get/responses/200/content/application~1json/examples/stale_and_unknown",
+    "value": {
+      "summary": "Synthetic HTTP mechanics only; five-minute test policy, not a Q07 decision",
+      "value": {
+        "items": [
+          {
+            "item_id": "1",
+            "stock": "unknown",
+            "observed_at": null,
+            "source_version": null
+          },
+          {
+            "item_id": "2",
+            "stock": "unknown",
+            "observed_at": "2026-01-01T12:00:00Z",
+            "source_version": "0"
+          },
+          {
+            "item_id": "3",
+            "stock": "stale",
+            "observed_at": "2026-01-01T11:54:59Z",
+            "source_version": "1"
+          }
+        ],
+        "page": {
+          "limit": 20,
+          "next_cursor": null
+        }
+      }
+    }
+  }
+]

@@ -9,6 +9,10 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from starlette.exceptions import HTTPException
 
+from clavel.api.inventory import (
+    InventoryCursors, InventoryRuntime, InventoryUnavailable, InventoryUnavailableResponse,
+    router as inventory_router,
+)
 from clavel.core.correlation import RequestCorrelationMiddleware
 from clavel.core.errors import ApplicationError, ErrorCode, ErrorResponse, error_response
 from clavel.core.settings import Settings, load_settings
@@ -19,15 +23,28 @@ class HealthResponse(BaseModel):
     status: Literal["ok"] = "ok"
 
 
-def create_app(*, settings: Settings | None = None) -> FastAPI:
+def create_app(
+    *, settings: Settings | None = None,
+    inventory_runtime: InventoryRuntime | None = None,
+) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         app.state.settings = settings if settings is not None else load_settings()
         app.state.database = Database(app.state.settings)
+        app.state.inventory_runtime = inventory_runtime or InventoryRuntime()
         yield
 
     app = FastAPI(title="Clavel", lifespan=lifespan, debug=False)
+    app.state.inventory_cursors = InventoryCursors()
     app.add_middleware(RequestCorrelationMiddleware)
+    app.include_router(inventory_router)
+
+    @app.exception_handler(InventoryUnavailable)
+    async def inventory_unavailable(request: Request, exc: InventoryUnavailable) -> JSONResponse:
+        body = InventoryUnavailableResponse(
+            retryable=exc.retryable, request_id=request.state.request_id,
+        )
+        return JSONResponse(status_code=503, content=body.model_dump(mode="json"))
 
     @app.exception_handler(ApplicationError)
     async def application_error(request: Request, exc: ApplicationError) -> JSONResponse:

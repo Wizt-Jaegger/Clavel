@@ -161,16 +161,19 @@ def test_paused_preview_rejects_misleading_or_invalid_payloads(field, value):
     assert not validator(media["schema"]).is_valid({**example, field: value})
 
 
-def test_draft_adds_no_runtime_routes_or_business_schema():
+def test_only_implemented_inventory_operation_is_registered_beyond_shell():
     # Synthetic local settings; no external service or database is accessed.
     app = create_app(settings=Settings(
         _env_file=None, app_env="test",
         database_url="postgresql://synthetic:fake@localhost/synthetic"))
     with TestClient(app) as client:
         runtime = client.get("/openapi.json").json()
-        assert set(runtime["paths"]) == {"/health", "/ready"}
+        assert set(runtime["paths"]) == {"/health", "/ready", "/v1/inventory"}
         for path, method, _ in OPERATIONS:
             response = client.request(method, path)
+            if (path, method) == ("/v1/inventory", "get"):
+                assert response.status_code == 401
+                continue
             assert response.status_code == 404
             assert response.json()["error"]["code"] == "not_found"
         assert client.get("/health").json() == {"status": "ok"}
