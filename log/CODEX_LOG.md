@@ -2776,3 +2776,7 @@ END P0021 | Awaiting review | f1f1e1c0a8a1a2c500203ce8b7cea6b72f4405a2 | live re
 2026-11-06T23:53:49Z | P0021 | DECISION | Commit SHA in END identifies the validated implementation f1f1e1c; follow-up commit records post-commit audit only, with identical source/tests/evidence. No status edits.
 2026-11-06T23:53:49Z | P0021 | CMD | git add -- log/CODEX_LOG.md && git commit -m 'P0021 synthetic fixture generator' | audit-only closure; outcome provided by git commit output and final response
 END P0021 | Awaiting review | f1f1e1c (validated implementation; audit-only closure follows) | live representativeness Blocked on Q03/Q04/Q08 | independent Codex review and orchestrator acceptance
+2026-11-06T23:53:55Z | P0021 | ORCH | attempt 1: codex exit 0; full output log/runs/P0021-impl1.txt
+2026-11-06T23:57:35Z | P0021 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 927 passed, 1 warning, 7 subtests passed in 219.52s (0:03:39)
+2026-11-06T23:59:39Z | P0021 | REVIEW | automatic Codex review; source 17bde414a7f30be096a031465186b1e68cc47ce7; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T23:59:39Z | P0021 | ORCH | ACCEPTED by automatic review at 17bde414a7f30be096a031465186b1e68cc47ce7
