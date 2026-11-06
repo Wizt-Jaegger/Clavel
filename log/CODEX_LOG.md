@@ -2097,3 +2097,7 @@ START P0036 | 2026-11-06T19:22:13+00:00 | main | 9f0b5e1ffd20d61bba793a018075b37
 2026-11-06T19:31:34Z | P0036 | CMD | python final committed-log prefix and STATUS SHA256 audit; git diff --cached --quiet -- log/STATUS.md | exit 0; append-only history intact and STATUS unchanged/unstaged
 2026-11-06T19:31:34Z | P0036 | DECISION | Log audit complete. Final closure command: git add log/CODEX_LOG.md; git commit --amend --no-edit; git rev-parse HEAD; git status --short. Amendment includes only final audit/commit/END records; terminal output supplies final hash and result.
 END P0036 | Awaiting review | HEAD (log-only closure amendment of validated 29432a5fe7909e13598c3a4ad17f1db675b8ff53) | production A03 auth and Q07 freshness/provider evidence Blocked; snapshot deviation resolved; 366 scoped tests and 32 final inventory tests passed | independent Codex review; orchestrator manages STATUS
+2026-11-06T19:31:42Z | P0036 | ORCH | attempt 2: codex exit 0; full output log/runs/P0036-impl2.txt
+2026-11-06T19:32:44Z | P0036 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 464 passed, 1 warning, 6 subtests passed in 61.61s (0:01:01)
+2026-11-06T19:34:09Z | P0036 | REVIEW | automatic Codex review; source b4246e5f5f9ee99ac5719dd0d2601e162d91a68e; attempt 2; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T19:34:09Z | P0036 | ORCH | ACCEPTED by automatic review at b4246e5f5f9ee99ac5719dd0d2601e162d91a68e

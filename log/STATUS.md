@@ -37,7 +37,7 @@
 | P0033 | Accepted | 3fbe272a6be6ba36603b08cc440cb093be0227f0 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:52:38Z | — |
 | P0034 | Pending | — | — | — | — | — |
 | P0035 | Blocked | efa02423871bf7065a5234ada53eb1d445277ac7 | — | failed 2 attempts: reviewer stdout did not end with exact VERDICT: ACCEPTED | — | — |
-| P0036 | Pending | — | — | — | — | — |
+| P0036 | Accepted | b4246e5f5f9ee99ac5719dd0d2601e162d91a68e | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T19:34:09Z | — |
 | P0037 | Pending | — | — | — | — | — |
 | P0038 | Pending | — | — | — | — | — |
 | P0039 | Pending | — | — | — | — | — |
