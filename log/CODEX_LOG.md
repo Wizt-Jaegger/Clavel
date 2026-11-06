@@ -2395,3 +2395,13 @@ START P0014 | 2026-11-06T22:29:32Z | main | a2f98bb7c8cb27e53376ad50cd5962500ede
 2026-11-06T22:37:31+00:00 | P0014 | CMD | git diff --cached --name-only | exit 0 | final staged scope / whitespace validation
 2026-11-06T22:37:31+00:00 | P0014 | READ | log/CODEX_LOG.md: audited P0014 events for all implementation/test edits, commands, reads, failed regression and successful retry
 2026-11-06T22:37:31+00:00 | P0014 | DECISION | Audit complete. Commit only the 11 staged task paths; preserve pre-existing orchestrator STATUS modification. Final audit refresh will stage log/CODEX_LOG.md before the validated task commit; post-commit SHA/END events necessarily append after that commit.
+2026-11-06T22:37:44+00:00 | P0014 | CMD | git add -- log/CODEX_LOG.md | exit 0 | final audit staging refresh
+2026-11-06T22:37:44+00:00 | P0014 | CMD | git commit -m "P0014 recommendation telemetry schema" | exit 0 | validated task changes and audit log
+2026-11-06T22:37:44+00:00 | P0014 | CMD | git rev-parse HEAD | exit 0 | 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3
+2026-11-06T22:37:44+00:00 | P0014 | COMMIT | 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3 | P0014 recommendation telemetry schema
+2026-11-06T22:37:44+00:00 | P0014 | CMD | git status --short | exit 0 | only post-commit CODEX_LOG audit tail and pre-existing orchestrator STATUS change remain
+END P0014 | Awaiting review | 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3 | no implementation blockers; post-commit audit tail appended | independent Codex review; orchestrator manages STATUS
+2026-11-06T22:37:59Z | P0014 | ORCH | attempt 1: codex exit 0; full output log/runs/P0014-impl1.txt
+2026-11-06T22:41:02Z | P0014 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 609 passed, 1 warning, 6 subtests passed in 182.77s (0:03:02)
+2026-11-06T22:45:10Z | P0014 | REVIEW | automatic Codex review; source 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T22:45:10Z | P0014 | ORCH | ACCEPTED by automatic review at 77702b96a9ab6f4494ac9f41b7aca56e1debb1e3
