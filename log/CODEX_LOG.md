@@ -2590,3 +2590,13 @@ START P0019 | 2026-11-06T23:18:53Z | main | 030a0306e7f4ca2954a819d504205f02e65e
 2026-11-06T23:23:12Z | P0019 | CMD | git add src/clavel/data/__init__.py src/clavel/data/import_validation.py src/clavel/data/README.md tests/test_import_validation.py log/CODEX_LOG.md | exit 0 | stage P0019 paths and append-only audit log only
 2026-11-06T23:23:12Z | P0019 | CMD | git diff --cached --check | exit 0 | staged whitespace check
 2026-11-06T23:23:12Z | P0019 | CMD | git diff --cached --stat | exit 0 | review staged task scope; STATUS excluded
+2026-11-06T23:23:27Z | P0019 | CMD | git add log/CODEX_LOG.md | exit 0 | stage final precommit audit entries
+2026-11-06T23:23:27Z | P0019 | CMD | git commit -m 'P0019 canonical import validation' | exit 0 | validated fixture contracts committed
+2026-11-06T23:23:27Z | P0019 | CMD | git rev-parse HEAD | exit 0 | cd022293a3a5c4a1e6590ba200793b520571bbc8
+2026-11-06T23:23:27Z | P0019 | COMMIT | cd022293a3a5c4a1e6590ba200793b520571bbc8 | P0019 canonical import validation
+2026-11-06T23:23:27Z | P0019 | CMD | git status --short | exit 0 | only audit closure and pre-existing orchestrator STATUS remain modified
+END P0019 | Awaiting review | cd022293a3a5c4a1e6590ba200793b520571bbc8 | Q01/Q02 live importer mapping Blocked; postcommit audit closure appended | independent Codex review of synthetic fixture slice
+2026-11-06T23:23:32Z | P0019 | ORCH | attempt 1: codex exit 0; full output log/runs/P0019-impl1.txt
+2026-11-06T23:27:16Z | P0019 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 870 passed, 1 warning, 6 subtests passed in 223.26s (0:03:43)
+2026-11-06T23:29:07Z | P0019 | REVIEW | automatic Codex review; source cd022293a3a5c4a1e6590ba200793b520571bbc8; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T23:29:07Z | P0019 | ORCH | ACCEPTED by automatic review at cd022293a3a5c4a1e6590ba200793b520571bbc8
