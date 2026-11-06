@@ -9,9 +9,11 @@ description = "Clavel modular monolith"
 readme = "README.md"
 requires-python = ">=3.13,<3.14"
 dependencies = [
+    "alembic>=1.14,<2",
     "fastapi>=0.115,<1",
     "psycopg[binary]>=3.2,<4",
     "pydantic-settings>=2.7,<3",
+    "SQLAlchemy>=2.0,<3",
 ]
 
 [project.optional-dependencies]

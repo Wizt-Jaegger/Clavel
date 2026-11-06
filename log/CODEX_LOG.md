@@ -1148,3 +1148,62 @@ END P0008 | Awaiting review | c040bf687377a733f0b0c739b870628fbefd680e | indepen
 2026-11-06T17:31:08Z | P0008 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 318 passed, 1 warning, 6 subtests passed in 1.77s
 2026-11-06T17:31:57Z | P0008 | REVIEW | automatic Codex review; source 3ac79a925632fd18f9ccc2525467b368ad94063d; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T17:31:57Z | P0008 | ORCH | ACCEPTED by automatic review at 3ac79a925632fd18f9ccc2525467b368ad94063d
+2026-11-06T17:31:58Z | P0009 | ORCH | starting from b51440dbaec8ef76e00a2eba03854097a1b03707
+START P0009 | 2026-11-06T17:32:21.541549+00:00 | main | b51440dbaec8ef76e00a2eba03854097a1b03707
+2026-11-06T17:32:21.541609+00:00 | P0009 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && sed -n '1,220p' AGENTS.md && rg -n '^\|? *P0009\b|P0009' /home/alonso/Documents/clavel-codex-kit/INDEX.md && sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0009.md | exit 0 | main at b51440d; pre-existing log and status edits
+2026-11-06T17:32:21.541646+00:00 | P0009 | READ | AGENTS.md; kit INDEX.md matching task row (rg also returned adjacent dependency references); kit tasks/P0009.md
+2026-11-06T17:32:21.541688+00:00 | P0009 | DECISION | P0008 prerequisites verified Accepted by orchestrator per user; retain current main branch; do not edit or stage log/STATUS.md; preserve existing log edits; no task-type template applies.
+2026-11-06T17:32:21.541732+00:00 | P0009 | EDIT | log/CODEX_LOG.md | append START and initial discovery events; subsequent command logging is automatic in Python wrappers
+2026-11-06T17:32:21.553538+00:00 | P0009 | CMD | rg --files -g '!uv.lock' -g '!log/CODEX_LOG.md' -g '!log/STATUS.md' -g '!tasks/**' -g '!docs/**' -g '!AGENTS.md' -g '!INDEX.md' -g '!CONTEXT.md' -g '!log/reviews/**' -g '!log/checkpoints/**' -g '!log/handoffs/**' -g '!log/blockers/**' -g '!templates/**' -g '!*.egg-info/**' -g '!requirements*.txt'; git diff --stat; ls -d .venv 2>/dev/null | exit 0 | repository file discovery and existing edit summary
+2026-11-06T17:32:31.251679+00:00 | P0009 | CMD | sed -n '1,220p' pyproject.toml && sed -n '1,260p' src/clavel/database/__init__.py && sed -n '1,240p' tests/test_database.py | exit 0 | targeted database, environment and CI inspection
+2026-11-06T17:32:31.251801+00:00 | P0009 | READ | pyproject.toml, src/clavel/database/__init__.py, tests/test_database.py
+2026-11-06T17:32:31.493340+00:00 | P0009 | CMD | rg --files --hidden .github; sed -n '1,220p' src/clavel/core/settings.py; sed -n '1,180p' tests/test_repository_rules.py; sed -n '1,180p' .env.example; command -v postgres; command -v initdb; command -v pg_ctl; command -v psql; command -v docker; .venv/bin/python -m pip show alembic psycopg SQLAlchemy pytest | tail -n 30 | exit 0 | targeted database, environment and CI inspection
+2026-11-06T17:32:31.493440+00:00 | P0009 | READ | src/clavel/core/settings.py, tests/test_repository_rules.py, .env.example; discovered CI paths
+2026-11-06T17:32:54.719384+00:00 | P0009 | ERROR | Discovery rg --files --hidden .github exited 2: CI directory absent; pip show reports Alembic/SQLAlchemy not installed. Compound discovery command exit 0 did not imply these probes succeeded.
+2026-11-06T17:32:54.719464+00:00 | P0009 | DECISION | Use Alembic with SQLAlchemy psycopg driver and an empty baseline; leave domain schema to later tasks. Prove real DDL reversibility and transaction rollback with a clearly synthetic test revision. CI uses a disposable PostgreSQL service; local tests use an isolated native cluster.
+2026-11-06T17:32:54.732213+00:00 | P0009 | CMD | sed -n '1,200p' README.md && sed -n '1,180p' tests/test_project_smoke.py && sed -n '1,150p' .gitignore && id -u && .venv/bin/python --version | exit 0 | inspect contributing conventions and local runtime
+2026-11-06T17:32:54.732291+00:00 | P0009 | READ | README.md, tests/test_project_smoke.py, .gitignore
+2026-11-06T17:34:35.778868+00:00 | P0009 | EDIT | pyproject.toml | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.778951+00:00 | P0009 | EDIT | alembic.ini | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779009+00:00 | P0009 | EDIT | migrations/env.py | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779066+00:00 | P0009 | EDIT | migrations/script.py.mako | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779122+00:00 | P0009 | EDIT | migrations/versions/0001_migration_baseline.py | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779177+00:00 | P0009 | EDIT | migrations/README.md | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779227+00:00 | P0009 | EDIT | tests/integration/conftest.py | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779276+00:00 | P0009 | EDIT | tests/integration/test_migrations.py | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:35.779324+00:00 | P0009 | EDIT | .github/workflows/migrations.yml | versioned PostgreSQL migrations, disposable synthetic integration evidence and mandatory CI path
+2026-11-06T17:34:44.125135+00:00 | P0009 | CMD | .venv/bin/python -m pip install -e '.[dev]' | exit 0 | install scoped migration dependencies into project-local venv
+2026-11-06T17:34:57.371295+00:00 | P0009 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration tests/test_database.py tests/test_project_smoke.py -q --tb=short | exit 1 | PostgreSQL migration and database regression checks
+2026-11-06T17:34:57.371295+00:00 | P0009 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration tests/test_database.py tests/test_project_smoke.py -q --tb=short | 2 failed, 10 passed, 1 warning in 2.63s
+2026-11-06T17:35:26.998402+00:00 | P0009 | ERROR | Initial PostgreSQL checks: 2 failed, 10 passed. Fixture rebuilt a Unix-socket URL with socket path as hostname, losing the socket query and violating settings validation.
+2026-11-06T17:35:26.998473+00:00 | P0009 | EDIT | tests/integration/conftest.py | replace only URL database path, preserving encoded credentials and Unix-socket query options
+2026-11-06T17:35:26.998511+00:00 | P0009 | EDIT | tests/integration/test_migrations.py | avoid connection-detail echo in assertion introspection; require the expected DivisionByZero failure
+2026-11-06T17:35:35.050707+00:00 | P0009 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration tests/test_database.py tests/test_project_smoke.py -q --tb=short | exit 0 | retry PostgreSQL migration and database checks after fixture correction
+2026-11-06T17:35:35.050825+00:00 | P0009 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration tests/test_database.py tests/test_project_smoke.py -q --tb=short | 12 passed, 1 warning in 7.60s
+2026-11-06T17:36:50.049650+00:00 | P0009 | CMD | postgres --version | exit 0 | migration validation
+2026-11-06T17:36:50.308536+00:00 | P0009 | CMD | .venv/bin/python -m pip check | exit 0 | migration validation
+2026-11-06T17:36:50.663029+00:00 | P0009 | CMD | .venv/bin/python -m alembic heads | exit 0 | migration validation
+2026-11-06T17:36:50.663747+00:00 | P0009 | EDIT | temporary CI-validation directory | synthetic password file and private socket directory; removed after check
+2026-11-06T17:36:51.131251+00:00 | P0009 | CMD | initdb -D /tmp/clavel-p0009-ci-krbb9dyi/data -U synthetic_p0009 --auth-local=trust --auth-host=scram-sha-256 --pwfile /tmp/clavel-p0009-ci-krbb9dyi/synthetic-password --no-locale --encoding=UTF8 | exit 0 | migration validation
+2026-11-06T17:36:51.241621+00:00 | P0009 | CMD | pg_ctl -D /tmp/clavel-p0009-ci-krbb9dyi/data -l /tmp/clavel-p0009-ci-krbb9dyi/postgres.log -o '-h 127.0.0.1 -p 50801 -k /tmp/clavel-p0009-ci-krbb9dyi/socket' -w start | exit 0 | migration validation
+2026-11-06T17:36:57.618278+00:00 | P0009 | CMD | .venv/bin/python -m pytest tests/integration -q --tb=short | exit 0 | disposable TCP PostgreSQL/CI-path validation
+2026-11-06T17:36:57.618359+00:00 | P0009 | TEST | .venv/bin/python -m pytest tests/integration -q --tb=short | 2 passed in 6.03s | CLAVEL_MIGRATION_TEST_URL points only to temporary synthetic TCP server; required mode enabled
+2026-11-06T17:36:57.719869+00:00 | P0009 | CMD | pg_ctl -D /tmp/clavel-p0009-ci-krbb9dyi/data -m immediate -w stop | exit 0 | migration validation
+2026-11-06T17:36:57.719959+00:00 | P0009 | EDIT | temporary CI-validation directory | cleanup of disposable PostgreSQL cluster and synthetic credentials
+2026-11-06T17:36:57.746793+00:00 | P0009 | CMD | git diff --check | exit 0 | migration validation
+2026-11-06T17:36:57.750157+00:00 | P0009 | CMD | git diff --stat | exit 0 | migration validation
+2026-11-06T17:36:57.753024+00:00 | P0009 | CMD | git status --short | exit 0 | migration validation
+2026-11-06T17:37:44.000738+00:00 | P0009 | EDIT | log/P0009_EVIDENCE.md | record observed PostgreSQL checks, synthetic provenance, fixture retry, hosted-CI limit and independent review handoff
+2026-11-06T17:37:44.007249+00:00 | P0009 | CMD | git diff -- pyproject.toml && git ls-files --others --exclude-standard .github alembic.ini migrations tests/integration log/P0009_EVIDENCE.md | exit 0 | final scoped implementation review
+2026-11-06T17:37:44.016624+00:00 | P0009 | CMD | sed -n '1,160p' migrations/env.py && sed -n '1,180p' tests/integration/conftest.py && sed -n '1,210p' tests/integration/test_migrations.py && sed -n '1,140p' .github/workflows/migrations.yml | exit 0 | final scoped implementation review
+2026-11-06T17:37:44.016710+00:00 | P0009 | READ | migrations/env.py, tests/integration/conftest.py, tests/integration/test_migrations.py, .github/workflows/migrations.yml | review final implementation
+2026-11-06T17:38:56.909116+00:00 | P0009 | READ | log/P0009_EVIDENCE.md | check evidence against observed outcomes
+2026-11-06T17:38:56.909172+00:00 | P0009 | EDIT | log/P0009_EVIDENCE.md | clarify stopped cluster vs pytest-managed temporary-directory lifecycle
+2026-11-06T17:38:56.909209+00:00 | P0009 | SKIP | Hosted GitHub Actions execution | no push/publication requested; equivalent local PostgreSQL 17 TCP/SCRAM integration entry point passed
+2026-11-06T17:38:56.915512+00:00 | P0009 | CMD | git add -- pyproject.toml alembic.ini migrations/README.md migrations/env.py migrations/script.py.mako migrations/versions/0001_migration_baseline.py tests/integration/conftest.py tests/integration/test_migrations.py .github/workflows/migrations.yml log/P0009_EVIDENCE.md log/CODEX_LOG.md | exit 0 | final staging and validation
+2026-11-06T17:38:56.919800+00:00 | P0009 | CMD | git diff --cached --check | exit 0 | final staging and validation
+2026-11-06T17:38:56.922151+00:00 | P0009 | CMD | git diff --cached --name-only | exit 0 | final staging and validation
+2026-11-06T17:38:56.925007+00:00 | P0009 | CMD | git show HEAD:log/CODEX_LOG.md | exit 0 | compare committed prefix without printing unrelated task history
+2026-11-06T17:38:56.926327+00:00 | P0009 | DECISION | Final audit passed: scoped paths only, append-only log history preserved, relevant tests and fixture retry recorded, STATUS unstaged and unchanged by this task; Awaiting review after commit. COMMIT/END must be appended after the commit to record its actual SHA.
+2026-11-06T17:38:56.929913+00:00 | P0009 | CMD | git diff --cached --stat | exit 0 | final staging and validation
+2026-11-06T17:38:56.933954+00:00 | P0009 | CMD | git add -- log/CODEX_LOG.md | exit 0 | final staging and validation

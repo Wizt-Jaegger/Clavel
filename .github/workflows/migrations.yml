@@ -1,0 +1,41 @@
+name: PostgreSQL migrations
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  postgres-migrations:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: synthetic_p0009
+          POSTGRES_PASSWORD: synthetic_ci_password
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U synthetic_p0009 -d postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Synthetic service credentials only; no production connection.
+      CLAVEL_MIGRATION_TEST_URL: postgresql://synthetic_p0009:synthetic_ci_password@localhost:5432/postgres
+      CLAVEL_REQUIRE_POSTGRES: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install into project environment
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -e '.[dev]'
+      - name: Upgrade, downgrade and upgrade on clean PostgreSQL
+        run: .venv/bin/python -m pytest tests/integration -q
