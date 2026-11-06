@@ -2513,3 +2513,10 @@ START P0017 | 2026-11-06T22:55:44Z | main | ef48ebc82e27f484fdb31c02f4c0a7e083ff
 2026-11-06T23:01:03Z | P0017 | READ | tail -30 log/CODEX_LOG.md | exit 0 | audited current task event coverage, failed discovery attempts, edits and validation
 2026-11-06T23:01:31Z | P0017 | DECISION | Validation complete: 93 passed, no skips; status Awaiting review. Commit implementation and evidence with task message, then persist COMMIT/END in a log-only audit commit; closing SHA identifies validated implementation.
 2026-11-06T23:01:31Z | P0017 | CMD | git add -- log/CODEX_LOG.md | exit 0 | refreshed audit entries before task commit
+2026-11-06T23:01:31Z | P0017 | CMD | git add -- log/CODEX_LOG.md && git commit -m 'P0017 sales and return repository' | exit 0 | implementation and synthetic review evidence committed
+2026-11-06T23:01:31Z | P0017 | CMD | git rev-parse HEAD | exit 0 | 772d94fd54058bb683784fc4e5cef2be53b1cdd5
+2026-11-06T23:01:31Z | P0017 | COMMIT | 772d94fd54058bb683784fc4e5cef2be53b1cdd5 | P0017 sales and return repository
+2026-11-06T23:01:31Z | P0017 | CMD | git status --short | exit 0 | only post-commit audit append and pre-existing orchestrator STATUS.md change remain
+2026-11-06T23:01:31Z | P0017 | CMD | git diff --check -- log/CODEX_LOG.md | exit 0 | closing audit whitespace check
+2026-11-06T23:01:31Z | P0017 | DECISION | Audit coverage checked: repository discovery failures, all opened files, implementation/test/evidence edits, both test runs, staging and implementation commit recorded. Persist this closing append with git add -- log/CODEX_LOG.md and git commit -m 'P0017 sales and return repository'; no implementation changes. Validated implementation SHA 772d94fd54058bb683784fc4e5cef2be53b1cdd5.
+END P0017 | Awaiting review | 772d94fd54058bb683784fc4e5cef2be53b1cdd5 | independent review pending; no implementation blockers | independent Codex reviewer and orchestrator resolve review
