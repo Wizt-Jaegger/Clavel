@@ -2,8 +2,8 @@
 
 Clavel is planned as a Python/FastAPI modular monolith with PostgreSQL,
 pytest, BIRCH clustering, and segment-level popularity recommendations.
-This checkout establishes the repository operating rules; application setup
-and business features belong to later tasks.
+This checkout establishes the repository operating rules and Python project
+setup. Business features belong to later tasks.
 
 ## Start contributing
 
@@ -42,3 +42,29 @@ These standard-library checks validate the contribution entry point, task links,
 operating rules, and canonical P0001 status. They do not validate application
 behavior. P0001 also runs these checks from a clean export of the P0001 files to
 verify that the committed files are sufficient for a fresh checkout.
+
+## Python setup and tests
+
+Use Python 3.13.x (the supported minor version is recorded in `.python-version`
+and enforced by `requires-python` in `pyproject.toml`). Keep environments local
+to the project. Future Python minor versions require an explicit policy update
+and validation; use the latest available 3.13 patch release.
+
+From a fresh checkout:
+
+```sh
+python3.13 -m venv .venv
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/python -m pytest
+```
+
+Runtime dependencies provide FastAPI and the PostgreSQL driver, psycopg with its
+binary distribution. The `dev` extra adds pytest and the Uvicorn development
+server. Dependency ranges are bounded in `pyproject.toml`; exact resolutions
+may vary between installations.
+
+Production code belongs under `src/clavel/`; tests belong under `tests/` in
+`test_*.py` files. Pytest uses importlib mode so the smoke test exercises the
+installed package. The smoke test imports the package and runtime libraries
+without starting a server or connecting to a database. These checks establish
+installation mechanics only; application behavior is covered by later tasks.

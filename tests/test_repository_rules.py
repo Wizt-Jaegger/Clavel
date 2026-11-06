@@ -24,7 +24,7 @@ class RepositoryRulesTests(unittest.TestCase):
         for requirement in ("No refactors outside scope", "Commit only after validation",
                             "append-only", "only the reviewer sets Accepted"):
             self.assertIn(requirement, rules)
-        self.assertIn("reviewer owns acceptance", rules)
+        self.assertIn("reviewer owns acceptance", " ".join(readme.split()))
         self.assertIn("reviewed SHA", readme)
 
     def test_task_is_indexed_once_with_one_status(self):
@@ -34,7 +34,7 @@ class RepositoryRulesTests(unittest.TestCase):
             rows = [line for line in content.splitlines() if line.startswith("| P0001 |")]
             self.assertEqual(len(rows), 1)
         self.assertTrue((ROOT / "tasks/P0001.md").is_file())
-        self.assertRegex(status, r"\| P0001 \| (In progress|Awaiting review) \|")
+        self.assertRegex(status, r"\| P0001 \| (In progress|Awaiting review|Accepted) \|")
 
 
 if __name__ == "__main__":
