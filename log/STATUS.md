@@ -9,7 +9,7 @@
 | P0005 | Accepted | 0441954 | — | auto: orchestrator+AI reviewer | — | — |
 | P0006 | Accepted | 8a031e9 | — | auto: orchestrator+AI reviewer | — | — |
 | P0007 | Accepted | 9bcc5217943eb68b6b51fc16fc8d7b7a6d115fd1 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:22:20Z | — |
-| P0008 | Pending | — | — | — | — | — |
+| P0008 | Accepted | 3ac79a925632fd18f9ccc2525467b368ad94063d | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:31:57Z | — |
 | P0009 | Pending | — | — | — | — | — |
 | P0010 | Pending | — | — | — | — | — |
 | P0011 | Pending | — | — | — | — | — |
