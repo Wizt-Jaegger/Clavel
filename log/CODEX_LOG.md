@@ -462,3 +462,7 @@ START P0004 | 2026-11-06T09:15:19Z | main | 7d637aff287ca8781ca8a71a52a586357f65
 2026-11-06T09:19:36Z | P0004 | DECISION | Audit confirms discovery, reads, implementation edits, failed helper/dependency/closure attempts, retries, install, validation and implementation commit are recorded. STATUS.md left untouched and unstaged. Archive closing records in a log-only commit with the task message; END identifies the validated implementation SHA because an audit commit cannot contain its own hash.
 2026-11-06T09:19:36Z | P0004 | DECISION | Closing archive command: git add log/CODEX_LOG.md && git commit -m "P0004 fastapi shell"; git reports its result and SHA in the final response.
 END P0004 | Awaiting review | 7c85a83b5db99c28c2bdde6d61e924fb8d38fd7e | reviewer acceptance pending; upstream TestClient deprecation warning | review implementation and test evidence
+2026-11-06T09:19:42Z | P0004 | ORCH | attempt 1: codex exit 0; full output log/runs/P0004-impl1.txt
+2026-11-06T09:19:42Z | P0004 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 28 passed, 1 warning, 6 subtests passed in 0.39s
+2026-11-06T09:20:39Z | P0004 | REVIEW | attempt 1: ACCEPTED
+2026-11-06T09:20:39Z | P0004 | ORCH | ACCEPTED at 788b37b

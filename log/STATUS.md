@@ -5,7 +5,7 @@
 | P0001 | Accepted | 1b86090 | 3/3 unittest checks pass locally and in clean export; shell syntax and whitespace pass | human accepted 2026-11-06T08:40:17Z | — | Confirm branch, stage explicit P0001 files, commit, request review |
 | P0002 | Accepted | a19dc40 | — | auto: orchestrator+AI reviewer | — | — |
 | P0003 | Accepted | f7eefa4 | — | auto: orchestrator+AI reviewer | — | — |
-| P0004 | Pending | — | — | — | — | — |
+| P0004 | Accepted | 788b37b | — | auto: orchestrator+AI reviewer | — | — |
 | P0005 | Pending | — | — | — | — | — |
 | P0006 | Pending | — | — | — | — | — |
 | P0007 | Pending | — | — | — | — | — |
