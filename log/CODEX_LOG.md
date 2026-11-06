@@ -521,3 +521,152 @@ END P0005 | Awaiting review | 447a5907f09cc3c7fc35474bc71a72978a867bde | A01-A10
 2026-11-06T09:28:12Z | P0005 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 28 passed, 1 warning, 6 subtests passed in 0.39s
 2026-11-06T09:29:43Z | P0005 | REVIEW | attempt 1: ACCEPTED
 2026-11-06T09:29:43Z | P0005 | ORCH | ACCEPTED at 0441954
+2026-11-06T09:29:43Z | P0006 | ORCH | starting from 3cc9763
+START P0006 | 2026-11-06T09:29:50Z | main | 3cc9763f0f04d1e16d04b02a9d7b4900bc800a6d
+2026-11-06T09:30:12Z | P0006 | CMD | pwd | exit=0 | /home/alonso/Documents/GitRepos/Clavel
+2026-11-06T09:30:12Z | P0006 | CMD | git branch --show-current | exit=0 | main
+2026-11-06T09:30:12Z | P0006 | CMD | git rev-parse HEAD | exit=0 | 3cc9763f0f04d1e16d04b02a9d7b4900bc800a6d
+2026-11-06T09:30:12Z | P0006 | CMD | date -u +%Y-%m-%dT%H:%M:%SZ | exit=0 | 2026-11-06T09:29:50Z
+2026-11-06T09:30:12Z | P0006 | CMD | sed -n '1,180p' AGENTS.md | exit=0 | read repository rules
+2026-11-06T09:30:12Z | P0006 | READ | AGENTS.md
+2026-11-06T09:30:12Z | P0006 | DECISION | User confirms prerequisites Accepted and directs current-branch work; do not edit log/STATUS.md because orchestrator manages it.
+2026-11-06T09:30:12Z | P0006 | EDIT | /tmp/clavel_p0006_runner.py created command logging helper; log/CODEX_LOG.md appended START, initialization command records, and decisions using python3 heredoc.
+2026-11-06T09:30:13Z | P0006 | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md P0006 row; /home/alonso/Documents/clavel-codex-kit/tasks/P0006.md
+2026-11-06T09:30:26Z | P0006 | ERROR | runner attempted rg -n '^\| *P0006 *\|' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit=1 | /bin/bash unavailable; command did not execute.
+2026-11-06T09:30:26Z | P0006 | ERROR | runner attempted sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0006.md | exit=1 | /bin/bash unavailable; command did not execute.
+2026-11-06T09:30:26Z | P0006 | ERROR | runner attempted git status --short | exit=1 | /bin/bash unavailable; command did not execute.
+2026-11-06T09:30:26Z | P0006 | DECISION | Prior kit READ entry was premature; no kit files opened due to shell startup failure; retry now.
+2026-11-06T09:30:26Z | P0006 | EDIT | /tmp/clavel_p0006_runner.py uses shutil.which("bash") for Nix environment; python3 heredoc exit=0.
+2026-11-06T09:30:26Z | P0006 | CMD | sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0006.md | exit=0 | **Done when:** Lint schema and validate happy, empty and error examples.; ; **Commit:** `P0006 initial openapi and fixture contract`
+2026-11-06T09:30:26Z | P0006 | CMD | rg -n '^\| *P0006 *\|' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit=0 | 10:| P0006 | Initial OpenAPI and fixture contract | P0 | P0004, P0005 | CP0 | — |
+2026-11-06T09:30:26Z | P0006 | CMD | git status --short | exit=0 |  M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-06T09:30:26Z | P0006 | READ | Successfully read kit INDEX.md P0006 row and tasks/P0006.md after shell path correction
+2026-11-06T09:30:33Z | P0006 | CMD | rg --files -g '!tasks/**' -g '!log/STATUS.md' -g '!log/CODEX_LOG.md' -g '!AGENTS.md' -g '!INDEX.md' -g '!CONTEXT.md' -g '!templates/**' -g '!backlog*' -g '!uv.lock' -g '!poetry.lock' | exit=0 | docs/REGISTRO_DECISIONES.md; pyproject.toml; .env.example
+2026-11-06T09:30:33Z | P0006 | CMD | ls -d .venv docs tests src app 2>/dev/null | exit=2 | docs; src; tests
+2026-11-06T09:30:42Z | P0006 | CMD | sed -n '1,160p' pyproject.toml | exit=0 | minversion = "8.3"; testpaths = ["tests"]; addopts = "--import-mode=importlib -ra"
+2026-11-06T09:30:42Z | P0006 | CMD | sed -n '1,160p' tests/test_repository_rules.py | exit=0 | ; if __name__ == "__main__":;     unittest.main()
+2026-11-06T09:30:42Z | P0006 | CMD | sed -n '1,200p' tests/test_api_shell.py | exit=0 |     with pytest.raises(ConfigurationError, match="database_url"):;         with TestClient(create_app()):;             pass
+2026-11-06T09:30:42Z | P0006 | CMD | sed -n '1,210p' src/clavel/api/app.py | exit=0 |         return HealthResponse(); ;     return app
+2026-11-06T09:30:42Z | P0006 | CMD | sed -n '1,180p' src/clavel/core/errors.py | exit=0 |         content=body.model_dump(mode="json"),;         headers={REQUEST_ID_HEADER: request_id},;     )
+2026-11-06T09:30:42Z | P0006 | CMD | rg -n 'API|contrat|catalog|invent|segment|preview|evento|event|rol|role|Emi|KPI|Q0|Q1' docs/ARQUITECTURA.md docs/REGISTRO_DECISIONES.md | exit=0 | docs/ARQUITECTURA.md:113:on one invented snapshot and held-out split. Keep each model paired with its; docs/ARQUITECTURA.md:123:documentation only: no OpenAPI contract, runtime code, schema, live experiment; docs/ARQUITECTURA.md:126:names no specific decision gate for P0005; no Q01–Q12 mapping is inferred.
+2026-11-06T09:30:43Z | P0006 | READ | pyproject.toml; src/clavel/api/app.py; src/clavel/core/errors.py; tests/test_api_shell.py; tests/test_repository_rules.py; targeted API/role/gate lines in docs/ARQUITECTURA.md and docs/REGISTRO_DECISIONES.md
+2026-11-06T09:31:12Z | P0006 | CMD | .venv/bin/python -c 'import sys, importlib.util; print(sys.version); print({name: importlib.util.find_spec(name) is not None for name in ("pytest", "jsonschema", "openapi_spec_validator", "pip")})' | exit=0 | 3.13.15 (main, Aug  5 2026, 12:25:43) [GCC 15.3.0]; {'pytest': True, 'jsonschema': False, 'openapi_spec_validator': False, 'pip': True}
+2026-11-06T09:31:12Z | P0006 | CMD | sed -n '1,150p' src/clavel/core/correlation.py | exit=0 |             await send(message); ;         await self.app(scope, receive, send_with_request_id)
+2026-11-06T09:31:13Z | P0006 | READ | src/clavel/core/correlation.py (request ID contract)
+2026-11-06T09:31:13Z | P0006 | DECISION | P0006 proposes a new docs-only OpenAPI 3.1 v1 draft plus synthetic request/response examples and schema validation. Existing runtime schema and handlers stay unchanged. Proposed roles, routes, event semantics and governance limits await review; every business operation is design-time, and later governance/reporting operations are explicitly Emi-stage. Migration impact: no current clients; future publication requires review and runtime implementation, with breaking changes assigned a new major version.
+2026-11-06T09:31:19Z | P0006 | CMD | command -v uv | exit=0 | /run/current-system/sw/bin/uv
+2026-11-06T09:31:19Z | P0006 | DECISION | Schema lint uses openapi-spec-validator and JSON Schema example validation uses jsonschema in the existing project-local .venv; dependencies added only to the dev extra. Synthetic evidence validates mechanics, not readiness, model quality, live authorization or inventory freshness.
+2026-11-06T09:33:14Z | P0006 | EDIT | pyproject.toml: dev-only OpenAPI and JSON Schema validators; /tmp/clavel_p0006_contract.py: synthetic draft artifact builder (apply_patch succeeded)
+2026-11-06T09:33:14Z | P0006 | CMD | python3 /tmp/clavel_p0006_contract.py | exit=0 | Created docs/openapi/clavel-v1.draft.json: 18 proposed operations, 36 schemas
+2026-11-06T09:33:14Z | P0006 | EDIT | docs/openapi/clavel-v1.draft.json: added review-only OpenAPI 3.1 draft, explicit operation availability/stage/roles, strict schemas and synthetic happy/empty/error/unavailable examples
+2026-11-06T09:33:17Z | P0006 | CMD | uv pip install --python .venv/bin/python -e .[dev] | exit=0 |  + rpds-py==2026.9.1;  + six==1.17.0;  + urllib3==2.8.0
+2026-11-06T09:35:16Z | P0006 | EDIT | docs/CONTRATO_FRONTEND_API.md: review proposal, baseline evidence, operation/role table, availability, domain semantics and migration/change process; tests/test_openapi_contract.py: schema lint, all synthetic examples, negative safety/availability checks, role/coverage checks and runtime separation (apply_patch succeeded)
+2026-11-06T09:35:22Z | P0006 | CMD | git diff --check | exit=0 | no output
+2026-11-06T09:35:23Z | P0006 | CMD | .venv/bin/python -m openapi_spec_validator docs/openapi/clavel-v1.draft.json | exit=0 | docs/openapi/clavel-v1.draft.json: OK
+2026-11-06T09:35:23Z | P0006 | CMD | .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q | exit=0 | ; -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html; 285 passed, 3 warnings in 0.88s
+2026-11-06T09:35:50Z | P0006 | CMD | git diff --stat -- pyproject.toml docs/CONTRATO_FRONTEND_API.md docs/openapi/clavel-v1.draft.json tests/test_openapi_contract.py log/CODEX_LOG.md | exit=0 |  log/CODEX_LOG.md | 43 +++++++++++++++++++++++++++++++++++++++++++;  pyproject.toml   |  2 ++;  2 files changed, 45 insertions(+)
+2026-11-06T09:35:51Z | P0006 | CMD | git status --short | exit=0 | ?? docs/CONTRATO_FRONTEND_API.md; ?? docs/openapi/; ?? tests/test_openapi_contract.py
+2026-11-06T09:36:08Z | P0006 | TEST | .venv/bin/python -m openapi_spec_validator docs/openapi/clavel-v1.draft.json | PASS; .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q | 285 passed, 0 failed, 3 deprecation warnings; git diff --check | PASS
+2026-11-06T09:36:08Z | P0006 | EDIT | tests/test_openapi_contract.py: use current validator entry point and materialized parametrization to remove newly introduced deprecations; simplify example coverage condition (apply_patch succeeded)
+2026-11-06T09:36:09Z | P0006 | CMD | git diff -- pyproject.toml | exit=0 |      "pytest>=8.3,<10",;      "uvicorn>=0.30,<1",;  ]
+2026-11-06T09:36:09Z | P0006 | CMD | .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q | exit=0 | ; -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html; 285 passed, 1 warning in 0.87s
+2026-11-06T09:36:27Z | P0006 | TEST | .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q | 285 passed, 0 failed; only existing FastAPI/Starlette TestClient deprecation remains
+2026-11-06T09:36:28Z | P0006 | CMD | .venv/bin/python -m openapi_spec_validator docs/openapi/clavel-v1.draft.json | exit=0 | docs/openapi/clavel-v1.draft.json: OK
+2026-11-06T09:36:28Z | P0006 | CMD | git diff --check | exit=0 | no output
+2026-11-06T09:37:31Z | P0006 | EDIT | /tmp/clavel_p0006_audit.py: final read-only link, operation-table, append-only-log and changed-path audit (apply_patch succeeded)
+2026-11-06T09:37:31Z | P0006 | CMD | python3 /tmp/clavel_p0006_audit.py | exit=0 | PASS: documentation links and operation table; prior log preserved; session commands/reads/edits/tests/errors recorded; only five task paths plus pre-existing STATUS change.
+2026-11-06T09:37:31Z | P0006 | READ | Final audit read docs/CONTRATO_FRONTEND_API.md, docs/openapi/clavel-v1.draft.json and log/CODEX_LOG.md plus baseline log via git show; file content of log/STATUS.md was not opened
+2026-11-06T09:37:31Z | P0006 | TEST | Final schema lint PASS; whitespace check PASS; final audit PASS; 285 targeted tests PASS. No live data, production service, model quality, auth implementation or deployment validated.
+2026-11-06T09:37:31Z | P0006 | DECISION | Task status Awaiting review; API/domain reviewers must assess proposed v1 contract, roles and A03–A10 choices. No blockers for the draft-only scope. Keep pre-existing log/STATUS.md modification out of task commits. Record task commit SHA and END in a subsequent audit-only closeout commit to preserve the completion record without editing past lines.
+2026-11-06T09:37:31Z | P0006 | CMD | git add -- docs/CONTRATO_FRONTEND_API.md docs/openapi/clavel-v1.draft.json tests/test_openapi_contract.py pyproject.toml log/CODEX_LOG.md | exit=0 | no output
+2026-11-06T09:37:31Z | P0006 | CMD | git diff --cached --check | exit=0 | no output
+2026-11-06T09:37:32Z | P0006 | CMD | git diff --cached --stat | exit=0 |  pyproject.toml                    |    2 +;  tests/test_openapi_contract.py    |  147 ++;  5 files changed, 3833 insertions(+)
+2026-11-06T09:37:42Z | P0006 | CMD | git commit -m "P0006 initial openapi and fixture contract" | exit=0 |  create mode 100644 docs/CONTRATO_FRONTEND_API.md;  create mode 100644 docs/openapi/clavel-v1.draft.json;  create mode 100644 tests/test_openapi_contract.py
+2026-11-06T09:38:08Z | P0006 | CMD | git rev-parse HEAD | exit=0 | 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920
+2026-11-06T09:38:08Z | P0006 | CMD | git status --short | exit=0 |  M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-06T09:38:08Z | P0006 | COMMIT | 0f8176b2 | P0006 initial openapi and fixture contract | implementation commit; exact full SHA recorded by git rev-parse HEAD entry above
+2026-11-06T09:38:15Z | P0006 | ERROR | Prior COMMIT entry mistyped abbreviated SHA as 0f8176b2; correct implementation SHA is 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920. No history rewritten.
+2026-11-06T09:38:15Z | P0006 | COMMIT | 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 | P0006 initial openapi and fixture contract
+2026-11-06T09:38:47Z | P0006 | CMD | python3 heredoc: final append-only audit closeout transaction started; stages only log/CODEX_LOG.md and commits completion evidence
+2026-11-06T09:38:47Z | P0006 | CMD | git rev-parse HEAD | exit=0 | 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920
+2026-11-06T09:38:47Z | P0006 | CMD | git status --short | exit=0 | M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-06T09:38:47Z | P0006 | CMD | git diff --check | exit=0 | 
+2026-11-06T09:38:47Z | P0006 | READ | log/CODEX_LOG.md checked for complete task execution record, START, schema lint, 285 passing tests, file edits, failed shell attempts, retry, and implementation COMMIT
+2026-11-06T09:38:47Z | P0006 | DECISION | Final implementation SHA is 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920; following audit-only commit persists completion metadata. Terminal persistence commands: git add -- log/CODEX_LOG.md; git diff --cached --check; git commit -m "P0006 record validation and session closeout"; git status --short. This transaction records its own invocation before persistence to avoid an endless sequence of audit-only commits. Expected remaining modification is pre-existing log/STATUS.md only.
+END P0006 | Awaiting review | 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 | proposed contract and A03–A10 choices await reviewer; live capability not implemented | reviewer assess contract/examples and record acceptance; orchestrator manages STATUS
+2026-11-06T09:38:47Z | P0006 | ERROR | Terminal persistence command failed: git diff --cached --check | exit=2
+2026-11-06T09:39:21Z | P0006 | CMD | python3 heredoc: retry terminal audit closeout after immutable log whitespace finding
+2026-11-06T09:39:21Z | P0006 | ERROR | git diff --cached --check | exit=2 | one trailing space on new audit-log line 593; no contract, schema, dependency or test whitespace issues. Prior terminal transaction stopped before its audit commit.
+2026-11-06T09:39:21Z | P0006 | DECISION | Preserve existing log line 593 under append-only rule. Validate ordinary task files with strict whitespace checking; disable blank-at-eol only for the log check. Do not rewrite past log lines. Prior END reflects completed implementation, while this retry closes audit persistence.
+2026-11-06T09:39:21Z | P0006 | CMD | git diff --cached --check -- . :!log/CODEX_LOG.md | exit=0 | no output
+2026-11-06T09:39:21Z | P0006 | CMD | git -c core.whitespace=-blank-at-eol diff --check -- log/CODEX_LOG.md | exit=0 | no output
+2026-11-06T09:39:21Z | P0006 | TEST | Contract files strict whitespace PASS; audit log check excluding trailing-space rule PASS; implementation unchanged since 285 tests and schema lint passed.
+2026-11-06T09:39:21Z | P0006 | CMD | git rev-parse HEAD | exit=0 | 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920
+2026-11-06T09:39:21Z | P0006 | DECISION | Terminal persistence retry commands: git add -- log/CODEX_LOG.md; git -c core.whitespace=-blank-at-eol diff --cached --check; git commit -m "P0006 record validation and session closeout"; git status --short. Invocation recorded before persistence to avoid recursive audit commits; only expected remaining change is orchestrator-managed log/STATUS.md.
+END P0006 | Awaiting review | 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 | proposed contract and A03–A10 choices await reviewer; live capability not implemented; one immutable audit-log trailing space retained | reviewer assess contract/examples and record acceptance; orchestrator manages STATUS
+2026-11-06T09:39:27Z | P0006 | ORCH | attempt 1: codex exit 0; full output log/runs/P0006-impl1.txt
+2026-11-06T09:39:28Z | P0006 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 301 passed, 1 warning, 6 subtests passed in 0.95s
+2026-11-06T09:41:08Z | P0006 | REVIEW | attempt 1: CHANGES: Define and validate the unavailable response for previews while recommendations are paused.
+2026-11-06T09:41:08Z | P0006 | ORCH | attempt 1 rejected: CHANGES: Define and validate the unavailable response for previews while recommendations are paused.
+2026-11-06T09:41:08Z | P0006 | ORCH | reverted to 3cc9763 after rejected attempt 1
+START P0006 | 2026-11-06T09:41:40.397516Z | main | 3cc9763f0f04d1e16d04b02a9d7b4900bc800a6d
+2026-11-06T09:41:40.397516Z | P0006 | CMD | pwd && git branch --show-current && git rev-parse HEAD && ls -l AGENTS.md log/log.sh log/CODEX_LOG.md && sed -n '1,180p' AGENTS.md && rg -n 'P0006' /home/alonso/Documents/clavel-codex-kit/INDEX.md && sed -n '1,220p' /home/alonso/Documents/clavel-codex-kit/tasks/P0006.md | exit 0 | current main and task instructions inspected
+2026-11-06T09:41:40.397516Z | P0006 | READ | AGENTS.md; kit INDEX.md task row (adjacent P0007 row incidentally matched); kit tasks/P0006.md
+2026-11-06T09:41:40.397516Z | P0006 | DECISION | Prerequisites already verified Accepted by orchestrator; leave log/STATUS.md untouched per explicit user instruction. Limit correction to paused preview unavailable contract and validation; commit message from task.
+2026-11-06T09:41:40.397516Z | P0006 | EDIT | log/CODEX_LOG.md: append START and initial read/command/decision audit; subsequent work logged after each action.
+2026-11-06T09:41:40Z | P0006 | READ | log/log.sh helper
+2026-11-06T09:41:40Z | P0006 | CMD | sed -n '1,100p' log/log.sh | exit 0 | logging helper inspected
+2026-11-06T09:41:40Z | P0006 | CMD | git status --short | exit 0 | only current log modification shown
+2026-11-06T09:41:40Z | P0006 | CMD | rg --files docs tests | rg '(openapi|contract|contrato|CONTRATO|preview)' | exit 0 | located contract docs and tests
+2026-11-06T09:41:40Z | P0006 | CMD | ls -ld .venv .venv/bin/python | exit 0 | project-local environment exists
+2026-11-06T09:41:48Z | P0006 | ERROR | Correction: git status showed existing log/STATUS.md modification plus own log edit; preserve orchestrator change. Previous discovery pipeline returned no matches (rg exit 1), incorrectly recorded exit 0; retry with root file discovery.
+2026-11-06T09:41:48Z | P0006 | CMD | rg --files -g '!log/CODEX_LOG.md' -g '!log/STATUS.md' -g '!AGENTS.md' -g '!tasks/**' -g '!INDEX.md' -g '!CONTEXT.md' | head -65 | exit 0 | discovered repository paths
+2026-11-06T09:41:48Z | P0006 | CMD | ls -la docs tests | exit 0 | inspected document and test directories
+2026-11-06T09:41:48Z | P0006 | CMD | rg -n 'preview|paused|unavailable|openapi' docs tests pyproject.toml | exit 0 | locate preview contract and dependencies
+2026-11-06T09:42:03Z | P0006 | CMD | git log -5 --oneline | exit 0 | inspected current baseline history
+2026-11-06T09:42:03Z | P0006 | CMD | rg -n 'P0006' log/CODEX_LOG.md | tail -25 | exit 0 | inspected P0006 audit history only
+2026-11-06T09:42:03Z | P0006 | READ | pyproject.toml: project dependencies and pytest configuration
+2026-11-06T09:42:03Z | P0006 | READ | src/clavel/api/app.py: existing API shell and version routing
+2026-11-06T09:42:03Z | P0006 | READ | src/clavel/core/errors.py: runtime common error envelope
+2026-11-06T09:42:03Z | P0006 | READ | tests/test_api_shell.py: shell contract and error expectations
+2026-11-06T09:42:03Z | P0006 | CMD | sed -n '1,180p' pyproject.toml; sed -n '1,200p' src/clavel/api/app.py; sed -n '1,180p' src/clavel/core/errors.py; sed -n '1,170p' tests/test_api_shell.py | each exit 0 | scoped baseline reads
+2026-11-06T09:42:12Z | P0006 | CMD | git show --format=fuller --stat 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 | tail -30 | exit 0 | identified rejected task artifact paths
+2026-11-06T09:42:12Z | P0006 | CMD | git diff --name-only HEAD 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 -- docs tests pyproject.toml | exit 0 | enumerated recoverable task-only files
+2026-11-06T09:42:25Z | P0006 | DECISION | Recover only four P0006 artifacts from rejected revision 0f8176b; preserve current baseline code, audit history and orchestrator STATUS; correct paused-preview gap atop recovered proposal.
+2026-11-06T09:42:25Z | P0006 | CMD | git restore --source=0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 --worktree -- docs/CONTRATO_FRONTEND_API.md docs/openapi/clavel-v1.draft.json pyproject.toml tests/test_openapi_contract.py | exit 0 | restored task artifacts only
+2026-11-06T09:42:25Z | P0006 | EDIT | docs/CONTRATO_FRONTEND_API.md; docs/openapi/clavel-v1.draft.json; pyproject.toml; tests/test_openapi_contract.py: recover rejected P0006 proposal for focused correction
+2026-11-06T09:42:25Z | P0006 | READ | docs/CONTRATO_FRONTEND_API.md: recovered draft contract and migration process
+2026-11-06T09:42:25Z | P0006 | READ | tests/test_openapi_contract.py: recovered schema, examples and scope validation
+2026-11-06T09:42:25Z | P0006 | READ | docs/openapi/clavel-v1.draft.json: targeted preview, pause and unavailable definitions
+2026-11-06T09:42:25Z | P0006 | CMD | sed -n '1,190p' docs/CONTRATO_FRONTEND_API.md; sed -n '1,175p' tests/test_openapi_contract.py; rg -n 'preview|paused|unavailable|Unavailable|Preview|reason|recommendations' docs/openapi/clavel-v1.draft.json | head -100 | each exit 0 | scoped contract reads
+2026-11-06T09:42:43Z | P0006 | READ | docs/openapi/clavel-v1.draft.json: metadata, preview response, Unavailable schema/response; pyproject.toml dev dependencies
+2026-11-06T09:42:43Z | P0006 | CMD | sed -n '1,48p' docs/openapi/clavel-v1.draft.json; sed -n '369,405p' docs/openapi/clavel-v1.draft.json; sed -n '2088,2150p' docs/openapi/clavel-v1.draft.json; sed -n '3380,3460p' docs/openapi/clavel-v1.draft.json; sed -n '15,38p' pyproject.toml | each exit 0 | read narrow edit targets
+2026-11-06T09:43:09Z | P0006 | EDIT | tests/test_openapi_contract.py: add paused-preview 503 fixture, mutually exclusive success/empty checks, and invalid payload regression coverage
+2026-11-06T09:43:09Z | P0006 | DECISION | Proposed draft.2 diff: add recommendations_paused unavailable reason, dedicated preview 503 example, retryable=false constraint until role-checked enable. Update migration impact; no runtime feature implementation.
+2026-11-06T09:43:10Z | P0006 | CMD | .venv/bin/python -m pytest tests/test_openapi_contract.py -q -k paused_preview --tb=short > /tmp/clavel-p0006-red.txt 2>&1 | exit 1 | new regression cases fail on missing pause example as expected
+2026-11-06T09:43:10Z | P0006 | TEST | Paused-preview regression before correction: 7 failed, 278 deselected; KeyError recommendations_paused confirms rejected contract gap
+2026-11-06T09:43:46Z | P0006 | ERROR | Correction: pre-fix regression run reported 273 deselected, not 278; 7 failures remain accurate.
+2026-11-06T09:43:46Z | P0006 | EDIT | /tmp/clavel-p0006-update.py: temporary focused OpenAPI transformation; tests/test_openapi_contract.py: draft.2 version expectation; docs/CONTRATO_FRONTEND_API.md: proposed paused response, retry semantics, example and migration impact
+2026-11-06T09:43:46Z | P0006 | CMD | .venv/bin/python /tmp/clavel-p0006-update.py | exit 0 | applied focused draft.2 OpenAPI correction
+2026-11-06T09:43:46Z | P0006 | EDIT | docs/openapi/clavel-v1.draft.json: draft.2, recommendations_paused reason with retryable=false, dedicated PreviewUnavailable 503 response and synthetic paused example
+2026-11-06T09:43:48Z | P0006 | CMD | .venv/bin/python -m pytest tests/test_openapi_contract.py tests/test_api_shell.py -q --tb=short > /tmp/clavel-p0006-tests.txt 2>&1 | exit 0 | contract and API shell validation
+2026-11-06T09:43:48Z | P0006 | TEST | 293 passed, 1 warning in 0.88s
+2026-11-06T09:44:19Z | P0006 | CMD | .venv/bin/python -m openapi_spec_validator docs/openapi/clavel-v1.draft.json > /tmp/clavel-p0006-lint.txt 2>&1 | exit 0 | standalone OpenAPI schema lint
+2026-11-06T09:44:19Z | P0006 | TEST | OpenAPI CLI lint: exit 0
+2026-11-06T09:44:19Z | P0006 | CMD | git diff 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 --stat -- docs tests pyproject.toml | exit 0 | verified correction relative to rejected artifact
+2026-11-06T09:44:19Z | P0006 | CMD | git diff --check -- docs tests pyproject.toml log/CODEX_LOG.md | exit 2 | whitespace validation
+2026-11-06T09:44:19Z | P0006 | CMD | git status --short | exit 0 | task files plus audit log and pre-existing orchestrator STATUS modification
+2026-11-06T09:44:19Z | P0006 | CMD | git diff 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 -- docs/CONTRATO_FRONTEND_API.md tests/test_openapi_contract.py | tail -100 | exit 0 | reviewed focused docs/test correction
+2026-11-06T09:44:19Z | P0006 | DECISION | Validation complete: 293 contract/API-shell tests passed, OpenAPI CLI lint passed, whitespace check passed. Synthetic fixtures prove contract mechanics only; role-checked runtime pause/enable remains design-time and awaits reviewer. No broader tests needed for documentation/fixture-only change.
+2026-11-06T09:44:42Z | P0006 | ERROR | Whitespace command exited 2: one inherited append-only audit entry at line 593 has a trailing space; preserve history. Correction to prior decision: broad whitespace check did not pass; validate contract files strictly and log with only blank-at-eol disabled.
+2026-11-06T09:44:42Z | P0006 | ERROR | git diff against rejected commit ignored untracked restored artifacts and misleadingly reported deletions; stage explicit task paths then repeat comparison against index.
+2026-11-06T09:44:42Z | P0006 | CMD | git add -- docs/CONTRATO_FRONTEND_API.md docs/openapi/clavel-v1.draft.json pyproject.toml tests/test_openapi_contract.py | exit 0 | staged explicit task artifacts only
+2026-11-06T09:44:42Z | P0006 | CMD | git diff --cached 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 --stat -- docs tests pyproject.toml | exit 0 | actual correction limited to three contract/test files; recovered dependency file unchanged
+2026-11-06T09:44:42Z | P0006 | CMD | git diff --cached --check -- docs tests pyproject.toml | exit 0 | strict task-file whitespace validation
+2026-11-06T09:44:42Z | P0006 | CMD | git -c core.whitespace=-blank-at-eol diff --check -- log/CODEX_LOG.md | exit 0 | audit-log whitespace validation preserving inherited trailing space
+2026-11-06T09:44:42Z | P0006 | CMD | git diff --cached 0f8176b3e5728e3b5fa5d08ef6ce6756c8fa2920 -- docs/CONTRATO_FRONTEND_API.md tests/test_openapi_contract.py | tail -85 | exit 0 | reviewed actual narrow correction
+2026-11-06T09:44:42Z | P0006 | TEST | Final checks: 293 passed; standalone OpenAPI lint OK; strict contract-file whitespace OK; audit whitespace OK except immutable inherited blank-at-eol entry, explicitly excluded.
+2026-11-06T09:44:42Z | P0006 | DECISION | Audit coverage reviewed for initial discovery, scoped reads, restore, failing regression, proposal edits, successful tests/lint and failed/retried whitespace/diff checks; log/STATUS.md remains outside staging and untouched.
+2026-11-06T09:45:06Z | P0006 | CMD | git add -- log/CODEX_LOG.md | exit 0 | staged append-only task audit
+2026-11-06T09:45:06Z | P0006 | DECISION | Commit validated task artifacts using required message; then append actual commit SHA and END, and persist closeout in an audit-only commit using same required task message. END identifies validated implementation SHA; final HEAD includes audit persistence.
+2026-11-06T09:45:06Z | P0006 | CMD | git add -- log/CODEX_LOG.md | exit 0 | refreshed audit staging before implementation commit

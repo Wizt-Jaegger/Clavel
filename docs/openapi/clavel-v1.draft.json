@@ -1,0 +1,3550 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Clavel proposed frontend contract",
+    "version": "1.0.0-draft.2",
+    "description": "Review-only proposal. No business endpoint is implemented. All examples are synthetic.",
+    "x-source-revision": "3cc9763f0f04d1e16d04b02a9d7b4900bc800a6d"
+  },
+  "x-availability": "design-time",
+  "x-fixture-provenance": {
+    "kind": "synthetic",
+    "source": "P0006 hand-authored draft",
+    "proves": "Schema and example mechanics only; no live business or model evidence."
+  },
+  "paths": {
+    "/v1/catalog": {
+      "get": {
+        "operationId": "v1_list_catalog",
+        "summary": "List catalog",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "foundation",
+        "x-required-roles": [
+          "viewer"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "item_id": "synthetic-item-1",
+                          "name": "Synthetic item",
+                          "compatibility": "unknown"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "item_id": "synthetic-item-1",
+                          "name": "Synthetic item",
+                          "compatibility": "unknown"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/inventory": {
+      "get": {
+        "operationId": "v1_list_inventory",
+        "summary": "List inventory",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "foundation",
+        "x-required-roles": [
+          "viewer"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "item_id": "synthetic-item-1",
+                          "stock": "unknown",
+                          "observed_at": null,
+                          "source_version": null
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "item_id": "synthetic-item-1",
+                          "stock": "unknown",
+                          "observed_at": null,
+                          "source_version": null
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/segments": {
+      "get": {
+        "operationId": "v1_list_segments",
+        "summary": "List segments",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "foundation",
+        "x-required-roles": [
+          "viewer"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "segment_id": "synthetic-segment-1",
+                          "model_version": "synthetic-model-1",
+                          "member_count": 10
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "segment_id": "synthetic-segment-1",
+                          "model_version": "synthetic-model-1",
+                          "member_count": 10
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/recommendations/preview": {
+      "post": {
+        "operationId": "v1_preview_recommendations",
+        "summary": "Preview recommendations",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API. While recommendations are paused, return 503 recommendations_paused with retryable=false, even with a valid bundle and eligible items; resume only after role-checked enable.",
+        "x-availability": "design-time",
+        "x-stage": "foundation",
+        "x-required-roles": [
+          "viewer"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Preview"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "state": "ready",
+                      "segment_id": "synthetic-segment-1",
+                      "bundle": {
+                        "bundle_version": "synthetic-bundle-1",
+                        "model_version": "synthetic-model-1",
+                        "score_version": "synthetic-score-1"
+                      },
+                      "items": [
+                        {
+                          "item_id": "synthetic-item-1",
+                          "score": 2.0,
+                          "stock": "in_stock",
+                          "compatibility": "verified",
+                          "stock_observed_at": "2026-01-01T00:00:00Z",
+                          "stock_source_version": "synthetic-inventory-1"
+                        }
+                      ],
+                      "empty_reason": null
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "state": "empty",
+                      "segment_id": "synthetic-segment-1",
+                      "bundle": {
+                        "bundle_version": "synthetic-bundle-1",
+                        "model_version": "synthetic-model-1",
+                        "score_version": "synthetic-score-1"
+                      },
+                      "items": [],
+                      "empty_reason": "no_eligible_items"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/PreviewUnavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewRequest"
+              },
+              "examples": {
+                "happy": {
+                  "summary": "Synthetic draft; mechanics only, no live evidence",
+                  "value": {
+                    "segment_id": "synthetic-segment-1",
+                    "model_version": "synthetic-model-1",
+                    "compatibility_context_id": "synthetic-context-1",
+                    "limit": 10
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/events": {
+      "post": {
+        "operationId": "v1_ingest_event",
+        "summary": "Ingest event",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "foundation",
+        "x-required-roles": [
+          "event_writer"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventReceipt"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "event_id": "synthetic-event-1",
+                      "state": "accepted",
+                      "duplicate": false,
+                      "request_id": "synthetic-request-1"
+                    }
+                  },
+                  "duplicate": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "event_id": "synthetic-event-1",
+                      "state": "accepted",
+                      "duplicate": true,
+                      "request_id": "synthetic-request-1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequest"
+              },
+              "examples": {
+                "happy": {
+                  "summary": "Synthetic draft; mechanics only, no live evidence",
+                  "value": {
+                    "event_id": "synthetic-event-1",
+                    "event_type": "click",
+                    "item_id": "synthetic-item-1",
+                    "segment_id": "synthetic-segment-1",
+                    "model_version": "synthetic-model-1",
+                    "occurred_at": "2026-01-01T00:00:00Z",
+                    "schema_version": "v1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/reports/dashboard": {
+      "get": {
+        "operationId": "v1_get_dashboard",
+        "summary": "Get dashboard",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "analyst"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dashboard"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "as_of": "2026-01-01T00:00:00Z",
+                      "metrics": [
+                        {
+                          "name": "recommendation_requests",
+                          "value": 12,
+                          "state": "available",
+                          "reason": null,
+                          "sample_count": 12
+                        }
+                      ]
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "as_of": null,
+                      "metrics": [
+                        {
+                          "name": "recommendation_requests",
+                          "value": null,
+                          "state": "unavailable",
+                          "reason": "not_measured",
+                          "sample_count": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/reports/clustering-quality/{model_version}": {
+      "get": {
+        "operationId": "v1_get_clustering_quality",
+        "summary": "Get clustering quality",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "analyst"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "name": "model_version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quality"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "model_version": "synthetic-model-1",
+                      "evaluated_at": "2026-01-01T00:00:00Z",
+                      "metrics": [
+                        {
+                          "name": "silhouette",
+                          "value": 0.25,
+                          "state": "available",
+                          "reason": null,
+                          "sample_count": 10
+                        }
+                      ]
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "model_version": "synthetic-model-1",
+                      "evaluated_at": null,
+                      "metrics": [
+                        {
+                          "name": "silhouette",
+                          "value": null,
+                          "state": "unavailable",
+                          "reason": "not_measured",
+                          "sample_count": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/experiments": {
+      "get": {
+        "operationId": "v1_list_experiments",
+        "summary": "List experiments",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "analyst"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "experiment_id": "synthetic-experiment-1",
+                          "state": "completed",
+                          "dataset_version": "synthetic-dataset-1",
+                          "created_at": "2026-01-01T00:00:00Z"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "experiment_id": "synthetic-experiment-1",
+                          "state": "completed",
+                          "dataset_version": "synthetic-dataset-1",
+                          "created_at": "2026-01-01T00:00:00Z"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/experiments/{experiment_id}/candidates": {
+      "get": {
+        "operationId": "v1_list_candidates",
+        "summary": "List candidates",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "analyst"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CandidatePage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "candidate_id": "synthetic-candidate-1",
+                          "experiment_id": "synthetic-experiment-1",
+                          "model_version": "synthetic-model-1",
+                          "state": "evaluated",
+                          "metrics": [
+                            {
+                              "name": "silhouette",
+                              "value": null,
+                              "state": "unavailable",
+                              "reason": "not_measured",
+                              "sample_count": null
+                            }
+                          ]
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "candidate_id": "synthetic-candidate-1",
+                          "experiment_id": "synthetic-experiment-1",
+                          "model_version": "synthetic-model-1",
+                          "state": "evaluated",
+                          "metrics": [
+                            {
+                              "name": "silhouette",
+                              "value": null,
+                              "state": "unavailable",
+                              "reason": "not_measured",
+                              "sample_count": null
+                            }
+                          ]
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/tuning/status": {
+      "get": {
+        "operationId": "v1_get_tuning_status",
+        "summary": "Get tuning status",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TuningStatus"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "state": "idle",
+                      "active_experiment_id": null,
+                      "updated_at": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/tuning/limits": {
+      "get": {
+        "operationId": "v1_get_tuning_limits",
+        "summary": "Get tuning limits",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TuningLimits"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "state": "proposed",
+                      "max_candidates": 100,
+                      "max_duration_seconds": 3600,
+                      "max_parallel_runs": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/tuning/runs": {
+      "post": {
+        "operationId": "v1_start_tuning",
+        "summary": "Start tuning",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TuningReceipt"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "experiment_id": "synthetic-experiment-1",
+                      "state": "queued",
+                      "request_id": "synthetic-request-1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TuningRequest"
+              },
+              "examples": {
+                "happy": {
+                  "summary": "Synthetic draft; mechanics only, no live evidence",
+                  "value": {
+                    "dataset_version": "synthetic-dataset-1",
+                    "candidate_count": 3,
+                    "duration_seconds": 60
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/versions": {
+      "get": {
+        "operationId": "v1_list_versions",
+        "summary": "List versions",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "bundle": {
+                            "bundle_version": "synthetic-bundle-1",
+                            "model_version": "synthetic-model-1",
+                            "score_version": "synthetic-score-1"
+                          },
+                          "state": "active",
+                          "created_at": "2026-01-01T00:00:00Z"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "bundle": {
+                            "bundle_version": "synthetic-bundle-1",
+                            "model_version": "synthetic-model-1",
+                            "score_version": "synthetic-score-1"
+                          },
+                          "state": "active",
+                          "created_at": "2026-01-01T00:00:00Z"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    },
+    "/v1/rollbacks": {
+      "get": {
+        "operationId": "v1_list_rollbacks",
+        "summary": "List rollbacks",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollbackPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "rollback_id": "synthetic-rollback-1",
+                          "from_bundle_version": "synthetic-bundle-2",
+                          "to_bundle_version": "synthetic-bundle-1",
+                          "state": "completed",
+                          "occurred_at": "2026-01-01T00:00:00Z"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "rollback_id": "synthetic-rollback-1",
+                          "from_bundle_version": "synthetic-bundle-2",
+                          "to_bundle_version": "synthetic-bundle-1",
+                          "state": "completed",
+                          "occurred_at": "2026-01-01T00:00:00Z"
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      },
+      "post": {
+        "operationId": "v1_rollback_bundle",
+        "summary": "Rollback bundle",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rollback"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "rollback_id": "synthetic-rollback-1",
+                      "from_bundle_version": "synthetic-bundle-2",
+                      "to_bundle_version": "synthetic-bundle-1",
+                      "state": "completed",
+                      "occurred_at": "2026-01-01T00:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollbackRequest"
+              },
+              "examples": {
+                "happy": {
+                  "summary": "Synthetic draft; mechanics only, no live evidence",
+                  "value": {
+                    "expected_bundle_version": "synthetic-bundle-2",
+                    "target_bundle_version": "synthetic-bundle-1",
+                    "reason": "Synthetic recovery drill"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/recommendations/pause": {
+      "post": {
+        "operationId": "v1_pause_recommendations",
+        "summary": "Pause recommendations",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlState"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "state": "paused",
+                      "revision": "synthetic-revision-2",
+                      "updated_at": "2026-01-01T00:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlRequest"
+              },
+              "examples": {
+                "happy": {
+                  "summary": "Synthetic draft; mechanics only, no live evidence",
+                  "value": {
+                    "expected_revision": "synthetic-revision-1",
+                    "reason": "Synthetic operator drill"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/recommendations/enable": {
+      "post": {
+        "operationId": "v1_enable_recommendations",
+        "summary": "Enable recommendations",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "operator"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ControlState"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "state": "enabled",
+                      "revision": "synthetic-revision-2",
+                      "updated_at": "2026-01-01T00:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ControlRequest"
+              },
+              "examples": {
+                "happy": {
+                  "summary": "Synthetic draft; mechanics only, no live evidence",
+                  "value": {
+                    "expected_revision": "synthetic-revision-1",
+                    "reason": "Synthetic operator drill"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/reports/recommendation-activity": {
+      "get": {
+        "operationId": "v1_list_recommendation_activity",
+        "summary": "List recommendation activity",
+        "description": "PROPOSED ONLY. This operation is not registered by the runtime API.",
+        "x-availability": "design-time",
+        "x-stage": "emi",
+        "x-required-roles": [
+          "analyst"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic proposed success",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Correlation ID, also present in error bodies.",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]{1,64}$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityPage"
+                },
+                "examples": {
+                  "happy": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "activity_id": "synthetic-activity-1",
+                          "occurred_at": "2026-01-01T00:00:00Z",
+                          "segment_id": "synthetic-segment-1",
+                          "bundle_version": "synthetic-bundle-1",
+                          "result": "served",
+                          "item_count": 1
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "empty": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": null
+                      }
+                    }
+                  },
+                  "next_page": {
+                    "summary": "Synthetic draft; mechanics only, no live evidence",
+                    "value": {
+                      "items": [
+                        {
+                          "activity_id": "synthetic-activity-1",
+                          "occurred_at": "2026-01-01T00:00:00Z",
+                          "segment_id": "synthetic-segment-1",
+                          "bundle_version": "synthetic-bundle-1",
+                          "result": "served",
+                          "item_count": 1
+                        }
+                      ],
+                      "page": {
+                        "limit": 20,
+                        "next_cursor": "synthetic-cursor-2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Proposed authentication only; issuer and role claims await A03 review."
+      }
+    },
+    "parameters": {
+      "RequestId": {
+        "name": "X-Request-ID",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._-]{1,64}$"
+        },
+        "description": "Optional correlation ID. Invalid, repeated or absent values are replaced by a generated ID."
+      },
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 20
+        }
+      },
+      "Cursor": {
+        "name": "cursor",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "description": "Opaque cursor bound to operation, filters and snapshot; invalid or expired cursor returns 400."
+      }
+    },
+    "schemas": {
+      "Page": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "limit",
+          "next_cursor"
+        ],
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "bad_request",
+              "not_found",
+              "method_not_allowed",
+              "validation_error",
+              "http_error",
+              "internal_error"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "error",
+          "request_id"
+        ],
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]{1,64}$"
+          }
+        }
+      },
+      "Unavailable": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "reason",
+          "retryable",
+          "request_id"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "unavailable"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "not_implemented",
+              "no_active_bundle",
+              "missing_segment",
+              "version_mismatch",
+              "dependency_unavailable",
+              "recommendations_paused"
+            ]
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]{1,64}$"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "reason": {
+                  "const": "recommendations_paused"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "retryable": {
+                  "const": false
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CatalogItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item_id",
+          "name",
+          "compatibility"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "compatibility": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "incompatible",
+              "unknown"
+            ]
+          }
+        }
+      },
+      "InventoryItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item_id",
+          "stock",
+          "observed_at",
+          "source_version"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "stock": {
+            "type": "string",
+            "enum": [
+              "in_stock",
+              "out_of_stock",
+              "unknown",
+              "stale"
+            ]
+          },
+          "observed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "source_version": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "Segment": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "segment_id",
+          "model_version",
+          "member_count"
+        ],
+        "properties": {
+          "segment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "model_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "member_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "PreviewRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "segment_id",
+          "model_version",
+          "compatibility_context_id",
+          "limit"
+        ],
+        "properties": {
+          "segment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "model_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "compatibility_context_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          }
+        }
+      },
+      "Recommendation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item_id",
+          "score",
+          "stock",
+          "compatibility",
+          "stock_observed_at",
+          "stock_source_version"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0
+          },
+          "stock": {
+            "type": "string",
+            "enum": [
+              "in_stock"
+            ]
+          },
+          "compatibility": {
+            "type": "string",
+            "enum": [
+              "verified"
+            ]
+          },
+          "stock_observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stock_source_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "Bundle": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bundle_version",
+          "model_version",
+          "score_version"
+        ],
+        "properties": {
+          "bundle_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "model_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "score_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "Preview": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "segment_id",
+          "bundle",
+          "items",
+          "empty_reason"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "empty"
+            ]
+          },
+          "segment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "bundle": {
+            "$ref": "#/components/schemas/Bundle"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recommendation"
+            }
+          },
+          "empty_reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null,
+              "no_eligible_items"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "empty"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "items": {
+                  "maxItems": 0
+                },
+                "empty_reason": {
+                  "const": "no_eligible_items"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "items": {
+                  "minItems": 1
+                },
+                "empty_reason": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "EventRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "event_id",
+          "event_type",
+          "item_id",
+          "segment_id",
+          "model_version",
+          "occurred_at",
+          "schema_version"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "view",
+              "click",
+              "purchase"
+            ]
+          },
+          "item_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "segment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "model_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "schema_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          }
+        }
+      },
+      "EventReceipt": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "event_id",
+          "state",
+          "duplicate",
+          "request_id"
+        ],
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "accepted"
+            ]
+          },
+          "duplicate": {
+            "type": "boolean"
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]{1,64}$"
+          }
+        }
+      },
+      "Metric": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "value",
+          "state",
+          "reason",
+          "sample_count"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "recommendation_requests",
+              "eligible_items_returned",
+              "silhouette",
+              "davies_bouldin",
+              "recommendation_clicks"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "available",
+              "unavailable"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              null,
+              "not_measured",
+              "insufficient_data"
+            ]
+          },
+          "sample_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "unavailable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "null"
+                },
+                "reason": {
+                  "type": "string"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "value": {
+                  "type": "number"
+                },
+                "reason": {
+                  "type": "null"
+                },
+                "sample_count": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Dashboard": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "as_of",
+          "metrics"
+        ],
+        "properties": {
+          "as_of": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            }
+          }
+        }
+      },
+      "Quality": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "model_version",
+          "evaluated_at",
+          "metrics"
+        ],
+        "properties": {
+          "model_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "evaluated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            }
+          }
+        }
+      },
+      "Experiment": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "experiment_id",
+          "state",
+          "dataset_version",
+          "created_at"
+        ],
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "running",
+              "completed",
+              "failed"
+            ]
+          },
+          "dataset_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Candidate": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "experiment_id",
+          "model_version",
+          "state",
+          "metrics"
+        ],
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "experiment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "model_version": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "evaluated",
+              "rejected",
+              "promoted"
+            ]
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            }
+          }
+        }
+      },
+      "TuningStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "active_experiment_id",
+          "updated_at"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "idle",
+              "queued",
+              "running",
+              "failed"
+            ]
+          },
+          "active_experiment_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "TuningLimits": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "max_candidates",
+          "max_duration_seconds",
+          "max_parallel_runs"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "proposed"
+            ]
+          },
+          "max_candidates": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "max_duration_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3600
+          },
+          "max_parallel_runs": {
+            "type": "integer",
+            "const": 1
+          }
+        }
+      },
+      "TuningRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset_version",
+          "candidate_count",
+          "duration_seconds"
+        ],
+        "properties": {
+          "dataset_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "candidate_count": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3600
+          }
+        }
+      },
+      "TuningReceipt": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "experiment_id",
+          "state",
+          "request_id"
+        ],
+        "properties": {
+          "experiment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "queued"
+            ]
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]{1,64}$"
+          }
+        }
+      },
+      "Version": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bundle",
+          "state",
+          "created_at"
+        ],
+        "properties": {
+          "bundle": {
+            "$ref": "#/components/schemas/Bundle"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "active",
+              "retired",
+              "available"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Rollback": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rollback_id",
+          "from_bundle_version",
+          "to_bundle_version",
+          "state",
+          "occurred_at"
+        ],
+        "properties": {
+          "rollback_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "from_bundle_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "to_bundle_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "failed"
+            ]
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RollbackRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "expected_bundle_version",
+          "target_bundle_version",
+          "reason"
+        ],
+        "properties": {
+          "expected_bundle_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "target_bundle_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "ControlRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "expected_revision",
+          "reason"
+        ],
+        "properties": {
+          "expected_revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      },
+      "ControlState": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "revision",
+          "updated_at"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "paused",
+              "enabled"
+            ]
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "activity_id",
+          "occurred_at",
+          "segment_id",
+          "bundle_version",
+          "result",
+          "item_count"
+        ],
+        "properties": {
+          "activity_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "segment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "bundle_version": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "served",
+              "empty",
+              "unavailable"
+            ]
+          },
+          "item_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "CatalogPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CatalogItem"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "InventoryPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InventoryItem"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "SegmentPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Segment"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "ExperimentPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Experiment"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "CandidatePage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "VersionPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Version"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "RollbackPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rollback"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "ActivityPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "items",
+          "page"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Activity"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Error400": {
+        "description": "Invalid or expired pagination cursor / bad request",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "bad_request",
+                    "message": "Bad request"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error401": {
+        "description": "Missing or invalid bearer credentials",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "http_error",
+                    "message": "Request failed"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error403": {
+        "description": "Authenticated caller lacks a required role",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "http_error",
+                    "message": "Request failed"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error404": {
+        "description": "Requested resource does not exist",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "not_found",
+                    "message": "Not found"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error409": {
+        "description": "Stale revision, incompatible bundle or conflicting event ID",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "http_error",
+                    "message": "Request failed"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "Payload or parameter validation failed",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "validation_error",
+                    "message": "Request validation failed"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error500": {
+        "description": "Unexpected server error",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "error": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "error": {
+                    "code": "internal_error",
+                    "message": "Internal server error"
+                  },
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Unavailable": {
+        "description": "Dependency or active bundle unavailable; not an empty success.",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Unavailable"
+            },
+            "examples": {
+              "not_implemented": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "not_implemented",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "no_active_bundle": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "no_active_bundle",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "missing_segment": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "missing_segment",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "version_mismatch": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "version_mismatch",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "dependency_unavailable": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "dependency_unavailable",
+                  "retryable": true,
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PreviewUnavailable": {
+        "description": "Preview unavailable, including while recommendations are paused. A paused preview returns 503 with recommendations_paused and retryable=false; only role-checked enable can lift the pause. Never serve cached recommendations or report an empty success while paused.",
+        "headers": {
+          "X-Request-ID": {
+            "description": "Correlation ID, also present in error bodies.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9._-]{1,64}$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Unavailable"
+            },
+            "examples": {
+              "not_implemented": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "not_implemented",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "no_active_bundle": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "no_active_bundle",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "missing_segment": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "missing_segment",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "version_mismatch": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "version_mismatch",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "dependency_unavailable": {
+                "summary": "Synthetic draft; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "dependency_unavailable",
+                  "retryable": true,
+                  "request_id": "synthetic-request-1"
+                }
+              },
+              "recommendations_paused": {
+                "summary": "Synthetic paused preview; mechanics only, no live evidence",
+                "value": {
+                  "state": "unavailable",
+                  "reason": "recommendations_paused",
+                  "retryable": false,
+                  "request_id": "synthetic-request-1"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
