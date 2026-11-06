@@ -1056,3 +1056,12 @@ START P0007 | 2026-11-06T17:16:22Z | main | 8166fbc0a3c535150e6b1e6998021f4eae7b
 2026-11-06T17:19:32Z | P0007 | CMD | git diff --check -- docs/REVISION_P0007.md log/CODEX_LOG.md | exit 0 | clean
 2026-11-06T17:19:32Z | P0007 | CMD | git status --short | exit 0 | M log/CODEX_LOG.md;  M log/STATUS.md; ?? docs/REVISION_P0007.md
 2026-11-06T17:19:32Z | P0007 | DECISION | Pre-commit log coverage audit complete: rules/task/template and evidence reads, failed diff/retry, all commands/tests, inventory, edits and retained gates recorded; kit and orchestrator status untouched
+2026-11-06T17:19:58Z | P0007 | CMD | git add -- docs/REVISION_P0007.md log/CODEX_LOG.md | exit 0 | completed
+2026-11-06T17:19:58Z | P0007 | CMD | git diff --cached --check | exit 0 | completed
+2026-11-06T17:19:58Z | P0007 | CMD | git diff --cached --name-only | exit 0 | docs/REVISION_P0007.md; log/CODEX_LOG.md
+2026-11-06T17:19:58Z | P0007 | CMD | git commit -m "P0007 contract review and foundation gate" | exit 0 | [main 99f0c35] P0007 contract review and foundation gate;  2 files changed, 190 insertions(+);  create mode 100644 docs/REVISION_P0007.md
+2026-11-06T17:19:58Z | P0007 | CMD | git rev-parse HEAD | exit 0 | 99f0c35ad23a5ce9748ee8a52bc1ae1161ecd9d5
+2026-11-06T17:19:58Z | P0007 | COMMIT | 99f0c35ad23a5ce9748ee8a52bc1ae1161ecd9d5 | P0007 contract review and foundation gate
+2026-11-06T17:19:58Z | P0007 | EDIT | log/CODEX_LOG.md: append successful commit and END; close with a log-only bookkeeping commit so task evidence and closure are committed
+2026-11-06T17:19:58Z | P0007 | DECISION | Final task evidence SHA is the commit above; subsequent commit contains only append-only log closure, not source/evidence changes. Independent review must use the final supplied commit and its pinned source
+END P0007 | Awaiting review | 99f0c35ad23a5ce9748ee8a52bc1ae1161ecd9d5 | independent automatic Codex review pending; no live checks claimed | orchestrator runs reviewer and records decision; closure-only commit follows
