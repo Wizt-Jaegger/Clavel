@@ -28,3 +28,27 @@ Estas pruebas verifican la infraestructura y la mecánica del ajuste. P0010
 sigue necesitando su implementación, pruebas específicas y un nuevo veredicto
 independiente. El orquestador debe reintentar únicamente P0010 después de pasar
 su estado de Blocked a Pending; no se marca Accepted manualmente.
+
+## Resultado del reintento
+
+P0010 **Accepted** por revisión automática independiente el 2026-11-06 a las
+19:52:08 UTC. SHA exacto revisado:
+`9714d8a03ab5894dfcae48dc695361b2bf7827e4`.
+
+El reintento implementó la revisión `0004_customer_session_schema`, después de
+inventario, con sujetos registrados/anónimos, referencias opacas únicas,
+sesiones opcionalmente enlazadas y actividad finita y ordenada. La política de
+vinculación anónima a registrada continúa separada y Pending. No hubo cambios
+OpenAPI ni activación de flujos de identificación o autorización.
+
+- Autor: 83 pruebas PostgreSQL de esquemas/migraciones correctas.
+- Orquestador: 494 pruebas y 6 subpruebas correctas; una advertencia de deprecación.
+- Revisor independiente: 84 pruebas correctas, 0 omitidas, incluyendo su propia
+  comprobación de concurrencia, enlaces inválidos y persistencia anónima.
+- Revisor terminó con código 0 y última línea stdout exactamente
+  `VERDICT: ACCEPTED`. Solo entonces el orquestador actualizó el estado.
+
+La evidencia verifica mecánica real de PostgreSQL sobre datos sintéticos; no es
+aceptación de identidades, datos o servicios de producción. Los registros previos
+al ajuste se conservaron en `log/runs/P0010-before-temp-resource-fix/` (ignorados
+por Git). No se ejecutaron otras tareas ni se publicaron commits al remoto.
