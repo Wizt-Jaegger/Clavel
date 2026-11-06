@@ -5,3 +5,7 @@ log/runs/
 __pycache__/
 .pytest_cache/
 .venv/
+.env
+.env.*
+!.env.example
+!.env.shared.example
