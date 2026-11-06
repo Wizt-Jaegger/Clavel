@@ -2312,3 +2312,86 @@ END P0013 | Awaiting review | b1e2b51c134db40ec91849d1ba6cfe730e60ac1b | indepen
 2026-11-06T22:26:08Z | P0013 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 549 passed, 1 warning, 6 subtests passed in 132.30s (0:02:12)
 2026-11-06T22:29:11Z | P0013 | REVIEW | automatic Codex review; source 9b4f9bf38f3bb52bd2ef359e02bc539b6663c8e8; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T22:29:11Z | P0013 | ORCH | ACCEPTED by automatic review at 9b4f9bf38f3bb52bd2ef359e02bc539b6663c8e8
+2026-11-06T22:29:11Z | P0014 | ORCH | starting from a2f98bb7c8cb27e53376ad50cd5962500ede2613
+START P0014 | 2026-11-06T22:29:32Z | main | a2f98bb7c8cb27e53376ad50cd5962500ede2613
+2026-11-06T22:29:32Z | P0014 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && sed -n '1,240p' AGENTS.md | exit 0 | main; existing orchestrator changes in log/CODEX_LOG.md and log/STATUS.md
+2026-11-06T22:29:32Z | P0014 | READ | AGENTS.md: session rules
+2026-11-06T22:29:32Z | P0014 | DECISION | User confirms prerequisites Accepted; current branch main; preserve existing log changes; do not edit or stage log/STATUS.md as instructed; kit is read-only
+2026-11-06T22:29:32Z | P0014 | CMD | rg -n '^\| P0014 \|' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0 | targeted instruction read
+2026-11-06T22:29:32Z | P0014 | READ | kit INDEX.md P0014 row
+2026-11-06T22:29:32Z | P0014 | CMD | sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0014.md | exit 0 | targeted instruction read
+2026-11-06T22:29:32Z | P0014 | READ | kit tasks/P0014.md
+2026-11-06T22:29:32Z | P0014 | CMD | sed -n '1,100p' log/log.sh | exit 0 | targeted instruction read
+2026-11-06T22:29:32Z | P0014 | READ | log/log.sh
+2026-11-06T22:29:42+00:00 | P0014 | CMD | rg --files -g '!log/**' -g '!tasks/**' -g '!docs/**' -g '!CONTEXT.md' -g '!INDEX.md' -g '!uv.lock' -g '!*.egg-info/**' -g '!.venv/**' | head -70 | exit 0 | repository path discovery / preserve existing changes
+2026-11-06T22:29:42+00:00 | P0014 | CMD | ls -d migrations app app/database tests .venv 2>/dev/null | exit 2 | repository path discovery / preserve existing changes
+2026-11-06T22:29:42+00:00 | P0014 | CMD | git diff --stat -- log/CODEX_LOG.md log/STATUS.md | exit 0 | repository path discovery / preserve existing changes
+2026-11-06T22:29:51+00:00 | P0014 | CMD | sed -n '1,180p' pyproject.toml | exit 0 | targeted implementation context
+2026-11-06T22:29:51+00:00 | P0014 | READ | pyproject.toml
+2026-11-06T22:29:51+00:00 | P0014 | CMD | sed -n '1,260p' src/clavel/database/customers.py | exit 0 | targeted implementation context
+2026-11-06T22:29:51+00:00 | P0014 | READ | src/clavel/database/customers.py
+2026-11-06T22:29:51+00:00 | P0014 | CMD | sed -n '1,280p' src/clavel/database/sales.py | exit 0 | targeted implementation context
+2026-11-06T22:29:51+00:00 | P0014 | READ | src/clavel/database/sales.py
+2026-11-06T22:29:51+00:00 | P0014 | CMD | sed -n '1,240p' migrations/versions/0005_sales_return_schema.py | exit 0 | targeted implementation context
+2026-11-06T22:29:51+00:00 | P0014 | READ | migrations/versions/0005_sales_return_schema.py
+2026-11-06T22:29:51+00:00 | P0014 | CMD | sed -n '1,240p' tests/integration/conftest.py | exit 0 | targeted implementation context
+2026-11-06T22:29:51+00:00 | P0014 | READ | tests/integration/conftest.py
+2026-11-06T22:29:51+00:00 | P0014 | CMD | sed -n '1,280p' tests/integration/test_sales_return_schema.py | exit 0 | targeted implementation context
+2026-11-06T22:29:51+00:00 | P0014 | READ | tests/integration/test_sales_return_schema.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | sed -n '1,220p' tests/integration/test_migrations.py | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:12+00:00 | P0014 | READ | tests/integration/test_migrations.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | sed -n '280,370p' tests/integration/test_sales_return_schema.py | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:12+00:00 | P0014 | READ | tests/integration/test_sales_return_schema.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | sed -n '1,200p' migrations/env.py | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:12+00:00 | P0014 | READ | migrations/env.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | sed -n '1,170p' src/clavel/database/__init__.py | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:12+00:00 | P0014 | READ | src/clavel/database/__init__.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | sed -n '1,110p' src/clavel/database/inventory.py | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:12+00:00 | P0014 | READ | src/clavel/database/inventory.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | sed -n '1,200p' tests/integration/test_customer_session_schema.py | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:12+00:00 | P0014 | READ | tests/integration/test_customer_session_schema.py
+2026-11-06T22:30:12+00:00 | P0014 | CMD | command -v initdb; command -v pg_ctl; id -u; .venv/bin/python --version | exit 0 | inspect migration/test conventions and local PostgreSQL availability
+2026-11-06T22:30:22+00:00 | P0014 | CMD | rg -n 'database\..*import|compare_metadata|HEAD =|0005_sales' tests/integration migrations/env.py | exit 0 | locate canonical head and metadata imports
+2026-11-06T22:30:22+00:00 | P0014 | DECISION | Add three telemetry tables: subject-bound requests, ranked generated results, and UUID-keyed typed events (exposure/click/add_to_cart/purchase). Generated results do not imply exposure. Require explicit anonymous or registered customer linkage; unresolved sessions cannot be attributed. Optional session must belong to request customer via composite FK. Composite event/result/request keys reject cross-subject and cross-SKU links; no API/provider integration.
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | src/clavel/database/customers.py: session/customer candidate key for telemetry FK
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | src/clavel/database/telemetry.py: request, generated result and event metadata with subject-safe constraints; documented local semantics
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | migrations/versions/0006_recommendation_telemetry.py: reversible telemetry DDL and session candidate key
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | migrations/env.py: register full telemetry metadata
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | tests/integration/test_migrations.py: advance expected migration head
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | tests/integration/test_customer_session_schema.py: compare full current metadata
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | tests/integration/test_inventory_schema.py: compare full current metadata
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | tests/integration/test_catalog_schema.py: compare full current metadata
+2026-11-06T22:31:31+00:00 | P0014 | EDIT | tests/integration/test_sales_return_schema.py: compare full current metadata
+2026-11-06T22:31:31+00:00 | P0014 | ERROR | Previous context-search driver emitted Python invalid escape SyntaxWarning; search succeeded; use raw strings for regexes.
+2026-11-06T22:33:19Z | P0014 | EDIT | tests/integration/test_recommendation_telemetry.py: synthetic PostgreSQL behavioral checks for separation, replay, IDs, constraints, cross-subject/SKU requests, updates/deletes, metadata, timezone round trip and reversible migration
+2026-11-06T22:33:41+00:00 | P0014 | CMD | git diff --check | exit 0 | whitespace/scope review; orchestrator status file remains unstaged
+2026-11-06T22:33:41+00:00 | P0014 | CMD | git diff --stat | exit 0 | whitespace/scope review; orchestrator status file remains unstaged
+2026-11-06T22:33:41+00:00 | P0014 | CMD | git status --short | exit 0 | whitespace/scope review; orchestrator status file remains unstaged
+2026-11-06T22:33:41+00:00 | P0014 | CMD | sed -n '40,75p' src/clavel/database/customers.py | exit 0 | whitespace/scope review; orchestrator status file remains unstaged
+2026-11-06T22:33:41+00:00 | P0014 | READ | src/clavel/database/customers.py: verify candidate key is on sessions
+2026-11-06T22:34:24+00:00 | P0014 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_recommendation_telemetry.py tests/integration/test_migrations.py -q | exit 0 | 62 passed in 55.76s
+2026-11-06T22:34:24+00:00 | P0014 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_recommendation_telemetry.py tests/integration/test_migrations.py -q | 62 passed in 55.76s | synthetic data in real disposable PostgreSQL; no live usage/provider evidence
+2026-11-06T22:34:51+00:00 | P0014 | CMD | git diff -- migrations/env.py src/clavel/database/customers.py tests/integration/test_migrations.py tests/integration/test_catalog_schema.py tests/integration/test_customer_session_schema.py tests/integration/test_inventory_schema.py tests/integration/test_sales_return_schema.py | exit 0 | final schema and migration review
+2026-11-06T22:34:51+00:00 | P0014 | CMD | sed -n '1,155p' src/clavel/database/telemetry.py | exit 0 | final schema and migration review
+2026-11-06T22:34:51+00:00 | P0014 | READ | src/clavel/database/telemetry.py
+2026-11-06T22:34:51+00:00 | P0014 | CMD | sed -n '1,140p' migrations/versions/0006_recommendation_telemetry.py | exit 0 | final schema and migration review
+2026-11-06T22:34:51+00:00 | P0014 | READ | migrations/versions/0006_recommendation_telemetry.py
+2026-11-06T22:34:51+00:00 | P0014 | CMD | git diff --check | exit 0 | final schema and migration review
+2026-11-06T22:35:29+00:00 | P0014 | CMD | git diff --numstat && git ls-files --others --exclude-standard | exit 0 | scope includes telemetry implementation, migration registration, existing head metadata checks and audit log only; STATUS change predates session
+2026-11-06T22:35:29+00:00 | P0014 | DECISION | Review evidence: direct PostgreSQL constraint enforcement covers explicit generation/event separation, UUID replay prevention, required subject keys, wrong-subject request/result/session links, ungenerated SKUs, update/delete protection, UTC persistence and metadata/migration round trip. Local schema vocabulary is exposure/click/add_to_cart/purchase, with no provider protocol assumption. No OpenAPI changes or live acceptance claims.
+2026-11-06T22:36:19+00:00 | P0014 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py tests/integration/test_customer_session_schema.py tests/integration/test_sales_return_schema.py -q | exit 1 | FAILED tests/integration/test_catalog_schema.py::test_catalog_upgrade_downgrade_upgrade; 1 failed, 135 passed in 106.11s (0:01:46)
+2026-11-06T22:36:19+00:00 | P0014 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_catalog_schema.py tests/integration/test_inventory_schema.py tests/integration/test_customer_session_schema.py tests/integration/test_sales_return_schema.py -q | FAILED tests/integration/test_catalog_schema.py::test_catalog_upgrade_downgrade_upgrade; 1 failed, 135 passed in 106.11s (0:01:46) | prior schema compatibility and metadata parity; synthetic data in disposable PostgreSQL
+2026-11-06T22:36:27+00:00 | P0014 | CMD | sed -n '155,210p' tests/integration/test_catalog_schema.py | exit 0 | inspect failed hardcoded current-head table expectation
+2026-11-06T22:36:27+00:00 | P0014 | READ | tests/integration/test_catalog_schema.py:155-210
+2026-11-06T22:36:27+00:00 | P0014 | ERROR | Regression run: catalog head table-list assertion omits three new telemetry tables; 135 other checks passed. Correct the expected current schema and rerun the catalog suite.
+2026-11-06T22:36:40+00:00 | P0014 | EDIT | tests/integration/test_catalog_schema.py: include new telemetry tables in explicit head table-list expectation; preserve baseline downgrade assertions
+2026-11-06T22:37:06+00:00 | P0014 | CMD | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_catalog_schema.py -q | exit 0 | 31 passed in 25.75s
+2026-11-06T22:37:06+00:00 | P0014 | TEST | CLAVEL_REQUIRE_POSTGRES=1 .venv/bin/python -m pytest tests/integration/test_catalog_schema.py -q | 31 passed in 25.75s | corrected catalog head expectation; disposable PostgreSQL with synthetic data
+2026-11-06T22:37:31+00:00 | P0014 | DECISION | Done-when evidence ready for independent Codex reviewer: 198 distinct checks passed across six schema/migration suites (62 telemetry+migrations, 105 inventory/customer/sales, 31 catalog rerun). Catalog expectation corrected after logged initial failure. No skips; CLAVEL_REQUIRE_POSTGRES=1 enforced. No live evidence required or claimed; no blockers. Status Awaiting review, never Accepted; STATUS remains orchestrator-managed.
+2026-11-06T22:37:31+00:00 | P0014 | CMD | git diff --check | exit 0 | final staged scope / whitespace validation
+2026-11-06T22:37:31+00:00 | P0014 | CMD | git add -- log/CODEX_LOG.md migrations/env.py migrations/versions/0006_recommendation_telemetry.py src/clavel/database/customers.py src/clavel/database/telemetry.py tests/integration/test_catalog_schema.py tests/integration/test_customer_session_schema.py tests/integration/test_inventory_schema.py tests/integration/test_migrations.py tests/integration/test_sales_return_schema.py tests/integration/test_recommendation_telemetry.py | exit 0 | final staged scope / whitespace validation
+2026-11-06T22:37:31+00:00 | P0014 | CMD | git diff --cached --check | exit 0 | final staged scope / whitespace validation
+2026-11-06T22:37:31+00:00 | P0014 | CMD | git diff --cached --stat | exit 0 | final staged scope / whitespace validation
+2026-11-06T22:37:31+00:00 | P0014 | CMD | git diff --cached --name-only | exit 0 | final staged scope / whitespace validation
+2026-11-06T22:37:31+00:00 | P0014 | READ | log/CODEX_LOG.md: audited P0014 events for all implementation/test edits, commands, reads, failed regression and successful retry
+2026-11-06T22:37:31+00:00 | P0014 | DECISION | Audit complete. Commit only the 11 staged task paths; preserve pre-existing orchestrator STATUS modification. Final audit refresh will stage log/CODEX_LOG.md before the validated task commit; post-commit SHA/END events necessarily append after that commit.

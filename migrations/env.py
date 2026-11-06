@@ -5,7 +5,7 @@ from sqlalchemy import create_engine, pool
 from sqlalchemy.engine import make_url
 
 from clavel.core.settings import load_settings
-from clavel.database.sales import metadata
+from clavel.database.telemetry import metadata
 
 
 def run_migrations() -> None:

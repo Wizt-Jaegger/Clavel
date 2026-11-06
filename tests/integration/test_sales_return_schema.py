@@ -13,7 +13,8 @@ import pytest
 import sqlalchemy as sa
 from sqlalchemy.engine import make_url
 
-from clavel.database.sales import metadata, sales_lines, sales_orders, sales_returns
+from clavel.database.sales import sales_lines, sales_orders, sales_returns
+from clavel.database.telemetry import metadata
 from tests.integration.test_migrations import HEAD, revisions, run_alembic, tables
 
 

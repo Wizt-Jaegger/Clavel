@@ -42,6 +42,7 @@ sessions = sa.Table(
     sa.Column("customer_id", sa.BigInteger, sa.ForeignKey("customers.id")),
     sa.Column("started_at", sa.DateTime(timezone=True), nullable=False),
     sa.Column("last_activity_at", sa.DateTime(timezone=True), nullable=False),
+    sa.UniqueConstraint("id", "customer_id", name="session_id_customer_unique"),
     sa.CheckConstraint(
         "opaque_ref <> '' AND opaque_ref = btrim(opaque_ref)",
         name="session_ref_valid",
