@@ -66,11 +66,16 @@ fixed codes (`unsupported_version`, `invalid_record_type`, `invalid_row`,
 or unexpected field names. Breaking input changes require a new version and
 explicit mapping; v1 is never silently reinterpreted.
 
-This is row validation only. A future assembler/resolver must verify source
+This function performs row validation only. An assembler/resolver must verify source
 namespaces, SKU/customer existence, complete orders, consistent repeated headers,
 duplicates/replays, sale links and cumulative return quantities in repository
 transactions. Unknown identifiers are not proof of existence. No demographic,
 stock, compatibility or recommendation eligibility conclusions follow.
+
+P0020 supplies that assembler/resolver for offline canonical JSONL files; see
+[offline import operations and rerun semantics](../../../docs/P0020_OFFLINE_IMPORT.md).
+It resolves existing references and checks complete-order replay and return
+limits in one PostgreSQL transaction. Provider completeness remains external.
 
 Reviewer evidence: `.venv/bin/python -m pytest -q tests/test_import_validation.py`
 exercises malformed timestamps/currency, missing cost versus zero, invalid
