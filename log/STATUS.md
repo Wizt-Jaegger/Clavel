@@ -3,7 +3,7 @@
 | Task | Status | Branch/SHA | Tests | Blocker | Reviewer/date | Next |
 |---|---|---|---|---|---|---|
 | P0001 | Accepted | 1b86090 | 3/3 unittest checks pass locally and in clean export; shell syntax and whitespace pass | human accepted 2026-11-06T08:40:17Z | — | Confirm branch, stage explicit P0001 files, commit, request review |
-| P0002 | Blocked | b7d784d | — | failed 2 attempts: no commit was created for the task uncommitted changes remain verify command `py | — | — |
+| P0002 | Pending | b7d784d | — | failed 2 attempts: no commit was created for the task uncommitted changes remain verify command `py | — | — |
 | P0003 | Pending | — | — | — | — | — |
 | P0004 | Pending | — | — | — | — | — |
 | P0005 | Pending | — | — | — | — | — |

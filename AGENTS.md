@@ -9,6 +9,7 @@ Stack: Python, FastAPI, PostgreSQL, pytest, REST, modular monolith. BIRCH cluste
 4. One task per session. Work and commit directly on `main` (no task branches). Do not touch unrelated files. No refactors outside scope.
 5. Replies stay short: changed paths, commands + result, SHA, next step. No restating the prompt.
 6. Paths in tasks are references: discover real paths first. Empty tree is OK only for bootstrap tasks.
+7. Python env: use a project-local `.venv` (`uv venv` or `python -m venv`), install dependencies there, and run tests as `.venv/bin/python -m pytest`. Never rely on a global pytest.
 
 ## Work rules
 - Smallest relevant test suite plus the task's "Done when" check. Commit only after validation, with the message in the task file.
