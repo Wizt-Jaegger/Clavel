@@ -11,7 +11,7 @@
 | P0007 | Accepted | 9bcc5217943eb68b6b51fc16fc8d7b7a6d115fd1 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:22:20Z | — |
 | P0008 | Accepted | 3ac79a925632fd18f9ccc2525467b368ad94063d | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:31:57Z | — |
 | P0009 | Accepted | 7a12f55e658d7e8ef861bf97eb0adf1e635679e9 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:40:32Z | — |
-| P0010 | Pending | e443f9e3563e4555662503af3206f03f63d82c94 | — | retry after permitting isolated temporary PostgreSQL fixtures in independent review | — | — |
+| P0010 | Accepted | 9714d8a03ab5894dfcae48dc695361b2bf7827e4 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T19:52:08Z | — |
 | P0011 | Accepted | 69431f8c4cc1dceff528ddde0b728b25c4082d45 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:12:44Z | — |
 | P0012 | Accepted | fa5125938dde418fdd24eddb92cbe0c2742acb40 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:28:03Z | — |
 | P0013 | Pending | — | — | — | — | — |

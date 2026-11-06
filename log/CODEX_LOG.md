@@ -2230,3 +2230,9 @@ START P0010 | 2026-11-06T19:42:57.883610+00:00 | main | 6331c5a14eabcf986b6f9595
 2026-11-06T19:47:34.450113+00:00 | P0010 | CMD | python heredoc verified append-only audit and remaining diff paths using git rev-parse HEAD, git show HEAD:log/CODEX_LOG.md, git diff --name-only | exit 0 | only audit and pre-existing STATUS changes remain
 2026-11-06T19:47:34.450113+00:00 | P0010 | DECISION | Completion records final implementation SHA below; seal these post-commit records in a log-only commit with the prescribed task message. Audit commit identity/result is available in Git history to avoid a self-referential commit hash.
 END P0010 | Awaiting review | 7845f3b03d705ac94a856ddc10bc7a2b97c972cc | separate anonymous-to-known linkage policy Pending; no task blockers | independent Codex review; orchestrator manages STATUS
+2026-11-06T19:47:39Z | P0010 | ORCH | attempt 1: codex exit 0; full output log/runs/P0010-impl1.txt
+2026-11-06T19:48:01.162913+00:00 | P0010 | READ | log/CODEX_LOG.md | inspect task commit/check/review stage during single-task retry
+2026-11-06T19:49:08Z | P0010 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 494 passed, 1 warning, 6 subtests passed in 88.63s (0:01:28)
+2026-11-06T19:49:20.540581+00:00 | P0010 | READ | log/CODEX_LOG.md | check general-suite and independent-review progress
+2026-11-06T19:52:08Z | P0010 | REVIEW | automatic Codex review; source 9714d8a03ab5894dfcae48dc695361b2bf7827e4; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-06T19:52:08Z | P0010 | ORCH | ACCEPTED by automatic review at 9714d8a03ab5894dfcae48dc695361b2bf7827e4
