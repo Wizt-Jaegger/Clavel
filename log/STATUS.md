@@ -11,7 +11,7 @@
 | P0007 | Accepted | 9bcc5217943eb68b6b51fc16fc8d7b7a6d115fd1 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:22:20Z | — |
 | P0008 | Accepted | 3ac79a925632fd18f9ccc2525467b368ad94063d | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:31:57Z | — |
 | P0009 | Accepted | 7a12f55e658d7e8ef861bf97eb0adf1e635679e9 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T17:40:32Z | — |
-| P0010 | Pending | — | — | — | — | — |
+| P0010 | Blocked | e443f9e3563e4555662503af3206f03f63d82c94 | — | failed 2 attempts: reviewer stdout did not end with exact VERDICT: ACCEPTED | — | — |
 | P0011 | Pending | — | — | — | — | — |
 | P0012 | Pending | — | — | — | — | — |
 | P0013 | Pending | — | — | — | — | — |
