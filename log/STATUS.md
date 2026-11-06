@@ -2,7 +2,7 @@
 
 | Task | Status | Branch/SHA | Tests | Blocker | Reviewer/date | Next |
 |---|---|---|---|---|---|---|
-| P0001 | In progress | main / base 5489d56822bd8b1ae1546cfcbe178f6ec3bb9d0f; branch choice pending | 3/3 unittest checks pass locally and in clean export; shell syntax and whitespace pass | Branch choice and git write approval pending | — | Confirm branch, stage explicit P0001 files, commit, request review |
+| P0001 | Accepted | 1b86090 | 3/3 unittest checks pass locally and in clean export; shell syntax and whitespace pass | human accepted 2026-11-06T08:40:17Z | — | Confirm branch, stage explicit P0001 files, commit, request review |
 | P0002 | Pending | — | — | — | — | — |
 | P0003 | Pending | — | — | — | — | — |
 | P0004 | Pending | — | — | — | — | — |
