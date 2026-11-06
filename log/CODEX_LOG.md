@@ -680,3 +680,62 @@ END P0006 | Awaiting review | 042c2f1a30d7af4840339e105445d21342d9ee18 | draft c
 2026-11-06T09:45:19Z | P0006 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 309 passed, 1 warning, 6 subtests passed in 0.96s
 2026-11-06T09:46:46Z | P0006 | REVIEW | attempt 2: ACCEPTED
 2026-11-06T09:46:46Z | P0006 | ORCH | ACCEPTED at 8a031e9
+2026-11-06T15:35:52Z | E0001 | ORCH | starting from 44e5be1
+START E0001 | 2026-11-06T15:36:06Z | main | 44e5be1cb6a5bd5da4c597a30cdd40707bb7c2d7
+2026-11-06T15:36:06Z | E0001 | CMD | git branch --show-current; git rev-parse HEAD; mkdir -p log; append START | exit 0 | initialized
+2026-11-06T15:36:06Z | E0001 | CMD | git status --short | exit 0 | inspected worktree
+2026-11-06T15:36:06Z | E0001 | READ | AGENTS.md (sed -n 1,160p)
+2026-11-06T15:36:06Z | E0001 | READ | kit INDEX.md E0001 row (rg -n E0001)
+2026-11-06T15:36:06Z | E0001 | READ | kit tasks/E0001.md (sed -n 1,120p)
+2026-11-06T15:36:16Z | E0001 | DECISION | Prerequisites verified Accepted by orchestrator; STATUS.md is orchestrator-managed
+2026-11-06T15:36:16Z | E0001 | CMD | sed -n 1,100p /home/wizt/Documents/Codex/2026-11-06/wizt-fedora-documents-codigo-programacionweb-clavel/work/clavel-e0001.EM5f1e/templates/REVIEW.md | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:16Z | E0001 | READ | kit templates/REVIEW.md
+2026-11-06T15:36:16Z | E0001 | CMD | git ls-tree -r 8a031e9da7dabe3369349b62bd277089c85f1f4d -- docs/openapi | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:16Z | E0001 | CMD | git ls-tree --name-only 8a031e9da7dabe3369349b62bd277089c85f1f4d -- docs | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:16Z | E0001 | CMD | git show --format=oneline --name-only 7bf88d21231b33ef29b608e25a7cda9c0158b4e9 | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:16Z | E0001 | CMD | git diff --cached --name-only | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:16Z | E0001 | CMD | ls -d docs/decisiones docs/reviews .venv | exit 2 | E0001 evidence/workflow
+2026-11-06T15:36:22Z | E0001 | CMD | ls docs | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:22Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/ARQUITECTURA.md | rg -ni targeted architecture and contract terms | tail -30 (exit 0)
+2026-11-06T15:36:22Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/REGISTRO_DECISIONES.md | rg -ni targeted architecture and contract terms | tail -30 (exit 0)
+2026-11-06T15:36:22Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/CONTRATO_FRONTEND_API.md | rg -ni targeted architecture and contract terms | tail -30 (exit 0)
+2026-11-06T15:36:22Z | E0001 | CMD | git ls-tree -r --name-only 8a031e9da7dabe3369349b62bd277089c85f1f4d -- tests backend/tests | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:22Z | E0001 | CMD | git tag --list accepted/P0006 | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:22Z | E0001 | CMD | git remote | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:29Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/ARQUITECTURA.md | sed -n 1,55p | exit 0
+2026-11-06T15:36:29Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/ARQUITECTURA.md | sed -n 56,126p | exit 0
+2026-11-06T15:36:29Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/REGISTRO_DECISIONES.md | sed -n 14,49p | exit 0
+2026-11-06T15:36:29Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/CONTRATO_FRONTEND_API.md | sed -n 1,82p | exit 0
+2026-11-06T15:36:29Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/CONTRATO_FRONTEND_API.md | sed -n 98,132p | exit 0
+2026-11-06T15:36:29Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/CONTRATO_FRONTEND_API.md | sed -n 151,200p | exit 0
+2026-11-06T15:36:29Z | E0001 | CMD | git diff --name-only 8a031e9da7dabe3369349b62bd277089c85f1f4d HEAD -- docs tests/test_openapi_contract.py | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:32Z | E0001 | CMD | .venv/bin/python -m pytest -q tests/test_openapi_contract.py | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:44Z | E0001 | CMD | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/openapi/clavel-v1.draft.json | .venv/bin/python -c (print operation responses, security, roles and schemas) | exit 0 | inventoried pinned contract
+2026-11-06T15:36:44Z | E0001 | READ | Pinned OpenAPI operations and schema inventory
+2026-11-06T15:36:44Z | E0001 | READ | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:tests/test_openapi_contract.py | rg -n targeted test names | tail -30 | exit 0
+2026-11-06T15:36:44Z | E0001 | TEST | .venv/bin/python -m pytest -q tests/test_openapi_contract.py | 281 passed, 0 failed, 1 warning
+2026-11-06T15:36:45Z | E0001 | CMD | .venv/bin/python -m openapi_spec_validator docs/openapi/clavel-v1.draft.json | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:45Z | E0001 | CMD | timeout 8 git ls-remote --exit-code --tags origin refs/tags/accepted/P0006 | exit 2 | E0001 evidence/workflow
+2026-11-06T15:36:53Z | E0001 | CMD | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/openapi/clavel-v1.draft.json | .venv/bin/python -c (print six targeted schemas) | exit 0 | inspected invariants
+2026-11-06T15:36:53Z | E0001 | READ | Pinned OpenAPI PreviewRequest, Recommendation, Preview, EventRequest, Version and ControlState
+2026-11-06T15:36:53Z | E0001 | CMD | git diff --name-only HEAD -- docs tests/test_openapi_contract.py tests/test_api_shell.py src | exit 0 | E0001 evidence/workflow
+2026-11-06T15:36:57Z | E0001 | TEST | .venv/bin/python -m pytest -q tests/test_openapi_contract.py tests/test_api_shell.py | tail -15 | exit 0
+2026-11-06T15:37:12Z | E0001 | TEST | git show 8a031e9da7dabe3369349b62bd277089c85f1f4d:docs/openapi/clavel-v1.draft.json | .venv/bin/python -c (synthetic Preview schema probes) | exit 0 | 4 assertions on response validity and one request-cap assertion
+2026-11-06T15:37:12Z | E0001 | CMD | git diff --exit-code 8a031e9da7dabe3369349b62bd277089c85f1f4d -- docs tests/test_openapi_contract.py tests/test_api_shell.py src | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:12Z | E0001 | CMD | git branch --show-current | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:12Z | E0001 | TEST | Focused pytest summary confirmed: 293 passed, 0 failed, 1 Starlette deprecation warning
+2026-11-06T15:37:46Z | E0001 | DECISION | Use a standalone review under docs; preserve reviewed architecture and OpenAPI artifacts
+2026-11-06T15:37:46Z | E0001 | DECISION | Use E0001 and AGENTS.md constraints as available review criteria; original master prompt is outside permitted inputs
+2026-11-06T15:37:46Z | E0001 | DECISION | Use HEAD of the E0001 commit in the embedded COMMIT and END entries because a Git commit cannot contain its own literal SHA
+2026-11-06T15:37:46Z | E0001 | SKIP | Live integrations and backend implementation are outside E0001 scope; original master prompt excluded by kit access rules
+2026-11-06T15:37:46Z | E0001 | CMD | cat > docs/REVISION_E0001.md (review content) | exit 0 | wrote review
+2026-11-06T15:37:46Z | E0001 | EDIT | docs/REVISION_E0001.md | documented provenance, findings and review disposition
+2026-11-06T15:37:46Z | E0001 | CMD | rg -n Awaiting review|Responsibility|Trust boundary|Contract ·|293 tests docs/REVISION_E0001.md | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:46Z | E0001 | CMD | git diff --check | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:46Z | E0001 | CMD | git add -- docs/REVISION_E0001.md log/CODEX_LOG.md | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:46Z | E0001 | CMD | git diff --cached --check | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:46Z | E0001 | CMD | git diff --cached --name-only | exit 0 | E0001 evidence/workflow
+2026-11-06T15:37:53Z | E0001 | DECISION | Done when satisfied by responsibility, trust boundary and contract dispositions with closure evidence; human sign-off and direct master-prompt comparison remain open
+2026-11-06T15:37:53Z | E0001 | CMD | git add -- log/CODEX_LOG.md; git diff --cached --check; git commit -m "E0001 independent architecture and contract review" | finalization sequence; successful commit is identified by this record
+2026-11-06T15:37:53Z | E0001 | COMMIT | HEAD of this record | E0001 independent architecture and contract review
+END E0001 | Awaiting review | HEAD of this record | master-prompt traceability and human signature | human review
