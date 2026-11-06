@@ -2525,3 +2525,68 @@ END P0017 | Awaiting review | 772d94fd54058bb683784fc4e5cef2be53b1cdd5 | indepen
 2026-11-06T23:07:00Z | P0017 | REVIEW | automatic Codex review; source ad74d63245286a11dd130a9fc425bd8dba6dd42f; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T23:07:00Z | P0017 | ORCH | ACCEPTED by automatic review at ad74d63245286a11dd130a9fc425bd8dba6dd42f
 2026-11-06T23:07:00Z | P0018 | ORCH | starting from 522feb4d3f3b3192498202f20ead0338f5db7ba5
+2026-11-06T23:15:45.526664+00:00 | HANDOFF-DIAG | CMD | git status --short --branch | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.529143+00:00 | HANDOFF-DIAG | CMD | git rev-parse HEAD | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.531703+00:00 | HANDOFF-DIAG | CMD | git log -5 --oneline | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.534010+00:00 | HANDOFF-DIAG | CMD | rg -n '^\| P(0017|0018|0045|0046) \|' log/STATUS.md | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.534077+00:00 | HANDOFF-DIAG | READ | log/STATUS.md | selected handoff rows or task only
+2026-11-06T23:15:45.535958+00:00 | HANDOFF-DIAG | CMD | rg -n '^\| P(0017|0018|0045|0046) \|' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.536029+00:00 | HANDOFF-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md | selected handoff rows or task only
+2026-11-06T23:15:45.558815+00:00 | HANDOFF-DIAG | CMD | sed -n 1,100p /home/alonso/Documents/clavel-codex-kit/tasks/P0018.md | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.558900+00:00 | HANDOFF-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0018.md | selected handoff rows or task only
+2026-11-06T23:15:45.569818+00:00 | HANDOFF-DIAG | CMD | sed -n 1,110p /home/alonso/Documents/clavel-codex-kit/tasks/P0045.md | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.569925+00:00 | HANDOFF-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0045.md | selected handoff rows or task only
+2026-11-06T23:15:45.572059+00:00 | HANDOFF-DIAG | CMD | sed -n 1,110p /home/alonso/Documents/clavel-codex-kit/tasks/P0046.md | exit 0 | targeted handoff status/task inspection
+2026-11-06T23:15:45.572118+00:00 | HANDOFF-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/tasks/P0046.md | selected handoff rows or task only
+2026-11-06T23:15:57.093593+00:00 | HANDOFF-DIAG | CMD | rg -n '^\| (P0014|P0018|P0044|P0045|P0046|E0003|E0004) \|' log/STATUS.md | exit 0 | exact predecessor/handoff status rows
+2026-11-06T23:15:57.093686+00:00 | HANDOFF-DIAG | READ | log/STATUS.md | specified P0018/P0046/E0003 prerequisite rows
+2026-11-06T23:15:57.096079+00:00 | HANDOFF-DIAG | CMD | rg -n '^\| (P0014|P0044|P0045|P0046|E0003|E0004) \|' /home/alonso/Documents/clavel-codex-kit/INDEX.md | exit 0 | exact predecessor/handoff status rows
+2026-11-06T23:15:57.096153+00:00 | HANDOFF-DIAG | READ | /home/alonso/Documents/clavel-codex-kit/INDEX.md | specified P0018/P0046/E0003 prerequisite rows
+2026-11-06T23:15:57.098307+00:00 | HANDOFF-DIAG | READ | log/CODEX_LOG.md | last 12 P0018 events to identify interruption/recovery state
+2026-11-06T23:16:25.155370+00:00 | HANDOFF-DIAG | CMD | rg -n '^\| (P0029|P0040|P0041|P0043|P0044|P0045|P0046|E0003|E0004) \|' /home/alonso/Documents/clavel-codex-kit/INDEX.md log/STATUS.md | exit 0 | CP2 path and Emi handoff prerequisites
+2026-11-06T23:16:25.155455+00:00 | HANDOFF-DIAG | READ | kit INDEX and STATUS | CP2 predecessor and Emi handoff rows only
+2026-11-06T23:16:25.155491+00:00 | HANDOFF-DIAG | DECISION | Current clean main is synchronized at 030a0306; P0018 is In progress and P0014 Accepted, so next concrete Alonso action is resume P0018. P0046 requires P0045, which requires CP2 P0044 and its prerequisites.
+2026-11-06T23:16:25.155494+00:00 | HANDOFF-DIAG | ERROR | Initial CP2 row lookup script had an indentation syntax error before executing any inspection; fixed and reran successfully.
+2026-11-06T23:16:25.155497+00:00 | HANDOFF-DIAG | EDIT | log/CODEX_LOG.md | closed targeted handoff diagnosis; no source, task state or remote changes
+END HANDOFF-DIAG | Awaiting review | 030a0306e7f4ca2954a819d504205f02e65e3d2b | CP2 predecessor tasks remain before P0046/E0003 | resume P0018 and complete CP2 sequence
+2026-11-06T23:18:37Z | P0019 | ORCH | starting from 030a0306e7f4ca2954a819d504205f02e65e3d2b
+START P0019 | 2026-11-06T23:18:53Z | main | 030a0306e7f4ca2954a819d504205f02e65e3d2b
+2026-11-06T23:18:53Z | P0019 | CMD | pwd && git branch --show-current && git rev-parse HEAD && git status --short && ls -l AGENTS.md log/log.sh log/CODEX_LOG.md && sed -n '1,240p' AGENTS.md | exit 0 | main; pre-existing log/CODEX_LOG.md and log/STATUS.md modifications
+2026-11-06T23:18:53Z | P0019 | READ | AGENTS.md | repository rules read; user overrides STATUS edits and prerequisites already verified
+2026-11-06T23:18:53Z | P0019 | DECISION | Preserve pre-existing log changes; do not edit or stage log/STATUS.md; prerequisites accepted per orchestrator
+2026-11-06T23:18:53Z | P0019 | CMD | rg -n '^\| P0019\b' /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0019.md | exit 0 | task instructions read
+2026-11-06T23:18:53Z | P0019 | READ | kit INDEX.md P0019 row; kit tasks/P0019.md
+2026-11-06T23:18:59Z | P0019 | CMD | rg --files -g AGENTS.md -g *import* -g *canonical* -g pyproject.toml -g requirements*.txt -g test* -g *schema* -g *model* app tests | head -80; ls -d .venv app/data; sed -n '1,80p' log/log.sh | exit 0 | discovered data code/tests and project venv
+2026-11-06T23:18:59Z | P0019 | READ | log/log.sh | logging helper implementation
+2026-11-06T23:19:06Z | P0019 | ERROR | Initial discovery used reference app path: rg returned 2 (app absent), ls returned 2 (app/data absent); pipeline and final helper masked status; next discover src layout
+2026-11-06T23:19:06Z | P0019 | CMD | rg --files -g AGENTS.md -g pyproject.toml -g *requirements* -g *catalog* -g *sales* -g *session* -g *repository* -g *customer* -g *data* -g *conftest* -g *import* -g *canonical* -g !log/** -g !tasks/**; ls | exit 0 | actual package is under src
+2026-11-06T23:19:13Z | P0019 | CMD | sed -n '1,200p' pyproject.toml; sed -n '1,240p' src/clavel/database/catalog.py; sed -n '1,240p' src/clavel/database/sales.py; sed -n '1,180p' src/clavel/database/customers.py; rg --files src/clavel tests/fixtures; sed -n '1,150p' tests/test_repository_rules.py | exit 0 | inspected schema conventions and test rules
+2026-11-06T23:19:13Z | P0019 | READ | pyproject.toml; src/clavel/database/catalog.py; src/clavel/database/sales.py; src/clavel/database/customers.py; tests/test_repository_rules.py
+2026-11-06T23:19:25Z | P0019 | ERROR | Schema discovery rg --files src/clavel tests/fixtures returned 2 because fixtures directory absent; no existing fixture import layer
+2026-11-06T23:19:25Z | P0019 | CMD | sed -n '1,240p' src/clavel/database/sales_repository.py; sed -n '1,160p' tests/integration/test_sales_repository.py; sed -n '1,130p' src/clavel/database/repositories.py; sed -n '1,140p' tests/test_inventory_eligibility.py | exit 0 | inspected repository boundaries and test conventions
+2026-11-06T23:19:25Z | P0019 | READ | src/clavel/database/sales_repository.py; tests/integration/test_sales_repository.py; src/clavel/database/repositories.py; tests/test_inventory_eligibility.py
+2026-11-06T23:19:25Z | P0019 | DECISION | Implement fixture-only v1 sale/return row contracts in src/clavel/data, normalization and safe row diagnostics; no database writes or HTTP/OpenAPI changes. Missing cost remains None; currency normalization is formatting only.
+2026-11-06T23:19:25Z | P0019 | BLOCKER | Live vendor importer mapping remains Blocked on Q01/Q02; synthetic contracts and tests do not establish live acceptance
+2026-11-06T23:20:22Z | P0019 | CMD | mkdir -p src/clavel/data | exit 0 | created import package directory
+2026-11-06T23:20:22Z | P0019 | DECISION | v1 uses opaque case-sensitive source/SKU/customer references; reject padded/control identifiers, require timezone offsets and exact decimal inputs; verify currency syntax only, not ISO registry membership; returns inherit sale currency. Downstream resolver/transaction must verify links, whole orders and return limits.
+2026-11-06T23:21:33Z | P0019 | EDIT | src/clavel/data/__init__.py; src/clavel/data/import_validation.py | added frozen v1 sale/return contracts, normalization, positional redacted diagnostics and unknown-cost warning
+2026-11-06T23:21:33Z | P0019 | CMD | apply_patch (add src/clavel/data/__init__.py and import_validation.py) | exit 0 | fixture validation implementation added
+2026-11-06T23:21:39Z | P0019 | EDIT | src/clavel/data/import_validation.py | removed redundant trailing-zero calculation before testing
+2026-11-06T23:21:40Z | P0019 | EDIT | tests/test_import_validation.py | synthetic fixtures covering malformed times/currency, missing cost, identifiers, numeric boundaries, versions, returns and safe row diagnostics
+2026-11-06T23:21:40Z | P0019 | CMD | apply_patch (update import_validation.py; add tests/test_import_validation.py) | exit 0 | regression suite added
+2026-11-06T23:21:40Z | P0019 | TEST | .venv/bin/python -m pytest -q tests/test_import_validation.py > /tmp/clavel-p0019-tests.txt 2>&1 | exit 0 | 204 passed in 0.24s
+2026-11-06T23:21:40Z | P0019 | CMD | tail -30 /tmp/clavel-p0019-tests.txt | exit 0 | displayed bounded test evidence
+2026-11-06T23:22:20Z | P0019 | EDIT | src/clavel/data/README.md | documented v1 fields, normalization, diagnostic codes, synthetic example, migration/version policy and resolver/live limitations for independent review
+2026-11-06T23:22:20Z | P0019 | CMD | apply_patch (add src/clavel/data/README.md) | exit 0 | contract and review evidence documented
+2026-11-06T23:22:21Z | P0019 | TEST | .venv/bin/python -m pytest -q tests/test_import_validation.py > /tmp/clavel-p0019-tests.txt 2>&1 | exit 0 | 204 passed in 0.20s
+2026-11-06T23:22:21Z | P0019 | CMD | tail -8 /tmp/clavel-p0019-tests.txt | exit 0 | final bounded synthetic validation evidence
+2026-11-06T23:22:40Z | P0019 | CMD | git diff --check | exit 0 | tracked diff whitespace validation
+2026-11-06T23:22:40Z | P0019 | READ | src/clavel/data/README.md; src/clavel/data/__init__.py; src/clavel/data/import_validation.py; tests/test_import_validation.py | validated docs example and parsed source
+2026-11-06T23:22:41Z | P0019 | CMD | .venv/bin/python - <<'PY' (execute README synthetic example; ast.parse changed Python files; check trailing whitespace) | exit 0 | documentation example and new-file validation
+2026-11-06T23:22:41Z | P0019 | CMD | git status --short | exit 0 | only task files plus pre-existing CODEX_LOG/STATUS modifications
+2026-11-06T23:23:12Z | P0019 | CMD | Exact prior Python validation program: import ast; from pathlib import Path; from clavel.data.import_validation import validate_rows; root = Path("src/clavel/data"); text = (root / "README.md").read_text(); example = text.split("```python\n", 1)[1].split("```", 1)[0]; exec(compile(example, str(root / "README.md"), "exec")); for each path in [root / "__init__.py", root / "import_validation.py", Path("tests/test_import_validation.py")]: ast.parse(path.read_text(), filename=str(path)); for number, line in enumerate(path.read_text().splitlines(), 1): assert line.rstrip() == line, (str(path), number); print("Documented synthetic example, Python parsing and new-file whitespace: PASS") | exit 0
+2026-11-06T23:23:12Z | P0019 | DECISION | Done-when requirements validated by 204 passing synthetic tests and executable documentation example. Fixture slice Awaiting review; Q01/Q02 real importer mapping stays Blocked; independent reviewer/orchestrator owns acceptance; no human signature requested.
+2026-11-06T23:23:12Z | P0019 | DECISION | Audit: reads, discovery failures/retries, edits, decisions and validations logged; preserve orchestrator STATUS file and existing log history. COMMIT/END appended after commit so the recorded SHA is exact.
+2026-11-06T23:23:12Z | P0019 | CMD | git add src/clavel/data/__init__.py src/clavel/data/import_validation.py src/clavel/data/README.md tests/test_import_validation.py log/CODEX_LOG.md | exit 0 | stage P0019 paths and append-only audit log only
+2026-11-06T23:23:12Z | P0019 | CMD | git diff --cached --check | exit 0 | staged whitespace check
+2026-11-06T23:23:12Z | P0019 | CMD | git diff --cached --stat | exit 0 | review staged task scope; STATUS excluded
