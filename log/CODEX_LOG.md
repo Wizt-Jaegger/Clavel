@@ -338,3 +338,15 @@ START P0002 | 2026-11-06T09:03:13Z | main | 430564188348f4f434b1c86cdad049a7bde0
 2026-11-06T09:06:21Z | P0002 | CMD | git add -- .python-version pyproject.toml src/clavel/__init__.py tests/test_project_smoke.py tests/test_repository_rules.py README.md log/CODEX_LOG.md | exit 0 | success
 2026-11-06T09:06:21Z | P0002 | CMD | git diff --cached --check | exit 0 | success
 2026-11-06T09:06:21Z | P0002 | CMD | git diff --cached --stat | exit 0 |  tests/test_repository_rules.py |  4 +--;  7 files changed, 135 insertions(+), 4 deletions(-)
+2026-11-06T09:06:21Z | P0002 | CMD | git add -- log/CODEX_LOG.md | exit 0 | success
+2026-11-06T09:06:21Z | P0002 | CMD | git commit -m 'P0002 python project and pytest' | exit 0 |  create mode 100644 src/clavel/__init__.py;  create mode 100644 tests/test_project_smoke.py
+2026-11-06T09:06:21Z | P0002 | CMD | git rev-parse HEAD | exit 0 | a19dc40d428d610a90db1d172e5e296e2ff29596
+2026-11-06T09:06:21Z | P0002 | COMMIT | a19dc40d428d610a90db1d172e5e296e2ff29596 | P0002 python project and pytest
+2026-11-06T09:06:21Z | P0002 | CMD | git status --short | exit 0 |  M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-06T09:06:21Z | P0002 | DECISION | Task files and pre-commit audit evidence committed; post-commit CMD/COMMIT/END audit tail remains append-only in working log because a commit cannot contain its own SHA. Existing orchestrator-owned STATUS modifications were neither edited nor staged.
+2026-11-06T09:06:21Z | P0002 | CMD | python heredoc: stage explicit task paths, validate staged whitespace, commit prescribed message, record commit SHA and final status | exit 0 | complete
+END P0002 | Awaiting review | a19dc40d428d610a90db1d172e5e296e2ff29596 | reviewer acceptance pending; post-commit audit tail unstaged; orchestrator STATUS unchanged | Review commit and record acceptance through orchestrator
+2026-11-06T09:06:30Z | P0002 | ORCH | attempt 1: codex exit 0; full output log/runs/P0002-impl1.txt
+2026-11-06T09:06:31Z | P0002 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 4 passed, 6 subtests passed in 0.22s
+2026-11-06T09:07:53Z | P0002 | REVIEW | attempt 1: ACCEPTED
+2026-11-06T09:07:53Z | P0002 | ORCH | ACCEPTED at a19dc40
