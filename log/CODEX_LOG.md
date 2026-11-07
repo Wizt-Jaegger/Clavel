@@ -3651,3 +3651,10 @@ no commit was created for the task
 log lacks START line for the task
 log lacks END line for the task
 no commit was created for the task
+2026-11-07T03:11:00.739804+00:00 | P0027-DIAG | CMD | git status --short --branch | exit 0 | post-run status
+2026-11-07T03:11:00.741614+00:00 | P0027-DIAG | CMD | git rev-parse HEAD | exit 0 | post-run status
+2026-11-07T03:11:00.743966+00:00 | P0027-DIAG | CMD | rg -n '^\| (P0023|P0024|P0025|P0026|P0027|P0032) \|' log/STATUS.md | exit 0 | post-run status
+2026-11-07T03:11:00.744019+00:00 | P0027-DIAG | READ | log/STATUS.md | P0027 and current neighboring task rows
+2026-11-07T03:11:00.746947+00:00 | P0027-DIAG | READ | log/CODEX_LOG.md | final reviewer rejection and task status events only
+2026-11-07T03:11:00.746954+00:00 | P0027-DIAG | EDIT | log/CODEX_LOG.md | recorded resumed investigation
+END P0027-DIAG | Blocked | current main | inspect concrete independent-review finding before any retry | resolve reviewer finding and NixOS repeatability
