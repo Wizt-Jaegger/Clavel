@@ -47,7 +47,7 @@
 | P0043 | Pending | — | — | — | — | — |
 | P0044 | Pending | — | — | — | — | — |
 | P0045 | Pending | — | — | — | — | — |
-| P0046 | Pending | — | — | — | — | — |
+| P0046 | Blocked | e695b6c380b8aeceb753c502791727eadab76349 | — | prerequisite P0045 is Pending; handoff cannot be accepted | — | complete and accept P0045, then resume P0046 |
 | E0001 | Accepted | 8c24f5c | — | human accepted 2026-11-06T15:52:21Z | — | — |
 | E0002 | Accepted | 05b9e10 | — | auto: orchestrator+AI reviewer | — | — |
 | E0003 | Pending | — | — | — | — | — |
