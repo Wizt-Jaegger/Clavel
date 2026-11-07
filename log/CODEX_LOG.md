@@ -3238,3 +3238,10 @@ END P0025 | Awaiting review | 17c6bd32a68f03657f7846aed3c0ecfa824d471b (implemen
 2026-11-07T01:10:52Z | P0025 | DECISION | Final audit seal: include the post-commit command record in the log-only closure commit via amend; implementation remains 17c6bd32a68f03657f7846aed3c0ecfa824d471b. STATUS.md hash unchanged and its pre-existing modifications remain unstaged.
 2026-11-07T01:10:52Z | P0025 | CMD | git diff --check; git add log/CODEX_LOG.md; git diff --cached --check; git commit --amend --no-edit; git status --short; git rev-parse HEAD | final audit seal prepared; results returned directly to user without recursive log commits
 END P0025 | Awaiting review | 17c6bd32a68f03657f7846aed3c0ecfa824d471b (validated implementation; containing log-only commit is audit closure) | independent review pending | orchestrator review
+2026-11-07T01:10:53.854650+00:00 | P0025 | READ | latest validation/review progress
+2026-11-07T01:10:58Z | P0025 | ORCH | attempt 1: codex exit 0; full output log/runs/P0025-impl1.txt
+2026-11-07T01:15:00.223772+00:00 | P0025 | READ | current general test/reviewer status only
+2026-11-07T01:15:40Z | P0025 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 1067 passed, 1 warning, 7 subtests passed in 281.09s (0:04:41)
+2026-11-07T01:16:11.185631+00:00 | P0025 | READ | full suite/review events if emitted
+2026-11-07T01:16:48Z | P0025 | REVIEW | automatic Codex review; source ca388e8b19e7a922406592f640a0dd14a9455323; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-07T01:16:48Z | P0025 | ORCH | ACCEPTED by automatic review at ca388e8b19e7a922406592f640a0dd14a9455323
