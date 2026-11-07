@@ -98,6 +98,82 @@ ventanas de atribución requieren política. No se acredita stock ni compatibili
 El downgrade de 0007 a 0006 se bloquea si existen eventos return: no borrarlos
 para forzar una migración en un entorno con evidencia que deba preservarse.
 
+## Features conductuales — P0023 (`behavioral-v1`)
+
+Definición ejecutable: `src/clavel/intelligence/clustering/features.py`;
+ejemplo y límites verificados por `tests/test_behavioral_features.py`.
+Es una baseline local para preparar clustering, **sin calibración ni aceptación
+live**. No entrena BIRCH, no asigna segmentos ni autoriza recomendaciones,
+stock o compatibilidad. No modifica esquema ni OpenAPI.
+
+Entrada: eventos explícitamente verificados de `RecommendationRepository`,
+un `customer_id` local, cutoff con zona y `FeaturePolicy`. Sólo se usa telemetría
+de recomendaciones: no representa toda la conducta del cliente. No se mezclan
+ventas contables con eventos purchase, evitando contarlos dos veces. Un evento
+purchase no equivale a cantidad, ingreso o pedido distinto. No se atribuyen
+ventas sin cliente ni se fusionan sujetos anónimos/registrados.
+
+La ventana por defecto es **90 días transcurridos**, `[cutoff − 90 días, cutoff)`.
+Además, `recorded_at < cutoff`: llegada tardía, llegada exactamente en cutoff,
+evento en cutoff y evento futuro quedan fuera. La frontera inferior de ocurrencia
+se incluye; no hay límite inferior de recepción. Todos los instantes se convierten
+a UTC antes de restar/comparar; no se usan días de calendario local ni reloj actual.
+Replay idéntico de UUID cuenta una vez; payload conflictivo de un UUID visible
+falla. No se deduplican UUID distintos por SKU o fecha. El orden de entrada no
+cambia el resultado. Los tiempos sin zona y tipos/identificadores inválidos fallan.
+
+`HistoryCoverage(customer_id, start, end, event_types)` declara que la extracción
+es completa y verificada para esos tipos y ese sujeto, **conocida al cutoff**.
+Se exige `start <= cutoff − lookback` y `end == cutoff`; una extracción posterior
+no demuestra completitud histórica. Cobertura ausente, parcial en tiempo o de
+otro snapshot deja las features desconocidas; cobertura de otro sujeto falla.
+No se infiere cobertura de tener filas, conexión disponible o cero resultados SQL.
+El llamador debe conservar evidencia de completitud; no existe adaptador live ni
+protocolo de proveedor aprobado en esta tarea. Un evento aislado no acredita
+completitud, y `recorded_at` por sí solo no acredita su autenticidad.
+
+| Feature por sujeto/ventana | Definición y desconocidos |
+| --- | --- |
+| `frequency[tipo]` | Número de UUID distintos por exposure/click/add_to_cart/purchase/return. `None` si ese tipo no tiene cobertura completa; `0` si está cubierto y no tiene eventos. Sin ponderación ni normalización. |
+| `recency_days[tipo]` | `(cutoff − max(occurred_at)) / 86400 segundos`, fracción de día permitida. `None` sin cobertura o sin evento; consultar frequency para distinguir ambos casos. |
+| `product_affinities[tipo][sku_id]` | Conteo del SKU / frequency de ese tipo. Distribución separada por tipo, suma 1 con tolerancia numérica; no se combinan pesos. `None` sin cobertura o con denominador cero, nunca una distribución uniforme inventada. Con denominador positivo, SKU omitido tiene participación observada cero dentro de ese tipo/ventana; no demuestra desinterés. No se infieren categorías desconocidas. |
+| `interaction_count` | Suma de click + add_to_cart + purchase, sólo si los tres tipos tienen cobertura completa; de lo contrario `None`. Exposure y return no son evidencia positiva. |
+| `active_days` | Fechas UTC distintas de esas interacciones, con el mismo requisito de cobertura; cero sólo para historial observado vacío. |
+| `cold_start` | `unknown` sin cobertura positiva completa; `insufficient` si no alcanza ambos mínimos; `sufficient` con **>=3 interacciones y >=2 fechas UTC**. Los mínimos son configuración explícita de baseline, no umbrales aprobados para producción. No significa elegibilidad comercial. |
+
+Return conserva señal propia: no resta purchase ni supone enlace a una venta;
+la telemetría no incluye esa atribución. Exposure tampoco cuenta como click.
+Cada salida conserva cutoff UTC, inicio de ventana, versión y política (lookback
+y ambos mínimos) para reproducibilidad. Cambiar política exige comparaciones
+explícitas; no se realiza tuning. No se imputan desconocidos a cero ni se produce
+todavía un vector numérico para BIRCH. Evidencia insuficiente/desconocida se deja
+para una política posterior de fallback; no se inventa asignación de segmento.
+
+Ejemplo **sintético, mechanics only**, sujeto 1, cutoff `2026-04-01T00:00:00Z`:
+con cobertura completa desde `2026-01-01T00:00:00Z`, click SKU 11 el 30 y 31 de
+marzo, click SKU 22 el 31, purchase SKU 22 el 1 de enero, return SKU 22 y exposure
+SKU 33 el 31 de marzo. Cada evento se recibió un segundo después de ocurrir.
+Se agrega un replay idéntico, un click ocurrido exactamente al cutoff recibido
+antes (desfase sintético), otro recibido exactamente al cutoff y uno ocurrido
+un microsegundo antes del inicio: ninguno añade frecuencia.
+
+| Resultado | Valor esperado |
+| --- | --- |
+| frequency | exposure=1, click=3, add_to_cart=0, purchase=1, return=1 |
+| recency_days | exposure=1, click=1, add_to_cart=None, purchase=90, return=1 |
+| product_affinities | click={11: 2/3, 22: 1/3}; purchase={22: 1}; return={22: 1}; exposure={33: 1}; add_to_cart=None |
+| Evidencia positiva | interaction_count=4, active_days=3, cold_start=sufficient |
+| Mismo sujeto sin eventos, cobertura completa | frequency=0 para todos; recency/afinidades=None; interaction_count=0, active_days=0, cold_start=insufficient |
+| Mismo sujeto sin cobertura | frequency/recency/afinidades=None por tipo; interaction_count/active_days=None, cold_start=unknown |
+
+Validación local: `.venv/bin/python -m pytest -q tests/test_behavioral_features.py`.
+Evidencia P0023: **36 passed**, datos sintéticos, sin consultas live. Incluye el
+ejemplo anterior, límites de ocurrencia/recepción, replay/conflicto, aislamiento
+de sujeto, cobertura parcial/ausente, ceros, umbrales y fechas UTC/DST.
+Estado P0023: **Awaiting review**; aceptación a cargo del revisor independiente.
+Preparado para revisión independiente de Codex; no acredita representatividad,
+retención, completitud de proveedor ni aceptación de producción.
+
 ## Archivo canónico v1 y procedencia sintética
 
 JSONL UTF-8: una fila de venta o devolución por línea física, sin líneas vacías,
