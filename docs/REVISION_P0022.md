@@ -12,8 +12,10 @@ revisión independiente cuya última línea stdout sea exactamente `VERDICT: ACC
   P0018 `a2773313fc20dc0fc38bcf98d1fbfeeccf7ae1a8`,
   P0020 `31941fdb27e60f3cdfa26b960ecc3d184b59aeb6`,
   P0021 `17bde414a7f30be096a031465186b1e68cc47ce7`.
-- Candidato con diccionario/prueba: se fija al cerrar el commit; la revisión
-  independiente debe registrar `git rev-parse HEAD` completo del checkout revisado.
+- Candidato de implementación y prueba: `806593d5b2493a4054ed1bc2a4408360ae425ec8`.
+  El cierre posterior sólo fija este identificador en el expediente y completa
+  la bitácora; la revisión independiente debe registrar `git rev-parse HEAD`
+  completo del checkout final revisado.
 - Python 3.13.15, PostgreSQL 17.11 nativo, `.venv` del proyecto. El harness crea
   cluster/socket sin TCP y bases únicas desechables; no usa datos de proveedores.
 - Migraciones reales hasta `0007_recommendation_returns`; datos **sintéticos**,
@@ -23,17 +25,18 @@ revisión independiente cuya última línea stdout sea exactamente `VERDICT: ACC
 ## Criterios exigidos por P0022 y CHECKPOINT.md
 
 Los resultados corresponden a los comandos R1/R2 de abajo. En cada fila el SHA
-identifica la implementación backend ejercitada; el candidato añade únicamente
-documentación, la prueba integrada y el registro append-only.
+identifica el candidato que contiene las fuentes y la prueba ejercitadas. La
+implementación backend conserva el SHA fuente indicado arriba; el candidato
+añade documentación, la prueba integrada y el registro append-only.
 
-| Criterio / tareas | SHA fuente completo | Reproducción y evidencia | Resultado observado | Revisor |
+| Criterio / tareas | SHA candidato completo | Reproducción y evidencia | Resultado observado | Revisor |
 | --- | --- | --- | --- | --- |
-| Migración PostgreSQL limpia / P0022 | `65f270f07808ed4db732dc97133a46ec331fe2d5` | R1 y R2 `test_migrations.py`; base sin tablas → head, downgrade base → head; error DDL inyectado revierte tabla y revisión. | R1 pasó dos ciclos; R2 pasó, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
-| Restricciones / P0022 | `65f270f07808ed4db732dc97133a46ec331fe2d5` | R2 suites de catálogo, inventario, sujetos, ventas y telemetría: FK/UNIQUE/CHECK, tipos/precisión, triggers y concurrencia. R1 preserva NULL/cero/antigüedad y compatibilidad desconocida. | R1 y R2 pasaron, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
-| Replay y rollback / P0018, P0020, P0022 | `65f270f07808ed4db732dc97133a46ec331fe2d5` | R2 repositorios y offline_import: reintentos exactos, conflictos, rollback de grupos/archivo, transacciones y carreras. R1 prueba dry run y replay sin duplicación. | R1 y R2 pasaron, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
-| Importación canónica / P0020, P0022 | `65f270f07808ed4db732dc97133a46ec331fe2d5` | R2 import_validation/offline_import, resolución de referencias, diagnósticos seguros, rechazo tardío y rollback. R1 ejecuta CLI real con lote generado de 30 filas. | R1: dry_run/imported/imported; 30 procesadas, ocho warnings unknown_cost; R2 pasó, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
-| Fixtures sintéticos y procedencia / P0021, P0022 | `65f270f07808ed4db732dc97133a46ec331fe2d5` | R2 test_synthetic_fixtures: reproducibilidad, cold start, stock desconocido/antiguo, envelope. R1 consume ese envelope y el bloque Python del diccionario. | R1: 2 categorías, 12 SKU/atributos, 11 inventarios, 8 sujetos, 24 ventas/líneas y 6 devoluciones; R2 pasó, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
-| Diccionario, retención y seed/reset / P0022 | `65f270f07808ed4db732dc97133a46ec331fe2d5` | [DICCIONARIO_DATOS.md](DICCIONARIO_DATOS.md), R1 ejecuta su bloque Python contra PostgreSQL vacío y vuelve a sembrar tras reset completo. | R1: 1 passed, 0 failed, 0 skipped (5.67 s); preguntas live explícitas, sin políticas inventadas. | Codex ejecutor; independiente Pending. |
+| Migración PostgreSQL limpia / P0022 | `806593d5b2493a4054ed1bc2a4408360ae425ec8` | R1 y R2 `test_migrations.py`; base sin tablas → head, downgrade base → head; error DDL inyectado revierte tabla y revisión. | R1 pasó dos ciclos; R2 pasó, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
+| Restricciones / P0022 | `806593d5b2493a4054ed1bc2a4408360ae425ec8` | R2 suites de catálogo, inventario, sujetos, ventas y telemetría: FK/UNIQUE/CHECK, tipos/precisión, triggers y concurrencia. R1 preserva NULL/cero/antigüedad y compatibilidad desconocida. | R1 y R2 pasaron, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
+| Replay y rollback / P0018, P0020, P0022 | `806593d5b2493a4054ed1bc2a4408360ae425ec8` | R2 repositorios y offline_import: reintentos exactos, conflictos, rollback de grupos/archivo, transacciones y carreras. R1 prueba dry run y replay sin duplicación. | R1 y R2 pasaron, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
+| Importación canónica / P0020, P0022 | `806593d5b2493a4054ed1bc2a4408360ae425ec8` | R2 import_validation/offline_import, resolución de referencias, diagnósticos seguros, rechazo tardío y rollback. R1 ejecuta CLI real con lote generado de 30 filas. | R1: dry_run/imported/imported; 30 procesadas, ocho warnings unknown_cost; R2 pasó, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
+| Fixtures sintéticos y procedencia / P0021, P0022 | `806593d5b2493a4054ed1bc2a4408360ae425ec8` | R2 test_synthetic_fixtures: reproducibilidad, cold start, stock desconocido/antiguo, envelope. R1 consume ese envelope y el bloque Python del diccionario. | R1: 2 categorías, 12 SKU/atributos, 11 inventarios, 8 sujetos, 24 ventas/líneas y 6 devoluciones; R2 pasó, sin fallos ni omisiones. | Codex ejecutor; independiente Pending. |
+| Diccionario, retención y seed/reset / P0022 | `806593d5b2493a4054ed1bc2a4408360ae425ec8` | [DICCIONARIO_DATOS.md](DICCIONARIO_DATOS.md), R1 ejecuta su bloque Python contra PostgreSQL vacío y vuelve a sembrar tras reset completo. | R1: 1 passed, 0 failed, 0 skipped (5.67 s); preguntas live explícitas, sin políticas inventadas. | Codex ejecutor; independiente Pending. |
 
 ## Reproducción
 
