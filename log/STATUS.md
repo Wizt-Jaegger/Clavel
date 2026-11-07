@@ -28,7 +28,7 @@
 | P0024 | Accepted | 004480b1eb83b35c2019ed050d2f7dba04b7b597 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-07T01:06:26Z | — |
 | P0025 | Accepted | ca388e8b19e7a922406592f640a0dd14a9455323 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-07T01:16:48Z | — |
 | P0026 | Accepted | 0e10719bd63b8750a472124bc4d2e9924783e54a | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-07T01:28:02Z | — |
-| P0027 | Pending | — | — | — | — | — |
+| P0027 | Blocked | e9d7e7cab7fd930a9f72888358e6069636d8b519 | — | failed 2 attempts: reviewer exited with code 1 reviewer stdout did not end with exact VERDICT: ACCE | — | — |
 | P0028 | Pending | — | — | — | — | — |
 | P0029 | Pending | — | — | — | — | — |
 | P0030 | Pending | — | — | — | — | — |
