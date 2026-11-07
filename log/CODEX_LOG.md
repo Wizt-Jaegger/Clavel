@@ -2895,3 +2895,15 @@ START P0018 | 2026-11-07T00:08:59Z | main | a6bb093ebbd9484e368945c85d1e576ae8a9
 2026-11-07T00:15:23Z | P0018 | DECISION | Validation complete: 110 synthetic PostgreSQL checks pass; source whitespace passes; audit remains append-only; no required live slice or unresolved blocker. Prepare Awaiting review without setting Accepted or editing STATUS.md.
 2026-11-07T00:15:23Z | P0018 | DECISION | Commit implementation with required task message, then package its COMMIT/END audit in a log-only closure commit with the same message; END identifies tested implementation SHA, closure HEAD is reported to user.
 2026-11-07T00:15:23Z | P0018 | CMD | python3 - <<'PY'\nfrom pathlib import Path\nfrom datetime import datetime,timezone\nwith Path('log/CODEX_LOG.md').open('a') as f:\n t=datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')\n f.write(t+' | P0018 | DECISION | Validation complete: 110 synthetic PostgreSQL checks pass; source whitespace passes; audit remains append-only; no required live slice or unresolved blocker. Prepare Awaiting review without setting Accepted or editing STATUS.md.\n')\n f.write(t+' | P0018 | DECISION | Commit implementation with required task message, then package its COMMIT/END audit in a log-only closure commit with the same message; END identifies tested implementation SHA, closure HEAD is reported to user.\n')\nPY | exit 0 | no output
+2026-11-07T00:15:23Z | P0018 | CMD | git add log/CODEX_LOG.md | exit 0 | no output
+2026-11-07T00:15:23Z | P0018 | CMD | git commit -m 'P0018 recommendation event repository' | exit 0 |  create mode 100644 src/clavel/database/recommendation_repository.py;  create mode 100644 tests/integration/test_recommendation_repository.py
+2026-11-07T00:15:23Z | P0018 | CMD | git rev-parse HEAD | exit 0 | 1c17e8317980eb530fee6c53deab8df356ac5673
+2026-11-07T00:15:47Z | P0018 | COMMIT | 1c17e8317980eb530fee6c53deab8df356ac5673 | P0018 recommendation event repository
+2026-11-07T00:15:47Z | P0018 | CMD | git status --short | exit 0 | M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-07T00:16:04Z | P0018 | ERROR | Audit closure status assertion failed after stripping leading git status whitespace; no closure commit attempted; use whitespace-safe path parsing.
+2026-11-07T00:16:04Z | P0018 | CMD | git status --short | exit 0 | M log/CODEX_LOG.md;  M log/STATUS.md
+2026-11-07T00:16:04Z | P0018 | CMD | git show HEAD:log/CODEX_LOG.md | exit 0 | implementation audit prefix preserved
+2026-11-07T00:16:04Z | P0018 | READ | log/CODEX_LOG.md | audit coverage verified for commands, edits, failed attempts, validation and implementation commit
+2026-11-07T00:16:04Z | P0018 | DECISION | Implementation committed and validated; closure commit packages final audit only; its self-referential SHA is reported outside this file.
+END P0018 | Awaiting review | 1c17e8317980eb530fee6c53deab8df356ac5673 | open items: independent automatic review only; no implementation/live-input blockers | next step: independent Codex reviewer and orchestrator; audit closure commit follows
+2026-11-07T00:16:04Z | P0018 | CMD | git add log/CODEX_LOG.md | exit 0 | stage implementation COMMIT and END audit closure
