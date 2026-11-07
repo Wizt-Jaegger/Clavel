@@ -1,7 +1,7 @@
 """Recommendation generation and explicit observations, with opaque linkage.
 
 A generated result is not an exposure. Only an explicit exposure event records
-that observation; click, add_to_cart and purchase are separate event types.
+that observation; click, add_to_cart, purchase and return are separate event types.
 Requests may return no results, and results may have no observed events.
 
 Callers supply stable request/event UUIDs for retry deduplication. A request is
@@ -71,7 +71,7 @@ recommendation_events = sa.Table(
         name="rec_event_result_subject_fk",
     ),
     sa.CheckConstraint(
-        "event_type IN ('exposure', 'click', 'add_to_cart', 'purchase')",
+        "event_type IN ('exposure', 'click', 'add_to_cart', 'purchase', 'return')",
         name="rec_event_type_valid",
     ),
     sa.CheckConstraint(

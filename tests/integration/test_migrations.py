@@ -11,7 +11,7 @@ import psycopg
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = "0001_migration_baseline"
-HEAD = "0006_recommendation_telemetry"
+HEAD = "0007_recommendation_returns"
 
 
 def run_alembic(url, *args, config=None, succeeds=True, expected_error=None):
