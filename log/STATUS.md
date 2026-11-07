@@ -19,7 +19,7 @@
 | P0015 | Accepted | d6762f41fbd1a98ade06db33e41da7c5fba9dfbb | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T22:55:25Z | — |
 | P0016 | Accepted | c319bf2beee3a8fdeee44f4eafbe42b776592e6f | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:39:15Z | — |
 | P0017 | Accepted | ad74d63245286a11dd130a9fc425bd8dba6dd42f | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:07:00Z | — |
-| P0018 | In progress | 522feb4d3f3b3192498202f20ead0338f5db7ba5 | — | — | — | — |
+| P0018 | Pending | 522feb4d3f3b3192498202f20ead0338f5db7ba5 | — | retry after completed orchestrator run; previous task session was interrupted | — | — |
 | P0019 | Accepted | cd022293a3a5c4a1e6590ba200793b520571bbc8 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:29:07Z | — |
 | P0020 | Accepted | 31941fdb27e60f3cdfa26b960ecc3d184b59aeb6 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:49:28Z | — |
 | P0021 | Accepted | 17bde414a7f30be096a031465186b1e68cc47ce7 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:59:39Z | — |

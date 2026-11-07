@@ -2780,3 +2780,11 @@ END P0021 | Awaiting review | f1f1e1c (validated implementation; audit-only clos
 2026-11-06T23:57:35Z | P0021 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 927 passed, 1 warning, 7 subtests passed in 219.52s (0:03:39)
 2026-11-06T23:59:39Z | P0021 | REVIEW | automatic Codex review; source 17bde414a7f30be096a031465186b1e68cc47ce7; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-06T23:59:39Z | P0021 | ORCH | ACCEPTED by automatic review at 17bde414a7f30be096a031465186b1e68cc47ce7
+2026-11-07T00:06:21.928996+00:00 | P0018 | CMD | git status --short --branch | exit 0 | check clean interrupted P0018 state
+2026-11-07T00:06:21.930937+00:00 | P0018 | CMD | git rev-parse HEAD | exit 0 | check clean interrupted P0018 state
+2026-11-07T00:06:21.932722+00:00 | P0018 | CMD | git log -5 --oneline | exit 0 | check clean interrupted P0018 state
+2026-11-07T00:06:21.934681+00:00 | P0018 | CMD | rg -n '^\| (P0014|P0018|P0019|P0020|P0021) \|' log/STATUS.md | exit 0 | check clean interrupted P0018 state
+2026-11-07T00:06:21.934732+00:00 | P0018 | READ | log/STATUS.md | P0018 and its prerequisite P0014 rows only
+2026-11-07T00:06:21.936740+00:00 | P0018 | READ | log/CODEX_LOG.md | last 10 P0018 events to confirm interruption/retry history
+2026-11-07T00:07:19.219743+00:00 | P0018 | DECISION | Completed orchestrator run reports no ready tasks; prior interruption left P0018 In progress. P0014 is Accepted, source worktree is clean; requeue only P0018 to Pending for automatic resume.
+2026-11-07T00:07:19Z | P0018 | ORCH | requeued In progress task as Pending after confirmed interrupted run; starting resumed orchestration
