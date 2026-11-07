@@ -33,7 +33,7 @@
 | P0029 | Pending | — | — | — | — | — |
 | P0030 | Pending | — | — | — | — | — |
 | P0031 | Pending | — | — | — | — | — |
-| P0032 | Pending | — | — | — | — | — |
+| P0032 | Blocked | 95bb9356950179b111d701ffc8f9d7556d52ea46 | — | failed 2 attempts: codex exit code 1 log lacks START line for the task log lacks END line for the t | — | — |
 | P0033 | Accepted | 3fbe272a6be6ba36603b08cc440cb093be0227f0 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T18:52:38Z | — |
 | P0034 | Pending | — | — | — | — | — |
 | P0035 | Blocked | efa02423871bf7065a5234ada53eb1d445277ac7 | — | failed 2 attempts: reviewer stdout did not end with exact VERDICT: ACCEPTED | — | — |
