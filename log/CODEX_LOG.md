@@ -3022,3 +3022,15 @@ START P0022 | 2026-11-07T00:24:30Z | main | 65f270f07808ed4db732dc97133a46ec331f
 2026-11-07T00:34:46.874373+00:00 | P0022 | DECISION | Log coverage checked: instruction/task/template reads, discovery, source reads, edits, failed whitespace attempt, retry exception, tests, implementation commit and evidence binding recorded. Final evidence/audit-only commit uses the required task message; its own SHA/result live in Git history to avoid recursive self-recording.
 2026-11-07T00:34:46.874400+00:00 | P0022 | DECISION | Closing command: git add -- docs/REVISION_P0022.md log/CODEX_LOG.md && git commit -m "P0022 data dictionary and data gate"; then git rev-parse HEAD; git status --short. Terminal/Git record the closure outcome; any failure is appended and retried, never reported as success.
 END P0022 | Awaiting review | 806593d5b2493a4054ed1bc2a4408360ae425ec8 | independent review Pending; live production inputs Blocked; no implementation blockers | automatic independent Codex review of final HEAD including evidence/audit-only closure
+2026-11-07T00:34:50.690890+00:00 | P0022 | READ | latest P0022 review status only
+2026-11-07T00:35:02Z | P0022 | ORCH | attempt 1: codex exit 0; full output log/runs/P0022-impl1.txt
+2026-11-07T00:35:29.095099+00:00 | P0022 | READ | latest reviewer result, if available
+2026-11-07T00:36:40.261842+00:00 | P0022 | READ | check independent reviewer status after implementation attempt
+2026-11-07T00:37:43.458179+00:00 | P0022 | READ | current reviewer completion events only
+2026-11-07T00:38:56.049903+00:00 | P0022 | READ | last P0022 verdict/result events only
+2026-11-07T00:39:45Z | P0022 | TEST | orchestrator `.venv/bin/python -m pytest -q -x` exit 0: 976 passed, 1 warning, 7 subtests passed in 282.05s (0:04:42)
+2026-11-07T00:41:12.048203+00:00 | P0022 | READ | latest P0022 review result and blocker rows only
+2026-11-07T00:44:10.720069+00:00 | P0022 | READ | last acceptance/review events while independent Codex is still running
+2026-11-07T00:45:22.294636+00:00 | P0022 | READ | final available P0022 review/acceptance event check
+2026-11-07T00:45:30Z | P0022 | REVIEW | automatic Codex review; source 5bbd48738b13b6c66c64ea56e105a701cd58a977; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
+2026-11-07T00:45:30Z | P0022 | ORCH | ACCEPTED by automatic review at 5bbd48738b13b6c66c64ea56e105a701cd58a977

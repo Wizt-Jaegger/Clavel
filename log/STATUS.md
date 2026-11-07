@@ -23,7 +23,7 @@
 | P0019 | Accepted | cd022293a3a5c4a1e6590ba200793b520571bbc8 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:29:07Z | — |
 | P0020 | Accepted | 31941fdb27e60f3cdfa26b960ecc3d184b59aeb6 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:49:28Z | — |
 | P0021 | Accepted | 17bde414a7f30be096a031465186b1e68cc47ce7 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-06T23:59:39Z | — |
-| P0022 | Pending | — | — | — | — | — |
+| P0022 | Accepted | 5bbd48738b13b6c66c64ea56e105a701cd58a977 | — | automatic: checks + independent Codex review | Codex (automatic) / 2026-11-07T00:45:30Z | — |
 | P0023 | Pending | — | — | — | — | — |
 | P0024 | Pending | — | — | — | — | — |
 | P0025 | Pending | — | — | — | — | — |
