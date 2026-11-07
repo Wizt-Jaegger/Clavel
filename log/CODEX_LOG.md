@@ -3187,3 +3187,45 @@ END P0024 | Awaiting review | eccc690d2abb0f29815e6649f02a84d694976b6b | impleme
 2026-11-07T01:05:52.213973+00:00 | P0024 | READ | final suite and reviewer state check
 2026-11-07T01:06:26Z | P0024 | REVIEW | automatic Codex review; source 004480b1eb83b35c2019ed050d2f7dba04b7b597; attempt 1; exit 0; last stdout line 'VERDICT: ACCEPTED'
 2026-11-07T01:06:26Z | P0024 | ORCH | ACCEPTED by automatic review at 004480b1eb83b35c2019ed050d2f7dba04b7b597
+2026-11-07T01:06:26Z | P0025 | ORCH | starting from b9edd411ac7e7734c1201c21272579f4cc4da8a7
+START P0025 | 2026-11-07T01:06:33Z | main | b9edd411ac7e7734c1201c21272579f4cc4da8a7
+2026-11-07T01:06:53Z | P0025 | CMD | pwd | exit 0 | project directory confirmed
+2026-11-07T01:06:53Z | P0025 | CMD | git status --short; git branch --show-current; git rev-parse HEAD; date -u +%Y-%m-%dT%H:%M:%SZ | exit 0 | main; existing log/CODEX_LOG.md and log/STATUS.md modifications preserved
+2026-11-07T01:06:53Z | P0025 | READ | AGENTS.md; kit INDEX.md P0025 row and tasks/P0025.md
+2026-11-07T01:06:53Z | P0025 | CMD | sed -n '1,220p' AGENTS.md | exit 0 | instructions read
+2026-11-07T01:06:53Z | P0025 | CMD | rg -n 'P0025' /home/alonso/Documents/clavel-codex-kit/INDEX.md; sed -n '1,240p' /home/alonso/Documents/clavel-codex-kit/tasks/P0025.md; ls -ld log; ls -l log/log.sh | exit 0 | task scope, commit message and logging paths discovered
+2026-11-07T01:06:53Z | P0025 | DECISION | Prerequisites already verified Accepted by user; preserve current branch and orchestrator STATUS.md; P0025 has no template requirement
+2026-11-07T01:06:53Z | P0025 | EDIT | log/CODEX_LOG.md | append task START and initial discovery events; preserve existing lines
+2026-11-07T01:06:53Z | P0025 | CMD | python bootstrap logging and temporary command runner | exit 0 | append-only task logging initialized
+2026-11-07T01:06:59Z | P0025 | ERROR | Tool orchestration attempted to store a JavaScript function; serialization failed after bootstrap completed; no exploration command ran. Retry without store.
+2026-11-07T01:07:07Z | P0025 | ERROR | Both initial command-runner discovery attempts exited 1 before execution: /bin/bash absent on NixOS.
+2026-11-07T01:07:07Z | P0025 | CMD | python repair temporary runner to resolve bash via shutil.which | exit 0 | retry discovery with system bash
+2026-11-07T01:07:07Z | P0025 | CMD | rg --files app tests | rg '(intelligence|clustering|feature|schema)' | exit 0
+2026-11-07T01:07:07Z | P0025 | CMD | ls -l pyproject.toml .venv/bin/python; sed -n '1,180p' pyproject.toml; git diff --stat; sed -n '1,80p' log/log.sh | exit 0
+2026-11-07T01:07:07.967280+00:00 | P0024 | READ | state confirmation for four accepted tasks while P0025 starts
+2026-11-07T01:07:13Z | P0025 | CMD | rg --files src tests | rg '(intelligence|clustering|feature|conftest)'; sed -n '1,240p' tests/test_feature_snapshots.py; sed -n '1,100p' tests/test_behavioral_features.py | exit 0
+2026-11-07T01:07:13Z | P0025 | READ | pyproject.toml; log/log.sh; tests/test_feature_snapshots.py lines 1-240; tests/test_behavioral_features.py lines 1-100; source paths discovered under src (app absent).
+2026-11-07T01:07:13Z | P0025 | ERROR | Initial rg app tests discovery reported missing app directory; pipeline exit 0 due to matches in tests. Corrected search to src tests.
+2026-11-07T01:07:17Z | P0025 | CMD | sed -n '1,210p' src/clavel/intelligence/clustering/features.py; sed -n '1,220p' src/clavel/intelligence/clustering/snapshots.py; sed -n '1,80p' src/clavel/intelligence/clustering/__init__.py; ls docs; ls tests | exit 0
+2026-11-07T01:07:17Z | P0025 | READ | src/clavel/intelligence/clustering/features.py lines 1-210; snapshots.py lines 1-220; clustering/__init__.py; docs and tests directory listings.
+2026-11-07T01:07:35Z | P0025 | DECISION | Implement fixed numeric behavioral-v1 schema, train-only median imputation and population standardization with explicit missing indicators; all-missing/constant fallback remains marked. Persist immutable JSON artifact with content-derived version, training cutoff and feature policy; reject incompatible inference schema. Product affinity vocabulary and cold-start decisions remain outside preprocessing; no REST changes or live claims.
+2026-11-07T01:07:35Z | P0025 | CMD | sed -n '1,160p' tests/test_repository_rules.py; sed -n '1,120p' tests/test_project_smoke.py | exit 0
+2026-11-07T01:07:35Z | P0025 | READ | tests/test_repository_rules.py lines 1-160 and tests/test_project_smoke.py lines 1-120 for repository validation conventions.
+2026-11-07T01:07:49.947589+00:00 | P0025 | READ | current task planning/implementation events only
+2026-11-07T01:08:24Z | P0025 | EDIT | src/clavel/intelligence/clustering/preprocessing.py | fixed validated numeric matrix; immutable fit-only parameters, deterministic artifact version/JSON reload; inference applies stored transforms and missing indicators.
+2026-11-07T01:08:27.017144+00:00 | P0025 | READ | current P0025 implementation progress only
+2026-11-07T01:09:05.537796+00:00 | P0025 | READ | last feature-preprocessing implementation/test milestones only
+2026-11-07T01:09:14Z | P0025 | EDIT | tests/test_feature_preprocessing.py | synthetic regression evidence for missing states, hand-calculated train-only statistics, inference stability, versioned round trip and fail-closed schemas.
+2026-11-07T01:09:14Z | P0025 | CMD | set -o pipefail; .venv/bin/python -m pytest -q tests/test_feature_preprocessing.py tests/test_feature_snapshots.py tests/test_behavioral_features.py 2>&1 | tail -n 30 | exit 0
+2026-11-07T01:09:32Z | P0025 | TEST | .venv/bin/python -m pytest -q tests/test_feature_preprocessing.py tests/test_feature_snapshots.py tests/test_behavioral_features.py | 91 passed, 0 failed (synthetic mechanics; no live provider evidence).
+2026-11-07T01:09:32Z | P0025 | CMD | git diff --check; git status --short; git diff --numstat; sha256sum log/STATUS.md | exit 0
+2026-11-07T01:09:32Z | P0025 | CMD | sed -n '1,245p' src/clavel/intelligence/clustering/preprocessing.py; sed -n '1,210p' tests/test_feature_preprocessing.py | exit 0
+2026-11-07T01:09:32Z | P0025 | READ | Self-review of preprocessing.py and test_feature_preprocessing.py; validated fixed column order, train-only statistics, missing flags, immutable artifact and rejected incompatible schemas.
+2026-11-07T01:09:43.505149+00:00 | P0025 | READ | current P0025 test status only
+2026-11-07T01:10:08Z | P0025 | EDIT | docs/P0025_FEATURE_PREPROCESSING.md | API example, numeric schema, fitting and missing-state semantics, artifact identity and synthetic validation evidence for independent review.
+2026-11-07T01:10:08Z | P0025 | DECISION | Self-review complete; no live gate identified for P0025. Awaiting independent review only. Scope includes implementation/tests/evidence and append-only log; preserve pre-existing orchestrator STATUS.md changes.
+2026-11-07T01:10:08Z | P0025 | CMD | git diff --check; git diff -- log/CODEX_LOG.md | tail -n 18; git status --short | exit 0
+2026-11-07T01:10:23Z | P0025 | CMD | python /tmp/clavel-p0025-run.py (rg --files app tests | rg '(intelligence|clustering|feature|schema)') | exit 1 | initial runner failed before command execution because /bin/bash absent; retry already logged.
+2026-11-07T01:10:23Z | P0025 | CMD | python /tmp/clavel-p0025-run.py (ls -l pyproject.toml .venv/bin/python; sed -n '1,180p' pyproject.toml; git diff --stat; sed -n '1,80p' log/log.sh) | exit 1 | initial runner failed before command execution because /bin/bash absent; retry already logged.
+2026-11-07T01:10:23Z | P0025 | DECISION | Audit confirms all task commands, failed attempts, source reads and edits recorded. Commit validated implementation first; append its actual SHA and END afterward, then commit audit closure separately to avoid a self-referential SHA.
+2026-11-07T01:10:23Z | P0025 | CMD | set -e; git add src/clavel/intelligence/clustering/preprocessing.py tests/test_feature_preprocessing.py docs/P0025_FEATURE_PREPROCESSING.md log/CODEX_LOG.md; git diff --cached --check; git diff --cached --stat; test "$(sha256sum log/STATUS.md | cut -d' ' -f1)" = b4ebb1ce102accc3c2c0c7b126b333ee64bbc490a9e6986122d695590f0e520a | exit 0
